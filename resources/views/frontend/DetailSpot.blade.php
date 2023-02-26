@@ -124,7 +124,7 @@
         var map = L.map('map', {
             // Menampilkan nilai lokasi dari tabel spot
             center: [{{ $spots->location }}],
-            zoom: 20,
+            zoom: 10,
             fullscreenControl: {
                 pseudoFullscreen: false
             },
