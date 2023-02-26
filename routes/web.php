@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SpotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +22,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route FRONTEND
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::resource('detail',(HomeController::class));
+Route::get('rute/{slug}',[HomeController::class,'getRoute'])->name('cek-rute');
+Route::get('kategori-spot/{slug}',[HomeController::class,'getCategory'])->name('kategori-spot');
+Route::post('posts',[HomeController::class,'storeRatings'])->name('store-ratings');
+
+// Route BACKEND
+Route::resource('spot',(SpotController::class));
+Route::resource('category',(CategoryController::class));
+Route::delete('/deleteimage/{id}',[SpotController::class,'deleteImage'])->name('delete-image');
+
+// ROUTE DataTable
+Route::get('data-category',[\App\Http\Controllers\DataController::class,'categories'])->name('data-category');
+Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
