@@ -15,9 +15,6 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
-    {{-- cdn leaflet search --}}
-    <link rel="stylesheet" href="https://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css">
-    <script src="https://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.js"></script>
     <style>
         #map {
             height: 500px
@@ -132,30 +129,15 @@
 
         ];
 
-        // pada koding ini kita menambahkan control pencarian data        
-        var markersLayer = new L.LayerGroup();
-        map.addLayer(markersLayer);
-        var controlSearch = new L.Control.Search({
-            position: 'topleft',
-            layer: markersLayer,
-            initial: false,
-            zoom: 17,
-            markerLocation: true
-        })
-
-
-        //menambahkan variabel controlsearch pada addControl
-        map.addControl(controlSearch);
-
         // looping variabel datas
         for (i in datas) {
-            // lalu hasil loopingan tersebut kita definisikan ke dalam variabel baru,
-            // title dan loc selanjutnya kita masukkan ke dalam variabel marker dan marker ini
-            // yang akan kita pakai dalam option markersLayer
+            //     // lalu hasil loopingan tersebut kita definisikan ke dalam variabel baru,
+            //     // title dan loc selanjutnya kita masukkan ke dalam variabel marker dan marker ini
+            //     // yang akan kita pakai dalam option markersLayer
 
-            // jadi ketika kkta melakukan pencarian data spot, nama dari spot tersebut akan muncul kemudian 
-            // jika kita klik nama tersebut akan langsung di arahkan ke spot tersebut dan juga menampilkan marker dari spot itu
-            // beserta popup yang berisi informasi spot.
+            //     // jadi ketika kkta melakukan pencarian data spot, nama dari spot tersebut akan muncul kemudian 
+            //     // jika kita klik nama tersebut akan langsung di arahkan ke spot tersebut dan juga menampilkan marker dari spot itu
+            //     // beserta popup yang berisi informasi spot.
 
             var title = datas[i].title,
                 loc = datas[i].loc,
