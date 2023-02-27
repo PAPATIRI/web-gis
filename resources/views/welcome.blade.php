@@ -35,6 +35,7 @@
                     </strong>
                 </blockquote>
                 <div id="map"></div>
+                <h3>Testing Aja sih</h3>
             </div>
         </div>
     </div>
