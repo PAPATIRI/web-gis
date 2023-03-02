@@ -26,14 +26,52 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <blockquote>
-                    <strong>
-                        ** Silahkan login untuk menambahkan data spot <br>
-                        ** Untuk menggunakan fungsi cek rute pada spot pastikan berikan izin atau
-                        permission pada browser yang di gunakan untuk mengakses lokasi sekarang.
-                        Jika menggunakan browser smartphone pastikan gps dalam keadaan hidup.
-                    </strong>
-                </blockquote>
+                <div id="carouselExampleCaptions" class="carousel slide mb-4" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('img/tas-kulit.jpg') }}" class="d-block w-100" alt="...">
+                            <div class="overlay"></div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Mudah Mencari Oleh-oleh Kerajinan Tangan</h5>
+                                <p>temukan oleh-oleh kerajinan tangan khas merauke di sini</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/aneka-kerajinan.webp') }}" class="d-block w-100" alt="...">
+                            <div class="overlay"></div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Pilihan Produk Beragam</h5>
+                                <p>pilihan produk yang beragam dari berbagai toko yang tersebar di seluruh Merauke</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/aneka-kerajinan2.jpg') }}" class="d-block w-100" alt="...">
+                            <div class="overlay"></div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Cepat Mendapatkan Barang Incaran Kamu</h5>
+                                <p>cek lokasi toko kerajinan tangan terdekat dari lokasi kamu saat ini juga</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
                 <div id="map"></div>
             </div>
         </div>
@@ -129,6 +167,7 @@
 
         ];
 
+
         // looping variabel datas
         for (i in datas) {
             //     // lalu hasil loopingan tersebut kita definisikan ke dalam variabel baru,
@@ -144,7 +183,7 @@
                 marker = new L.Marker(new L.latLng(loc), {
                     title: title
                 });
-            markersLayer.addLayer(marker);
+            // markersLayer.addLayer(marker);
 
             // melakukan looping data untuk memunculkan popup dari spot yang dipilih
             @foreach ($spots as $item)

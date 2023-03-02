@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 
@@ -36,29 +37,15 @@
                 </button>
 
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    {{-- left Side of Navbar --}}
                     <ul class="navbar-nav">
-                        <!-- Authentication Links -->
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Kategori
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                {{-- <a class="dropdown-item" href="{{ route('kategori-spot', $categories->id) }}">
-                                    {{ $categories->name }}
-                                </a> --}}
-
-                                @foreach ($categories as $item)
-                                    <a class="dropdown-item" href="{{ route('kategori-spot', $item->slug) }}">
-                                        {{ $item->name }}
-                                    </a>
-                                @endforeach
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('list-toko') }}">{{ __('Toko Kerajinan') }}</a>
                         </li>
                     </ul>
-
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -69,14 +56,15 @@
                         </li>
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item mx-1">
+                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li class="nav-item mx-1">
+                                    <a class="btn btn-outline-primary"
+                                        href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -88,14 +76,10 @@
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
-
-
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                             document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

@@ -1,0 +1,28 @@
+/* custom style */
+/* navbar style */
+
+/* carouser style */
+.carousel-item {
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.carousel-item img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+}
+.carousel-caption h5 {
+    font-size: 32px;
+    font-weight: bold;
+}
+.carousel-caption p {
+    font-size: 18px;
+}
+
+.carousel-item .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
