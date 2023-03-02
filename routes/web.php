@@ -38,3 +38,9 @@ Route::delete('/deleteimage/{id}',[SpotController::class,'deleteImage'])->name('
 // ROUTE DataTable
 Route::get('data-category',[\App\Http\Controllers\DataController::class,'categories'])->name('data-category');
 Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
+
+// ROUTE HALAMAN LIST TOKO
+Route::get('/list-toko', [App\Http\Controllers\ListTokoController::class, 'listToko'])->name('list-toko');
+// Route::get('list-toko',function (){
+//     return view('frontend/ListToko');
+// });
