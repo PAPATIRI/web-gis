@@ -16,6 +16,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- AOS --}}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,11 +26,11 @@
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" data-aos="fade-down">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel & Leaflet') }}
+                    {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -40,10 +42,12 @@
                     {{-- left Side of Navbar --}}
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">Home</a>
+                            <a class="nav-link {{ request()->is('/') ? 'active-link' : '' }}"
+                                href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list-toko') }}">{{ __('Toko Kerajinan') }}</a>
+                            <a class="nav-link {{ request()->is('list-toko') ? 'active-link' : '' }}"
+                                href="{{ route('list-toko') }}">{{ __('Toko Kerajinan') }}</a>
                         </li>
                     </ul>
 
@@ -57,14 +61,14 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item mx-1">
-                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Masuk') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item mx-1">
-                                    <a class="btn btn-outline-primary"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="btn btn-outline-light text-primary"
+                                        href="{{ route('register') }}">{{ __('Daftar') }}</a>
                                 </li>
                             @endif
                         @else
@@ -97,8 +101,27 @@
         <main class="py-4">
             @yield('content')
         </main>
+        {{-- footer --}}
+        <div class="footer">
+            <span>copyright @ 2023</span>
+        </div>
+        {{-- button to top --}}
+        <div class="custom-back-to-top-wrapper">
+            <a href="#top" class="custom-back-to-top-link">
+                <img src="{{ asset('img/arrow-up.png') }}" class="img-fluid" alt="icon">
+            </a>
+        </div>
     </div>
     @stack('javascript')
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        const btnScrollToTop = document.querySelector('.custom-back-to-top-wrapper')
+        window.addEventListener('scroll', () => {
+            btnScrollToTop.style.display = window.scrollY > 40 ? 'block' : 'none'
+
+        })
+    </script>
     <script>
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {

@@ -26,57 +26,92 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div id="carouselExampleCaptions" class="carousel slide mb-4" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
+                {{-- jumbotron section --}}
+                <div class="custom-jumbotron" data-aos="zoom-in">
+                    <div class="custom-jumbotron-text-wrapper">
+                        <h2>temukan kerajinan tangan berkualitas khas merauke untuk oleh-oleh keluarga anda</h2>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('img/tas-kulit.jpg') }}" class="d-block w-100" alt="...">
-                            <div class="overlay"></div>
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Mudah Mencari Oleh-oleh Kerajinan Tangan</h5>
-                                <p>temukan oleh-oleh kerajinan tangan khas merauke di sini</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/aneka-kerajinan.webp') }}" class="d-block w-100" alt="...">
-                            <div class="overlay"></div>
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Pilihan Produk Beragam</h5>
-                                <p>pilihan produk yang beragam dari berbagai toko yang tersebar di seluruh Merauke</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/aneka-kerajinan2.jpg') }}" class="d-block w-100" alt="...">
-                            <div class="overlay"></div>
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Cepat Mendapatkan Barang Incaran Kamu</h5>
-                                <p>cek lokasi toko kerajinan tangan terdekat dari lokasi kamu saat ini juga</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <img src="{{ asset('img/aneka-kerajinan.webp') }}" class="img-fluid rounded" alt="...">
+                    <div class="custom-overlay"></div>
                 </div>
-                <div id="map"></div>
+                {{-- end of jumbotron section --}}
+                {{-- search CTA section --}}
+                <div class="row custom-section-wrapper mb-5">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
+                        <div class="custom-section-img-wrapper">
+                            <img src="{{ asset('img/searching.png') }}" class="img-fluid rounded" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 d-flex items-center" data-aos="fade-left" data-aos-delay="300">
+                        <div class="d-flex flex-column justify-content-center custom-search-section-wrapper">
+                            <h2 class="custom-section-title">cari oleh-oleh dengan mudah</h2>
+                            <p class="custom-section-desc">toko kerajinan tangan khas di merauke tersebar di
+                                seluruh
+                                merauke. kamu dapat menemukan
+                                dengan
+                                mudah dengan memanfaatkan fitur GIS (Geographic Information System) di sini</p>
+                            <button class="btn btn-success">Cari Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                {{-- end of search CTA section --}}
+                {{-- rating section --}}
+                <div class="row custom-section-wrapper mb-5 mb-5">
+                    <div class="col-sm-12 order-sm-2 order-md-1 col-md-6 d-flex custom-order-xs-2 items-center"
+                        data-aos="fade-right" data-aos-delay="300">
+                        <div class="d-flex flex-column justify-content-center custom-rating-section-wrapper">
+                            <h2 class="custom-section-title">toko produk dengan rating terbaik</h2>
+                            <p class="custom-section-desc">tidak perlu khawatir dengan kualitas produk yang ditawarkan toko.
+                                lihat rating yang telah diberikan pelanggan sebelum kamu untuk menambah keyakinan kamu atas
+                                produk incaranmu</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 order-sm-1 order-md-2 col-md-6 d-flex align-items-center custom-order-xs-1"
+                        data-aos="fade-left">
+                        <div class="custom-section-img-wrapper">
+                            <img src="{{ asset('img/rating.png') }}" class="img-fluid rounded" alt="...">
+                        </div>
+                    </div>
+                </div>
+                {{-- seller CTA section --}}
+                <div class="row custom-section-wrapper mb-5">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center" data-aos="fade-right">
+                        <div class="custom-section-img-wrapper">
+                            <img src="{{ asset('img/get-money.png') }}" class="img-fluid rounded" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 d-flex items-center" data-aos="fade-left" data-aos-delay="300">
+                        <div class="d-flex flex-column justify-content-center custom-search-section-wrapper">
+                            <h2 class="custom-section-title">Tingkatkan Penjualan Toko kamu sekarang!</h2>
+                            <p class="custom-section-desc">kamu mempunyai toko yang menjual kerajinan tangan? jangan ragu
+                                untun daftarkan tokomu agar lebih dikenal oleh konsumen secara luas dan tingkatkan hasil
+                                penjualanmu
+                            </p>
+                            <button class="btn btn-success">Daftar Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+                {{-- end of seller CTA section --}}
+                {{-- map section --}}
+                <div class="custom-section-wrapper">
+                    <h2 class="custom-map-section-title" data-aos="fade-up">toko kerajinan tangan merauke tersebar di
+                        seluruh kota loh!</h2>
+                    <p class="custom-section-desc px-md-4 text-center" data-aos="fade-up" data-anchor-delay="500">lebih
+                        mudah mencari toko oleh-oleh
+                        kerajinan tangan
+                        khas
+                        Merauke dengan
+                        fitur GIS di situs ini. untuk para pemilik toko, ayo daftarkan toko kamu sekarang juga!</p>
+                    <div class="custom-map-wrapper" data-aos="zoom-in" data-anchor-delay="1000">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                {{-- end of map section --}}
             </div>
         </div>
     </div>
 @endsection
+
 
 @push('javascript')
     <script>
@@ -117,8 +152,8 @@
             // rute dari lokasi kita ke lokasi spot yang kita pilih serta tombol detail untuk detail lengkap 
             // dari spot yang dipilih
 
-            center: [-3.196071254860089, 135.50952252328696],
-            zoom: 7,
+            center: [-8.499137749030071, 140.4046483416395],
+            zoom: 13,
             layers: [streets]
         });
 
