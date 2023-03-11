@@ -39,8 +39,18 @@ Route::delete('/deleteimage/{id}',[SpotController::class,'deleteImage'])->name('
 Route::get('data-category',[\App\Http\Controllers\DataController::class,'categories'])->name('data-category');
 Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
 
-// ROUTE HALAMAN LIST TOKO
-Route::get('/list-toko', [App\Http\Controllers\ListTokoController::class, 'listToko'])->name('list-toko');
-// Route::get('list-toko',function (){
-//     return view('frontend/ListToko');
-// });
+
+Route::get('dashboard',[\App\Http\Controllers\Dashboard::class,'index'])->name('dashboard');
+
+// Route Toko
+Route::get('data-toko',[\App\Http\Controllers\TokoController::class,'index'])->name('toko.listToko');
+Route::get('tambah-toko',[\App\Http\Controllers\TokoController::class,'create'])->name('toko.tambahToko');
+Route::post('simpan-toko',[\App\Http\Controllers\TokoController::class,'store'])->name('toko.simpanToko');
+Route::get('list-toko',[\App\Http\Controllers\TokoController::class,'listToko'])->name('toko.DaftarToko');
+Route::delete('hapus-toko/{id}',[\App\Http\Controllers\TokoController::class,'destroy'])->name('toko.hapusToko');
+Route::get('detail-toko/{id}',[\App\Http\Controllers\TokoController::class,'detailToko'])->name('toko.detailToko');
+
+// Route Galeri Produk
+Route::post('simpan-produk',[\App\Http\Controllers\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
+Route::delete('hapus-foto-produk/{id}',[\App\Http\Controllers\TokoController::class,'hapusFotoProduk'])->name('toko.hapusFotoProduk');
+
