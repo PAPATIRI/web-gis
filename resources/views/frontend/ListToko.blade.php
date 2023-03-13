@@ -71,8 +71,8 @@
             // rute dari lokasi kita ke lokasi spot yang kita pilih serta tombol detail untuk detail lengkap 
             // dari spot yang dipilih
 
-            center: [-3.196071254860089, 135.50952252328696],
-            zoom: 7,
+            center: [-8.499137749030071, 140.4046483416395],
+            zoom: 13,
             layers: [streets]
         });
 
@@ -92,5 +92,71 @@
         // kemudian hasil dari looping tersebut kita masukkan kedalam function marker untuk memunculkan marker dari tiap-tiap
         // spot dan option bindPopoup.Jadi ketika salah satu amrker yang ada di klik akan memunculkan popup berupa informasi spot,
         // tombol cek rute dan tombol detail spot.
+
+        @foreach ($spots as $item)
+            L.marker([{{ $item->location }}])
+                .bindPopup(
+                    "<div class='my-2'><img src='{{ $item->getImage() }}' class='img-fluid' width='700px'></div>" +
+                    "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $item->name }}</div>" +
+
+                    @foreach ($item->getCategory as $itemCategory)
+                        "<div class='my-2'><strong>Kategori Spot:</strong> <br>{{ $itemCategory->name }}</div>" +
+                    @endforeach
+
+                    "<div class='my-2'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-primary btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>" +
+                    "<div class='my-2'></div>"
+
+                ).addTo(map);
+        @endforeach
+
+        // pada variable datas kita akan mendefinisikannya sebagai data array yang mana isian arraynya kita ambil dari
+        // looping dari $spots dan variable datas ini akan kita loop lagi dalam perulangan for di bawah
+        var datas = [
+            @foreach ($spots as $key => $value)
+                {
+                    "loc": [{{ $value->location }}],
+                    "title": '{!! $value->name !!}'
+                },
+            @endforeach
+
+        ];
+
+
+        // looping variabel datas
+        for (i in datas) {
+            //     // lalu hasil loopingan tersebut kita definisikan ke dalam variabel baru,
+            //     // title dan loc selanjutnya kita masukkan ke dalam variabel marker dan marker ini
+            //     // yang akan kita pakai dalam option markersLayer
+
+            //     // jadi ketika kkta melakukan pencarian data spot, nama dari spot tersebut akan muncul kemudian 
+            //     // jika kita klik nama tersebut akan langsung di arahkan ke spot tersebut dan juga menampilkan marker dari spot itu
+            //     // beserta popup yang berisi informasi spot.
+
+            var title = datas[i].title,
+                loc = datas[i].loc,
+                marker = new L.Marker(new L.latLng(loc), {
+                    title: title
+                });
+            // markersLayer.addLayer(marker);
+
+            // melakukan looping data untuk memunculkan popup dari spot yang dipilih
+            @foreach ($spots as $item)
+                L.marker([{{ $item->location }}])
+                    .bindPopup(
+                        "<div class='my-2'><img src='{{ $item->getImage() }}' class='img-fluid' width='700px'></div>" +
+                        "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $item->name }}</div>" +
+
+                        @foreach ($item->getCategory as $itemCategory)
+                            "<div class='my-2'><strong>Kategori Spot:</strong> <br>{{ $itemCategory->name }}</div>" +
+                        @endforeach
+
+                        "<div class='my-2'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-primary btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>" +
+                        "<div class='my-2'></div>"
+
+                    ).addTo(map);
+            @endforeach
+
+        }
+        L.control.layers(baseLayers, overlays).addTo(map);
     </script>
 @endpush

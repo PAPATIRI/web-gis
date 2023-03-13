@@ -29,6 +29,7 @@ Route::resource('detail',(HomeController::class));
 Route::get('rute/{slug}',[HomeController::class,'getRoute'])->name('cek-rute');
 Route::get('kategori-spot/{slug}',[HomeController::class,'getCategory'])->name('kategori-spot');
 Route::post('posts',[HomeController::class,'storeRatings'])->name('store-ratings');
+Route::get('/toko', [App\Http\Controllers\ListTokoController::class, 'index'])->name('toko');
 
 // Route BACKEND
 Route::resource('spot',(SpotController::class));
@@ -55,4 +56,3 @@ Route::get('list-toko',[\App\Http\Controllers\TokoController::class,'listToko'])
 // Route Galeri Produk
 Route::post('simpan-produk',[\App\Http\Controllers\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
 Route::delete('hapus-foto-produk/{id}',[\App\Http\Controllers\TokoController::class,'hapusFotoProduk'])->name('toko.hapusFotoProduk');
-
