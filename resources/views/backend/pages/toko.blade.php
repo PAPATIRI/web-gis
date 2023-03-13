@@ -98,6 +98,7 @@
     @include('backend.layouts.footer')
     <script>
         $(document).ready(function() { 
+
             $.getJSON('list-toko', function(data){
                 // console.log(data);
             if(data == 0){

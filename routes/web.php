@@ -46,9 +46,9 @@ Route::get('dashboard',[\App\Http\Controllers\Dashboard::class,'index'])->name('
 Route::get('data-toko',[\App\Http\Controllers\TokoController::class,'index'])->name('toko.listToko');
 Route::get('tambah-toko',[\App\Http\Controllers\TokoController::class,'create'])->name('toko.tambahToko');
 Route::post('simpan-toko',[\App\Http\Controllers\TokoController::class,'store'])->name('toko.simpanToko');
-Route::get('list-toko',[\App\Http\Controllers\TokoController::class,'listToko'])->name('toko.DaftarToko');
 Route::delete('hapus-toko/{id}',[\App\Http\Controllers\TokoController::class,'destroy'])->name('toko.hapusToko');
 Route::get('detail-toko/{id}',[\App\Http\Controllers\TokoController::class,'detailToko'])->name('toko.detailToko');
+Route::get('list-toko',[\App\Http\Controllers\TokoController::class,'listToko'])->name('list-toko');
 
 // Route Galeri Produk
 Route::post('simpan-produk',[\App\Http\Controllers\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
