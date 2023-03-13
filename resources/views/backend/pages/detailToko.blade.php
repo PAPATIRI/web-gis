@@ -1,21 +1,4 @@
 @extends('backend.layouts.master')
-@section('styles')
-    {{-- pada section styles kita menambahkan style css untuk menampilkan plugin leaflet dan select2 untuk select option kategori spot --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
-
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
-    <style>
-        #map {
-            height: 100px
-        }
-    </style>
-@endsection
 @section('container')
 
 <div class="main-panel">
@@ -175,6 +158,9 @@
 
     @include('backend.layouts.footer')
         <script>
+             $('.btn-close').on('click' ,function(){
+                $('#modalAction').modal('hide');
+            })
              $('#tambahProduk').on('click' ,function(){
                 $('#modalAction').modal('show');
             })
@@ -257,119 +243,3 @@
         </script>
     </div>
 @endsection
-
-
-
-@push('javascript')
-  
-    {{-- <script src="{{ url('assetBackend/js/core/jquery.3.2.1.min.js')}}"></script> --}}
-    {{-- <script src="{{ url('assetBackend/js/core/jquery.min.js')}}"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script>
-        // menjalankan fungsi select2 untuk properti category_id
-        $(document).ready(function() {
-            $('.category_id').select2({
-                placeholder: 'Pilih Data Kategori'
-            })
-
-            $('#tambahProduk').on('click' ,function(){
-                // console.log('Test');
-                alert('Test');
-                // alert('Test')
-            })
-
-        })
-
-        // membuat variabel untuk load attribute dan url pada map
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl =
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-        // membuat var satellite, dark, dan streets agar layer map kita punya beberapa opsi tampilan yang bisa kita ubah 
-        var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            streets = L.tileLayer(mbUrl, {
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            });
-
-        // mendefinisikan var map. Menambahkan opsi seperti center untuk menentukan latitude dan longitude,
-        // mengantur zoom map saat di load dan memuat layer yang di inginkan.
-        // Untuk nilai dari latitude longitude bisa disesuaikan dengan lokasi yang di inginkan 
-        // nilai latitude dan longitude bisa di ambil dari google map
-        var map = L.map('map', {
-            // center: [-0.4922612112757657, 117.14561375238749],
-            center: [-3.196071254860089, 135.50952252328696],
-            zoom: 7,
-            layers: [streets]
-        });
-
-        // set baselayer yang ingin digunakan
-        var baseLayers = {
-            //"Grayscale": grayscale,
-            "Streets": streets
-        };
-
-        // set overlayer yang ingin digunakan
-        var overlays = {
-            "Streets": streets
-        };
-
-        // menambahkan baselayer dan overlays tadi ke dalam control dan di tampilkan ke tag map
-        L.control.layers(baseLayers, overlays).addTo(map);
-
-
-        // set koordinat lokasi ke dalam curLocation yang mana nilai dari curLocation juga akan
-        // digunakan untuk menampilkan marker pada map
-        var curLocation = [-0.4922612112757657, 117.14561375238749];
-        map.attributionControl.setPrefix(false);
-
-        var marker = new L.marker(curLocation, {
-            draggable: 'true',
-        });
-        map.addLayer(marker);
-
-        // dan ketika marker tersebut di geser akan mendapatkan titik koordinat yaitu latitude  dan longitudenya
-        // lalu menambahkan titik koordinat tersebut ke dalam tag input dengan namenya location 
-        marker.on('dragend', function(event) {
-            var location = marker.getLatLng();
-            marker.setLatLng(location, {
-                draggable: 'true',
-            }).bindPopup(location).update();
-
-            $('#location').val(location.lat + "," + location.lng).keyup()
-        });
-
-        // selain itu dengan fungsi di bawah juga bisa mendapatkan nilai latitude dan longitude
-        // dengan cara klik lokasi pada map maka nilai latitude dan longitudenya juga akan
-        // langsung muncul pada input text location
-
-        var loc = document.querySelector("[name=location]");
-        map.on("click", function(e) {
-            var lat = e.latlng.lat;
-            var lng = e.latlng.lng;
-
-            if (!marker) {
-                marker = L.marker(e.latlng).addTo(map);
-            } else {
-                marker.setLatLng(e.latlng);
-            }
-            loc.value = lat + "," + lng;
-        });
-    </script>
-@endpush

@@ -15,6 +15,7 @@ class Toko extends Model
         'fkid_user',
         'nama_toko',
         'lokasi_toko',
+        'alamat_detail_toko',
         'website_toko',
         'kontak_toko',
         'deskripsi_toko',
