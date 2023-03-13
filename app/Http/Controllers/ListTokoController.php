@@ -44,7 +44,6 @@ class ListTokoController extends Controller
         $spots = Spot::with('getCategory')->get();
         //$spotsSearch = Spot::with('getCategory')->get();
         //return dd($spots);
-        dump($spots);
 
         return view('frontend.ListToko', [
             'spots' => $spots,

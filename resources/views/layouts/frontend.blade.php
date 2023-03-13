@@ -46,8 +46,8 @@
                                 href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('list-toko') ? 'active-link' : '' }}"
-                                href="{{ route('list-toko') }}">{{ __('Toko Kerajinan') }}</a>
+                            <a class="nav-link {{ request()->is('toko') ? 'active-link' : '' }}"
+                                href="{{ route('toko') }}">{{ __('Toko Kerajinan') }}</a>
                         </li>
                     </ul>
 
