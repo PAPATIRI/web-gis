@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 @section('styles')
     {{-- pada section styles kita menambahkan style css untuk menampilkan plugin leaflet dan select2 untuk select option kategori spot --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -140,7 +140,18 @@
         </div>
     </div>
     @include('backend.layouts.footer')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+             // menjalankan fungsi select2 untuk properti category_id
+        $(document).ready(function() {
+            $('#jamBuka').select2({
+                placeholder: 'Pilih Jam Buka'
+            })
+            $('#jamTutup').select2({
+                placeholder: 'Pilih Jam Tutup'
+            })
+        })
+
          $('#formAction').on('submit', function(e){
                 e.preventDefault()
                 const _form = this
@@ -197,19 +208,8 @@
 
 
 @push('javascript')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
-        // menjalankan fungsi select2 untuk properti category_id
-        $(document).ready(function() {
-            $('#jamBuka').select2({
-                placeholder: 'Pilih Jam Buka'
-            })
-            $('#jamTutup').select2({
-                placeholder: 'Pilih Jam Tutup'
-            })
-        })
-
         // membuat variabel untuk load attribute dan url pada map
         var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
