@@ -31,11 +31,11 @@
         <link href="{{ url('assetBackend/js/plugin/sweetalert/sweetalert2.min.css')}}" rel="stylesheet">
         {{-- <link rel="stylesheet" href="{{ url('assetBackend/css/loader.css')}}"> --}}
          <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
         
     
     
         
         <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link rel="stylesheet" href="{{ url('assetBackend/css/demo.css')}}">
+        {{-- <link rel="stylesheet" href="{{ url('assetBackend/css/demo.css')}}"> --}}
     </head>

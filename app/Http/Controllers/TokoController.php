@@ -66,7 +66,8 @@ class TokoController extends Controller
         $data = [
             'fkid_user'     =>$request->fkid_user,
             'nama_toko'     =>$request->nama_toko,
-            'lokasi_toko'   =>'4671264761234.4124617364137',
+            'lokasi_toko'   =>$request->lokasi_toko,
+            'alamat_detail_toko'   =>$request->alamat_detail_toko,
             'website_toko'  =>$request->website_toko,
             'kontak_toko'   =>$request->kontak_toko,
             'deskripsi_toko'=>$request->deskripsi_toko,
@@ -102,7 +103,10 @@ class TokoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Ubah Data Toko';
+        $jamPelayanan = JamPelayanan::all();
+        $data = Toko::where('id',$id)->first();
+        return view('backend.pages.ubahToko',compact('title','jamPelayanan','data'));
     }
 
     /**
@@ -112,9 +116,40 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+
+        // $this->validate($request,[
+        //     'sampul_toko' => 'image|required'
+        // ]);
+
+        // Proses Input dan upload file gambar foto sampul toko
+        // $file = $request->file('sampul_toko');
+        // $namaFile = $file->getClientOriginalName();
+        // $file->move('uploads/Foto Sampul Toko/', $namaFile);
+       
+        // Proses update nilai dari inputan ke array untuk disimpan dalam database
+     
+        Toko::where('id',$request->id_toko)->update([
+            'fkid_user'     =>$request->fkid_user,
+            'nama_toko'     =>$request->nama_toko,
+            'lokasi_toko'   =>$request->lokasi_toko,
+            'alamat_detail_toko'   =>$request->alamat_detail_toko,
+            'website_toko'  =>$request->website_toko,
+            'kontak_toko'   =>$request->kontak_toko,
+            'deskripsi_toko'=>$request->deskripsi_toko,
+            'jam_buka'      =>$request->jamBuka,
+            'jam_tutup'     =>$request->jamTutup,
+            'status_toko'   =>$request->status_toko,
+            // 'sampul_toko'   =>$namaFile,
+
+        ]);
+        return response()->json([
+            'state' => 'success',
+            'message' => 'Berhasil mengubah data Toko.',
+            'title' => 'Berhasil..!',
+        ]);
     }
 
     /**

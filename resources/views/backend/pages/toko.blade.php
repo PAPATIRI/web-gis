@@ -33,9 +33,9 @@
                                     <span class="btn-label"><i class="fas fa-plus"></i></span>
                                     Tambah Toko
                                 </a>
-                                <button class="btn btn-info btn-sm ml-1">
+                                <button class="btn btn-info btn-sm ml-1 add-toko">
                                     <span class="btn-label"><i class="fas fa-print"></i></span>
-                                    Cetak Daftar Toko
+                                    Tambah toko with modal
                                 </button>
                             </div>
                             <div class="table-responsive">
@@ -72,12 +72,15 @@
                                             </td>
                                             <td width="30px">
                                                 <div class="form-button-action">
-                                                    <a href="{{ url('detail-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Detail Toko" class="btn btn-link btn-success action " data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="detail">
+                                                    <a href="{{ url('detail-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Detail Toko" class="btn btn-link btn-success" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="detail">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <button type="button" data-toggle="tooltip" title="Ubah Profile" class="btn btn-link btn-primary action" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="ubah">
+                                                    <a href="{{ url('ubah-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Ubah Toko" class="btn btn-link btn-primary" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="Ubah">
                                                         <i class="fa fa-edit"></i>
-                                                    </button>
+                                                    </a>
+                                                    {{-- <button type="button" data-toggle="tooltip" title="Ubah Toko" class="btn btn-link btn-primary action" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="ubah">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button> --}}
                                                     <button type="button" data-toggle="tooltip" title="Hapus Toko" class="btn btn-link btn-danger action" data-original-title="Remove" data-id="{{ $item->id }}" data-jenis="hapus">
                                                         <i class="fa fa-times"></i>
                                                     </button>
@@ -98,7 +101,6 @@
     @include('backend.layouts.footer')
     <script>
         $(document).ready(function() { 
-
             $.getJSON('list-toko', function(data){
                 // console.log(data);
             if(data == 0){
@@ -121,9 +123,9 @@
                                 time: 0.9,
                                 delay: 0,
                             });
-            }
-        });
-    })
+                }
+            });
+        })
     </script>
     <script>
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
