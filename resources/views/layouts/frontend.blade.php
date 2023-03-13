@@ -27,7 +27,7 @@
 
 <body>
     <div id="app top">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" data-aos="fade-down">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name') }}
@@ -62,13 +62,6 @@
                             @if (Route::has('login'))
                                 <li class="nav-item mx-1">
                                     <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Masuk') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item mx-1">
-                                    <a class="btn btn-outline-light text-primary"
-                                        href="{{ route('register') }}">{{ __('Daftar') }}</a>
                                 </li>
                             @endif
                         @else
