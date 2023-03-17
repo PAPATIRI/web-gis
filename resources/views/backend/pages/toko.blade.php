@@ -33,10 +33,6 @@
                                     <span class="btn-label"><i class="fas fa-plus"></i></span>
                                     Tambah Toko
                                 </a>
-                                <button class="btn btn-info btn-sm ml-1 add-toko">
-                                    <span class="btn-label"><i class="fas fa-print"></i></span>
-                                    Tambah toko with modal
-                                </button>
                             </div>
                             <div class="table-responsive">
                                 {{-- @csrf --}}
@@ -159,24 +155,13 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success : function(res){
-                            var content = {};
-                            var from ='top';
-                            var align = 'right';
-                            var state = res.state;
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = 'fas fa-check';
-                                $.notify(content,{
-                                        type: state,
-                                        placement: {
-                                            from: from,
-                                            align: align
-                                        },
-                                        time: 2,
-                                        delay: 4,
-                                });
-                            // window.LaravelDataTables["produk-table"].ajax.reload();
-                            // $('.reloadTable').load(window.location.href + " .reloadTable")
+                            Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    }).then(function(){
+                                        location.reload();
+                                    })  
 
                         }
                     })

@@ -11,6 +11,7 @@ class GaleriProduk extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'fkid_toko',
         'nama_produk',
         'deskripsi_produk',

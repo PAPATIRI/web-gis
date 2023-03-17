@@ -43,7 +43,7 @@
                         <div class="card-header">
                             <h4 class="card-title">Ubah Toko Saya</h4>
                         </div>
-                        <form action="{{ route('toko.ubahToko') }}" method="post" id="formAction">
+                        <form method="post" id="formAction">
                             @csrf
                             <div class="card-body">
                                 <input type="hidden" value="{{Auth::user()->id }}" name="fkid_user">
@@ -189,7 +189,7 @@
                 const url = this.getAttribute('action')
                     $.ajax({
                         method  : 'post',
-                        url     : url,
+                        url     : `{{ url('ubah-toko') }}`,
                         headers : {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -198,22 +198,11 @@
                         contentType : false,
                         success : function(res){
 
-                            var content = {};
-                            var from ='top';
-                            var align = 'right';
-                            var state = res.state;
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = 'fas fa-check';
-                                $.notify(content,{
-                                        type: state,
-                                        placement: {
-                                            from: from,
-                                            align: align
-                                        },
-                                        time: 1,
-                                        delay: 1,
-                                });
+                            Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    }) 
                             resetForm();
                         }
                     })
@@ -225,6 +214,7 @@
                 $('#jamTutup').val("");
                 $('#namaToko').val("");
                 $('#lokasiToko').val("");
+                $('#alamatDetailToko ').val("");
                 $('#websiteToko').val("");
                 $('#kontakToko').val("");
                 $('#jamPelayananToko').val("");

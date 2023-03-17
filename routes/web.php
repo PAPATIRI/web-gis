@@ -57,3 +57,6 @@ Route::get('detail-toko/{id}',[\App\Http\Controllers\TokoController::class,'deta
 // Route Galeri Produk
 Route::post('simpan-produk',[\App\Http\Controllers\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
 Route::delete('hapus-foto-produk/{id}',[\App\Http\Controllers\TokoController::class,'hapusFotoProduk'])->name('toko.hapusFotoProduk');
+Route::get('detail-produk/{id}',[\App\Http\Controllers\TokoController::class,'detailProduk'])->name('toko.detailProduk');
+Route::get('edit-produk/{id}',[\App\Http\Controllers\TokoController::class,'editProduk'])->name('toko.editProduk');
+Route::put('update-produk',[\App\Http\Controllers\TokoController::class,'updateProduk'])->name('toko.updateProduk');
