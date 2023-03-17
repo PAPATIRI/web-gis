@@ -214,7 +214,42 @@ class TokoController extends Controller
     }
 
     public function hapusFotoProduk(Request $request,$id){
-            // dd($request->all());
-            GaleriProduk::where('id',$id)->delete();
+            // dd($request->id);
+            GaleriProduk::where('id',$request->id)->delete();
+            return response()->json([
+                'state' => 'success',
+                'message' => 'Produk telah dihapus.',
+                'title' => 'Berhasil..!',
+            ]);
+    }
+
+    public function detailProduk(Request $request){
+        // dd($request->id);
+        $data = GaleriProduk::where('id',$request->id)->first();
+        return view('backend.modal.modal-detailProduk', compact('data'));
+    }
+
+    public function editProduk(Request $request){
+        // dd($request->id);
+        $data = GaleriProduk::where('id',$request->id)->first();
+        return view('backend.modal.modal-editProduk', compact('data'));
+    }
+
+    public function updateProduk(Request $request){
+
+        // dd($request->id_produk);
+
+        GaleriProduk::where('id',$request->id_produk)->update([
+            'nama_produk'       => $request->nama_produk,
+            'deskripsi_produk'  => $request->deskripsi_produk,
+            // 'gambar_produk'     => 'Test'
+            // 'gambar_produk'     => $request->gambar_produk
+        ]);
+
+        return response()->json([
+            'state' => 'success',
+            'message' => 'Produk telah diupdate.',
+            'title' => 'Berhasil..!',
+        ]);
     }
 }

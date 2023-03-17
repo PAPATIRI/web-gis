@@ -19,18 +19,13 @@
                         <div class="collapse in" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="#profile">
-                                        <span class="link-collapse">My Profile</span>
+                                    <a href="#" id="profile">
+                                        <span class="link-collapse">Profile Saya</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#edit">
+                                    <a href="#" id="edit">
                                         <span class="link-collapse">Edit Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#settings">
-                                        <span class="link-collapse">Settings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -87,3 +82,116 @@
         </div>
     </div>
     <!-- End Sidebar -->
+
+     {{-- Modal Detail Profile --}}
+     <div id="modalActionProfile" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {{-- Ambil dari blade action --}}
+            <div class="modal-content">
+                <form class="" id="formActiontttt" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
+                            <strong>
+                             Profile Saya
+                           </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body"> 
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label for="email2">Nama Akun</label>
+                                {{-- <input type="email" class="form-control" id="email2" placeholder="Enter Email"> --}}
+                                <h2><strong>{{ Auth::user()->name }}</strong></h2>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="email2">Email</label>
+                                {{-- <input type="email" class="form-control" id="email2" placeholder="Enter Email"> --}}
+                                <h2><strong>{{ Auth::user()->email }}</strong></h2>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="avatar-xxl mt-2">
+                                <img src="../assetBackend/img/profile.jpg" alt="image profile" class="avatar-img rounded">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-times"></i> Tutup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+     {{-- Modal Ubah Profile --}}
+     <div id="modalActionEditProfile" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {{-- Ambil dari blade action --}}
+            <div class="modal-content">
+                <form class="" id="formActionoioi" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
+                            <strong>
+                             Edit Profile Saya
+                           </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body"> 
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="email2">Nama Akun</label>
+                                <input type="email" class="form-control" id="email2" placeholder="" value="{{ Auth::user()->name }}" name="nama">
+                                {{-- <h2><strong>{{ Auth::user()->name }}</strong></h2> --}}
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="email2">Email</label>
+                                <input type="email" class="form-control" id="email2" placeholder="" value="{{ Auth::user()->email }}" name="email">
+                                {{-- <h2><strong>{{ Auth::user()->email }}</strong></h2> --}}
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="email2">Foto Profile</label>
+                                        <input type="file" class="form-control" id="email2" placeholder="" name="foto_profile">
+                                    </div>
+                                    <div class="col">
+                                        <div class="avatar-xxl">
+                                            <img src="../assetBackend/img/profile.jpg" alt="image profile" class="avatar-img rounded">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-times"></i> Tutup</button>
+                        <button type="submit" class="btn btn-success btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url('assetBackend/js/core/jquery.min.js')}}"></script>
+    <script>
+           $('#profile').on('click' ,function(){
+                $('#modalActionProfile').modal('show');
+            })
+
+           $('#edit').on('click' ,function(){
+                $('#modalActionEditProfile').modal('show');
+            })
+            
+            $('.btn-close').on('click' ,function(){
+                $('#modalActionProfile').modal('hide');
+                $('#modalActionEditProfile').modal('hide');
+            })
+    </script>

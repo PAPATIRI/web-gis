@@ -196,23 +196,11 @@
                         processData : false,
                         contentType : false,
                         success : function(res){
-
-                            var content = {};
-                            var from ='top';
-                            var align = 'right';
-                            var state = res.state;
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = 'fas fa-check';
-                                $.notify(content,{
-                                        type: state,
-                                        placement: {
-                                            from: from,
-                                            align: align
-                                        },
-                                        time: 1,
-                                        delay: 1,
-                                });
+                                Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    });
                             resetForm();
                         }
                     })

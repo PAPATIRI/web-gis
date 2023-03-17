@@ -89,8 +89,8 @@
                         </div>
                         <div class="card-body galeri">
                             <button type="button" class="btn btn-info" id="tambahProduk"><i class="fa fa-fw fa-plus"></i> Tambah Produk</button>
-                            <div class="row">
-                                @foreach ($galeriProduk as $produk)
+                            <div class="row m-1">
+                                {{-- @foreach ($galeriProduk as $produk)
                                 <div class ="col-md-3 mt-4">
                                     <div class="card card-post card-round">
                                         <input type="hidden" value="{{ $produk->id }}" id="id" class="id">
@@ -106,7 +106,52 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                                @endforeach --}}
+
+                                <div class="table-responsive mt-2">
+                                    {{-- @csrf --}}
+                                    <table id="basic-datatables tabelProduk" class="table table-hover tabelProduk" >
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Produk</th>
+                                                <th>Deskripsi Produk</th>
+                                                <th>Gambar Produk</th>
+                                                <th width="10px">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($galeriProduk as $produk)   
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $produk->nama_produk }}</td>
+                                                <td>{{ $produk->deskripsi_produk }}</td>
+                                                <td>
+                                                    <div class="avatar">
+                                                        <img src="{{ url('uploads/Galeri Produk/')}}/{{$produk->gambar_produk }}" alt="..." class="avatar-img rounded" style="">
+                                                    </div>
+                                                </td>
+                                                <td width="30px">
+                                                    <div class="form-button-action">
+                                                        <button type="button" data-toggle="tooltip" title="Detail Produk" class="btn btn-link btn-success action " data-original-title="Edit Task" data-id="{{ $produk->id }}" data-jenis="detail">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                        <button type="button" data-toggle="tooltip" title="Ubah Produk" class="btn btn-link btn-primary action" data-original-title="Edit Task" data-id="{{ $produk->id }}" data-jenis="Ubah">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button type="button" data-toggle="tooltip" title="Hapus Produk" class="btn btn-link btn-danger action" data-original-title="Remove" id="btn-hapus" data-id="{{ $produk->id }}">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,7 +160,7 @@
         </div>
     </div>
 
-    {{-- Modal Add toko --}}
+    {{-- Modal tambah produk --}}
     <div id="modalAction" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             {{-- Ambil dari blade action --}}
@@ -156,6 +201,23 @@
         </div>
     </div>
 
+
+    {{-- Modal Detail Produk --}}
+    <div id="modalActionDetail" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            {{-- Ambil dari blade action --}}
+          
+        </div>
+    </div>
+
+    {{-- Modal Edit Produk --}}
+    <div id="modalActionEdit" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {{-- Ambil dari blade action --}}
+          
+        </div>
+    </div>
+
     @include('backend.layouts.footer')
         <script>
              $('.btn-close').on('click' ,function(){
@@ -163,30 +225,57 @@
             })
              $('#tambahProduk').on('click' ,function(){
                 $('#modalAction').modal('show');
+                    store();
             })
 
              $('.btn-ubah').on('click' ,function(){
                 $('#modalAction').modal('show');
             })
             
-            //  $('.btn-hapus').on('click' ,function(){
-                // $('#modalAction').modal('show');
-                $('.galeri').on('click','.btn-hapus',function(){
+            // Proses CRUD
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $('.tabelProduk').on('click','.action',function(){
                 let data    = $(this).data()
                 let id      = data.id
-                // let id      = $('.id').val();
-                console.log(id);
-                Swal.fire({
-                title: "Anda Yakin ?",
-                text: "Data produk akan di hapus !",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                cancelButtonText: "Batal",
-                confirmButtonText: "Yakin"
+                let jenis   = data.jenis
+
+                if(jenis == 'detail'){
+                    // alert('Detail'+id)
+                    $('#modalActionDetail').modal('show');
+                    $.ajax({
+                        method : 'get',
+                        url : `{{ url('detail-produk') }}/${id}`,
+                        success : function(res){
+                            $('#modalActionDetail').find('.modal-dialog').html(res)
+                            $('#modalActionDetail').modal('show');
+
+                        }
+                    })
+                }
+                else if( jenis == 'Ubah'){
+                    $.ajax({
+                        method : 'get',
+                        url : `{{ url('edit-produk') }}/${id}`,
+                        success : function(res){
+                            $('#modalActionEdit').find('.modal-dialog').html(res)
+                            $('#modalActionEdit').modal('show');
+                            // store();
+                            
+                        }
+                    })
+                }
+                else{
+                    Swal.fire({
+                        title: "Anda Yakin ?",
+                        text: "Produk akan dihapus",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        cancelButtonText: "Batal",
+                        confirmButtonText: "Hapus"
                     }).then(result => {
-                        if (result.value) {
+                    if (result.value) {
                         $.ajax({
                             method  : 'DELETE',
                             url     : `{{ url('hapus-foto-produk') }}/${id}`,
@@ -194,52 +283,51 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success : function(res){
-                                // window.LaravelDataTables["produk-table"].ajax.reload();
-                                // $('#totalProduk').load(window.location.href + " #totalProduk")
+                                Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    }).then(function(){
+                                        location.reload();
+                                    })                             
                             }
                         })
-                        }   
-                    });
+                    }
+                });
+                return
+                }
+
             })
 
             // Proses simpan galeri baru
-            $('#formAction').on('submit', function(e){
-                e.preventDefault()
-                const _form = this
-                const formData = new FormData(_form)
-                const url = this.getAttribute('action')
-                    $.ajax({
-                        method  : 'post',
-                        url     : url,
-                        headers : {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data    : formData,
-                        processData : false,
-                        contentType : false,
-                        success : function(res){
-                            $('#modalAction').modal('hide');
-                            var content = {};
-                            var from ='top';
-                            var align = 'right';
-                            var state = res.state;
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = 'fas fa-check';
-                                $.notify(content,{
-                                        type: state,
-                                        placement: {
-                                            from: from,
-                                            align: align
-                                        },
-                                        time: 1,
-                                        delay: 1,
-                                });
-                            // resetForm();
-                            $('.reloadPageGaleri').load(window.location.href + " .reloadPageGaleri")
-                        }
-                    })
-            });
+            function store(){
+                $('#formAction').on('submit', function(e){
+                    e.preventDefault()
+                    const _form = this
+                    const formData = new FormData(_form)
+                    const url = this.getAttribute('action')
+                        $.ajax({
+                            method  : 'post',
+                            url     : url,
+                            headers : {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data    : formData,
+                            processData : false,
+                            contentType : false,
+                            success : function(res){
+                                $('#modalAction').modal('hide');
+                                Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    }).then(function(){
+                                        location.reload();
+                                    })  
+                            }
+                        })
+                });
+        }
         </script>
     </div>
 @endsection
