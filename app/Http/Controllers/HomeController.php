@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Spot;
+use App\Models\Toko;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,7 +30,7 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home');
+        return view('welcome');
     }
 
     public function index()
@@ -41,17 +42,10 @@ class HomeController extends Controller
          * 
          * $categories akan digunakan pada header di file views/layouts/frontend
          */
-        $categorySpot = Spot::with('getCategory')->get();
-        $spots = Spot::with('getCategory')->get();
-        //$spotsSearch = Spot::with('getCategory')->get();
-        $categories = Category::all();
-        //return dd($spots);
+        $tokoKerajinan = Toko::all();
 
         return view('welcome', [
-            'spots' => $spots,
-            'categorySpot' => $categorySpot,
-            'categories' => $categories,
-            //'spotsSearch' => $spotsSearch
+            'tokoKerajinan' => $tokoKerajinan,
         ]);
     }
 
@@ -60,11 +54,9 @@ class HomeController extends Controller
         /**
          * Menampilkan detail dari spot yang dipilih beradasrkan slugnya
          */
-        $categories = Category::all();
-        $spots = Spot::where('slug', $slug)->first();
-        return view('frontend.DetailSpot', [
-            'spots' => $spots,
-            'categories' => $categories
+        $tokoKerajinan = Toko::where('slug', $slug)->first();
+        return view('frontend.DetailToko', [
+            'tokoKerajinan' => $tokoKerajinan,
         ]);
     }
 
@@ -74,28 +66,10 @@ class HomeController extends Controller
          * Menampilkan rute spot berdasarkan lokasi spot yang dipilih
          */
         $categories = Category::all();
-        $spots = Spot::where('slug', $slug)->first();
+        $spots = Toko::where('slug', $slug)->first();
         return view('frontend.RouteSpot', [
             'spots' => $spots,
             'categories' => $categories
-        ]);
-    }
-
-    public function getCategory($slug)
-    {
-        /**
-         * Menampilkan data spot beradasarkan kategori spot yang dipilih
-         */
-        $categories = Category::all();
-        $category = Category::where('id', $slug)->orWhere('slug', $slug)->first();
-        
-        // pada $spot di bawah kita memanggil relasi spot() dari model category jadi dengan format
-        // seperti di bawah kita bisa langsung mendapatkan hasil dari spot yang mempunyai kategori yang kita pilih
-        $spot = $category->spot()->get();
-        return view('frontend.CategorySpot', [
-            'categories' => $categories,
-            'spot' => $spot,
-            'category' => $category
         ]);
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\GaleriProduk;
 use App\Models\Spot;
+use App\Models\Toko;
 use Illuminate\Http\Request;
 
 class ListTokoController extends Controller
@@ -40,27 +42,22 @@ class ListTokoController extends Controller
          * 
          * $categories akan digunakan pada header di file views/layouts/frontend
          */
-        $categorySpot = Spot::with('getCategory')->get();
-        $spots = Spot::with('getCategory')->get();
-        //$spotsSearch = Spot::with('getCategory')->get();
-        //return dd($spots);
+        $tokoKerajinan = Toko::paginate(8);
 
         return view('frontend.ListToko', [
-            'spots' => $spots,
-            'categorySpot' => $categorySpot,
+            'tokoKerajinan' => $tokoKerajinan,
         ]);
     }
 
-    public function show($slug)
+    public function show(Request $request, $id)
     {
         /**
          * Menampilkan detail dari spot yang dipilih beradasrkan slugnya
          */
-        $categories = Category::all();
-        $spots = Spot::where('slug', $slug)->first();
-        return view('frontend.DetailSpot', [
-            'spots' => $spots,
-            'categories' => $categories
+        $tokoKerajinan = Toko::where('id', $id)->first();
+
+        return view('frontend.DetailToko', [
+            'tokoKerajinan' => $tokoKerajinan,
         ]);
     }
 
@@ -69,29 +66,9 @@ class ListTokoController extends Controller
         /**
          * Menampilkan rute spot berdasarkan lokasi spot yang dipilih
          */
-        $categories = Category::all();
-        $spots = Spot::where('slug', $slug)->first();
+        $tokoKerajinan = Toko::where('slug', $slug)->first();
         return view('frontend.RouteSpot', [
-            'spots' => $spots,
-            'categories' => $categories
-        ]);
-    }
-
-    public function getCategory($slug)
-    {
-        /**
-         * Menampilkan data spot beradasarkan kategori spot yang dipilih
-         */
-        $categories = Category::all();
-        $category = Category::where('id', $slug)->orWhere('slug', $slug)->first();
-        
-        // pada $spot di bawah kita memanggil relasi spot() dari model category jadi dengan format
-        // seperti di bawah kita bisa langsung mendapatkan hasil dari spot yang mempunyai kategori yang kita pilih
-        $spot = $category->spot()->get();
-        return view('frontend.CategorySpot', [
-            'categories' => $categories,
-            'spot' => $spot,
-            'category' => $category
+            'tokoKerajinan' => $tokoKerajinan,
         ]);
     }
 }
