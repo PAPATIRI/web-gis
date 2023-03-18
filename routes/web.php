@@ -41,22 +41,25 @@ Route::get('data-category',[\App\Http\Controllers\DataController::class,'categor
 Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
 
 
-Route::get('dashboard',[\App\Http\Controllers\Dashboard::class,'index'])->name('dashboard');
+Route::get('dashboard',[\App\Http\Controllers\Backend\Dashboard::class,'index'])->name('dashboard');
 
 // Route Toko
-Route::get('data-toko',[\App\Http\Controllers\TokoController::class,'index'])->name('toko.listToko');
-Route::get('tambah-toko',[\App\Http\Controllers\TokoController::class,'create'])->name('toko.tambahToko');
-Route::post('simpan-toko',[\App\Http\Controllers\TokoController::class,'store'])->name('toko.simpanToko');
-Route::post('ubah-toko',[\App\Http\Controllers\TokoController::class,'update'])->name('toko.ubahToko');
-Route::get('list-toko',[\App\Http\Controllers\TokoController::class,'listToko'])->name('list-toko');
-Route::get('ubah-toko/{id}',[\App\Http\Controllers\TokoController::class,'edit'])->name('toko.editToko');
+Route::get('data-toko',[\App\Http\Controllers\Backend\TokoController::class,'index'])->name('toko.listToko');
+Route::get('tambah-toko',[\App\Http\Controllers\Backend\TokoController::class,'create'])->name('toko.tambahToko');
+Route::post('simpan-toko',[\App\Http\Controllers\Backend\TokoController::class,'store'])->name('toko.simpanToko');
+Route::post('ubah-toko',[\App\Http\Controllers\Backend\TokoController::class,'update'])->name('toko.ubahToko');
+Route::get('list-toko',[\App\Http\Controllers\Backend\TokoController::class,'listToko'])->name('list-toko');
+Route::get('edit-toko/{id}',[\App\Http\Controllers\Backend\TokoController::class,'edit'])->name('toko.editToko');
 
-Route::delete('hapus-toko/{id}',[\App\Http\Controllers\TokoController::class,'destroy'])->name('toko.hapusToko');
-Route::get('detail-toko/{id}',[\App\Http\Controllers\TokoController::class,'detailToko'])->name('toko.detailToko');
+Route::delete('hapus-toko/{id}',[\App\Http\Controllers\Backend\TokoController::class,'destroy'])->name('toko.hapusToko');
+Route::get('detail-toko/{id}',[\App\Http\Controllers\Backend\TokoController::class,'detailToko'])->name('toko.detailToko');
 
 // Route Galeri Produk
-Route::post('simpan-produk',[\App\Http\Controllers\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
-Route::delete('hapus-foto-produk/{id}',[\App\Http\Controllers\TokoController::class,'hapusFotoProduk'])->name('toko.hapusFotoProduk');
-Route::get('detail-produk/{id}',[\App\Http\Controllers\TokoController::class,'detailProduk'])->name('toko.detailProduk');
-Route::get('edit-produk/{id}',[\App\Http\Controllers\TokoController::class,'editProduk'])->name('toko.editProduk');
-Route::put('update-produk',[\App\Http\Controllers\TokoController::class,'updateProduk'])->name('toko.updateProduk');
+Route::post('simpan-produk',[\App\Http\Controllers\Backend\TokoController::class,'simpanProduk'])->name('toko.simpanProduk');
+Route::delete('hapus-foto-produk/{id}',[\App\Http\Controllers\Backend\TokoController::class,'hapusFotoProduk'])->name('toko.hapusFotoProduk');
+Route::get('detail-produk/{id}',[\App\Http\Controllers\Backend\TokoController::class,'detailProduk'])->name('toko.detailProduk');
+Route::get('edit-produk/{id}',[\App\Http\Controllers\Backend\TokoController::class,'editProduk'])->name('toko.editProduk');
+Route::put('update-produk',[\App\Http\Controllers\Backend\TokoController::class,'updateProduk'])->name('toko.updateProduk');
+
+// Route User
+Route::post('update-user',[\App\Http\Controllers\Backend\UserController::class,'update'])->name('user.update');

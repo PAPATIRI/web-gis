@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Models\Toko;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Toko;
 use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Controller
