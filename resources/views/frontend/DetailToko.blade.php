@@ -65,45 +65,160 @@
         </div>
         <div class="py-5"></div>
         <div class="container">
-            {{-- pada halaman DetailSpot ini kita tidak melakukan looping tapi langsung memanggil
-                        variabel yang kita definisikan dari HomeController karena kita hanya akan menampilkan
-                        single data saja --}}
             <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <div class="mb-4">
-                        <p class="custom-label-detail">Alamat Toko</p>
-                        <p class="custom-data-detail"> {{ $tokoKerajinan->alamat_detail_toko }}</p>
+                <div class="col-sm-12 col-md-4 rounded border bg-white p-3">
+                    <p class="fs-3 fw-bold text-capitalize">detail toko</p>
+                    <hr class="mb-4">
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">Alamat Toko</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->alamat_detail_toko }}</p>
                     </div>
-
-                    <div class="mb-4">
-                        <p class="custom-label-detail">Deskripsi</p>
-                        <p class="custom-data-detail"> {{ $tokoKerajinan->deskripsi_toko }}</p>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">Deskripsi</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->deskripsi_toko }}</p>
                     </div>
-                    <div class="mb-4">
-                        <p class="custom-label-detail">jam kerja</p>
-                        <p class="custom-data-detail"> {{ $tokoKerajinan->jam_buka }} - {{ $tokoKerajinan->jam_tutup }}</p>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">jam kerja</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->jam_buka }} - {{ $tokoKerajinan->jam_tutup }}</p>
                     </div>
-                    <div class="mb-4">
-                        <p class="custom-label-detail">kontak</p>
-                        <p class="custom-data-detail"> {{ $tokoKerajinan->kontak_toko }}</p>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">kontak</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->kontak_toko }}</p>
                     </div>
-                    <div class="mb-4">
-                        <p class="custom-label-detail">website toko</p>
-                        <p class="custom-data-detail"> {{ $tokoKerajinan->website_toko }}</p>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">website toko</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->website_toko }}</p>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-8">
-
-                    <p class="custom-label-detail"><strong>Galeri Toko</strong></p>
-                    <div class="row gap-4">
-                        {{-- @forelse ($galeriProduk as $item)
-                            <img src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $galeriProduk->nama_toko }}"
-                                alt='toko-img'>
-                        @empty
-                            <div class="alert alert-warning">
-                                <p>toko ini belum menambahkan produknya</p>
+                <div class="col-sm-12 col-md-8 p-3">
+                    <p class="fs-3 fw-bold text-capitalize"><strong>Galeri Toko</strong></p>
+                    <hr class="mb-5">
+                    <div class="d-flex justify-content-center flex-wrap gap-2">
+                        {{-- @dump($galeriProduk) --}}
+                        @forelse ($galeriProduk as $item)
+                            <div class="custom-galeri-img-wrapper">
+                                <img class="custom-galeri-img"
+                                    src="{{ url('uploads/Galeri Produk/') }}/{{ $item->gambar_produk }}" alt='toko-img'>
                             </div>
-                        @endforelse --}}
+                        @empty
+                            <div class="alert alert-warning w-100">
+                                <p class="fs-5 fw-medium text-center">toko ini belum menambah foto-foto produknya</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <p class="fs-3 fw-bold text-capitalize">review</p>
+                <hr class="mb-4">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i
+                        class="fa fa-regular fa-plus"></i> tambah
+                    review</button>
+                <div class="collapse" id="collapseExample">
+                    <div class="w-100 rounded border bg-white p-3 shadow-sm">
+                        <form>
+                            <div class="mb-3">
+                                <label for="rating" class="form-label fs-5 fw-medium">rating toko</label>
+                                <div>
+                                    <p id="rangeValue" class="fs-5 fw-bold text-primary">0</p>
+                                    <Input class="range" type="range" name="rating" value="5" min="0"
+                                        max="10" onChange="rangeSlide(this.value)"
+                                        onmousemove="rangeSlide(this.value)"></Input>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="review" class="form-label fs-5 fw-medium">komentar anda</label>
+                                <textarea placeholder="tambahkan review anda" class="form-control" id="review" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary fs-5 fw-md"
+                                    style="width:250px">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4 gap-3 overflow-x-scroll p-2">
+                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
+                        <p class="fs-5 fw-bold">supri</p>
+                        <div class="d-flex mb-3 gap-1">
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                        </div>
+                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini,
+                            penjualnya juga ramah ramah dan bisa tawar menamwar kalo beli grosir</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
+                        <p class="fs-5 fw-bold">supri</p>
+                        <div class="d-flex mb-3 gap-1">
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                        </div>
+                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
+                        <p class="fs-5 fw-bold">supri</p>
+                        <div class="d-flex mb-3 gap-1">
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                        </div>
+                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
+                        <p class="fs-5 fw-bold">supri</p>
+                        <div class="d-flex mb-3 gap-1">
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                        </div>
+                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
+                        <p class="fs-5 fw-bold">supri</p>
+                        <div class="d-flex mb-3 gap-1">
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-warning"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                            <i class="fa fa fa-star fa-sm text-dark"></i>
+                        </div>
+                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
                     </div>
                 </div>
             </div>
@@ -114,6 +229,12 @@
 
 @push('javascript')
     <script>
+        // slider script
+        function rangeSlide(value) {
+            document.getElementById('rangeValue').innerHTML = value;
+        }
+
+        // map script
         var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             mbUrl =

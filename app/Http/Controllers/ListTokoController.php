@@ -49,17 +49,19 @@ class ListTokoController extends Controller
         ]);
     }
 
-    public function show(Request $request, $id)
-    {
-        /**
-         * Menampilkan detail dari spot yang dipilih beradasrkan slugnya
-         */
-        $tokoKerajinan = Toko::where('id', $id)->first();
+    // public function show(Request $request,$id)
+    // {
+    //     /**
+    //      * Menampilkan detail dari spot yang dipilih beradasrkan slugnya
+    //      */
+    //     $tokoKerajinan = Toko::where('id', $id)->first();
+    //     $galeriProduk = GaleriProduk::where('fkid_toko',$id)->get();
 
-        return view('frontend.DetailToko', [
-            'tokoKerajinan' => $tokoKerajinan,
-        ]);
-    }
+    //     return view('frontend.DetailToko', [
+    //         'tokoKerajinan' => $tokoKerajinan,
+    //         'galeriProduk' => $galeriProduk
+    //     ]);
+    // }
 
     public function getRoute($slug)
     {
