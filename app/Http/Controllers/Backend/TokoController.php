@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\GaleriProduk;
 use App\Models\JamPelayanan;
 use App\Models\RatingToko;
@@ -9,9 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use \App\Models\Toko;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
-
-use Illuminate\Http\Request;
 
 class TokoController extends Controller
 {
@@ -120,34 +121,36 @@ class TokoController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
 
-        // $this->validate($request,[
-        //     'sampul_toko' => 'image|required'
-        // ]);
-
-        // Proses Input dan upload file gambar foto sampul toko
-        // $file = $request->file('sampul_toko');
-        // $namaFile = $file->getClientOriginalName();
-        // $file->move('uploads/Foto Sampul Toko/', $namaFile);
-       
-        // Proses update nilai dari inputan ke array untuk disimpan dalam database
-     
-        Toko::where('id',$request->id_toko)->update([
-            'fkid_user'     =>$request->fkid_user,
-            'nama_toko'     =>$request->nama_toko,
-            'lokasi_toko'   =>$request->lokasi_toko,
-            'alamat_detail_toko'   =>$request->alamat_detail_toko,
-            'website_toko'  =>$request->website_toko,
-            'kontak_toko'   =>$request->kontak_toko,
-            'deskripsi_toko'=>$request->deskripsi_toko,
-            'jam_buka'      =>$request->jamBuka,
-            'jam_tutup'     =>$request->jamTutup,
-            'status_toko'   =>$request->status_toko,
-            'slug' => Str::slug($request->nama_toko)
-            // 'sampul_toko'   =>$namaFile,
-
+        $this->validate($request,[
+            'sampul_toko' => 'image'
         ]);
+
+        $toko = Toko::findOrFail($request->id_toko);
+        $toko->fkid_user        =$request->fkid_user;
+        $toko->nama_toko        =$request->nama_toko;
+        $toko->lokasi_toko   =$request->lokasi_toko;
+        $toko->alamat_detail_toko   =$request->alamat_detail_toko;
+        $toko->website_toko  =$request->website_toko;
+        $toko->kontak_toko   =$request->kontak_toko;
+        $toko->deskripsi_toko=$request->deskripsi_toko;
+        $toko->jam_buka      =$request->jamBuka;
+        $toko->jam_tutup     =$request->jamTutup;
+        $toko->status_toko   =$request->status_toko;
+       
+
+        if ($request->hasFile("sampul_toko")) {
+
+            if (File::exists("uploads/Foto Sampul Toko/" . $toko->sampul_toko)) {
+                File::delete("uploads/Foto Sampul Toko/" . $toko->sampul_toko);
+            }
+            $file = $request->file("sampul_toko");
+            $toko->sampul_toko = $file->getClientOriginalName();
+            $file->move('uploads/Foto Sampul Toko/', $toko->sampul_toko);
+            $request['sampul_toko'] = $toko->sampul_toko;
+        }
+
+        $toko->update();
         return response()->json([
             'state' => 'success',
             'message' => 'Berhasil mengubah data Toko.',
@@ -240,15 +243,27 @@ class TokoController extends Controller
 
     public function updateProduk(Request $request){
 
-        // dd($request->id_produk);
-
-        GaleriProduk::where('id',$request->id_produk)->update([
-            'nama_produk'       => $request->nama_produk,
-            'deskripsi_produk'  => $request->deskripsi_produk,
-            // 'gambar_produk'     => 'Test'
-            // 'gambar_produk'     => $request->gambar_produk
+        $this->validate($request,[
+            'gambar_produk' => 'image'
         ]);
 
+        $galeriProduk = GaleriProduk::findOrFail($request->id_produk);
+        $galeriProduk->nama_produk       = $request->nama_produk;
+        $galeriProduk->deskripsi_produk  = $request->deskripsi_produk;
+       
+
+        if ($request->hasFile("gambar_produk")) {
+
+            if (File::exists("uploads/Galeri Produk/" . $galeriProduk->gambar_produk)) {
+                File::delete("uploads/Galeri Produk/" . $galeriProduk->gambar_produk);
+            }
+            $file = $request->file("gambar_produk");
+            $galeriProduk->gambar_produk = $file->getClientOriginalName();
+            $file->move('uploads/Galeri Produk/', $galeriProduk->gambar_produk);
+            $request['gambar_produk'] = $galeriProduk->gambar_produk;
+        }
+
+        $galeriProduk->update();
         return response()->json([
             'state' => 'success',
             'message' => 'Produk telah diupdate.',

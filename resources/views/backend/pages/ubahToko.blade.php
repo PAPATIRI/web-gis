@@ -122,9 +122,18 @@
     
                                     <div class="row mt-3">
                                         <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlFile1">Foto Profile Toko</label>
-                                                <input type="file" class="form-control-file" id="fotoProfileToko" name="sampul_toko">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlFile1">Foto Profile Toko</label>
+                                                        <input type="file" class="form-control-file" id="fotoProfileToko" name="sampul_toko">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="avatar-xl mt-2">
+                                                        <img src="{{ url('uploads/Foto Sampul Toko/')}}/{{$data->sampul_toko }}" alt="..." class="avatar-img rounded">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-4">

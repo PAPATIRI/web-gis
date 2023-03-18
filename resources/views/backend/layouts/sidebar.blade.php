@@ -128,7 +128,7 @@
         <div class="modal-dialog">
             {{-- Ambil dari blade action --}}
             <div class="modal-content">
-                <form class="" id="formActionoioi" method="POST">
+                <form class="" id="formActionEditUser" method="POST">
                     @csrf
                     <div class="modal-header">
                         <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
@@ -142,13 +142,12 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="email2">Nama Akun</label>
-                                <input type="email" class="form-control" id="email2" placeholder="" value="{{ Auth::user()->name }}" name="nama">
-                                {{-- <h2><strong>{{ Auth::user()->name }}</strong></h2> --}}
+                                <input type="hidden" value="{{  Auth::user()->id }}" name="id_user">
+                                <input type="text" class="form-control" id="email2" placeholder="" value="{{ Auth::user()->name }}" name="nama">
                             </div>
                             <div class="form-group mt-2">
                                 <label for="email2">Email</label>
                                 <input type="email" class="form-control" id="email2" placeholder="" value="{{ Auth::user()->email }}" name="email">
-                                {{-- <h2><strong>{{ Auth::user()->email }}</strong></h2> --}}
                             </div>
 
                             <div class="form-group mt-2">
@@ -169,7 +168,7 @@
                     </div>
                     <div class="modal-footer mt-2">
                         <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-times"></i> Tutup</button>
-                        <button type="submit" class="btn btn-success btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-save"></i> Simpan</button>
+                        <button type="submit" class="btn btn-success btn-save btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-save"></i> Simpan</button>
                     </div>
                 </form>
             </div>
@@ -184,6 +183,33 @@
 
            $('#edit').on('click' ,function(){
                 $('#modalActionEditProfile').modal('show');
+                $('#formActionEditUser').on('submit', function(e){
+                    $('#modalActionEditProfile').modal('hide');
+                    e.preventDefault()
+                    const _form = this
+                    const formData = new FormData(_form)
+                    const url = this.getAttribute('action')
+                        $.ajax({
+                            method  : 'post',
+                            url     : `{{ url('update-user') }}`,
+                            headers : {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data    : formData,
+                            processData : false,
+                            contentType : false,
+                            success : function(res){
+                                $('#modalActionEdit').modal('hide');
+                                Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                    }).then(function(){
+                                        location.reload();
+                                    })  
+                            }
+                        })
+                });
             })
             
             $('.btn-close').on('click' ,function(){

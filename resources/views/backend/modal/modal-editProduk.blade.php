@@ -22,8 +22,17 @@
                 <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk" required>{{ $data->deskripsi_produk }}</textarea>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Foto Produk</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar_produk" >
+                <div class="row">
+                    <div class="col">
+                        <label for="exampleFormControlFile1">Foto Produk</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar_produk" >
+                    </div>
+                    <div class="col">
+                        <div class="avatar-xl mt-1">
+                            <img src="{{ url('uploads/Galeri Produk/')}}/{{$data->gambar_produk }}" alt="..." class="avatar-img rounded" style="">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer mt-2">

@@ -71,12 +71,9 @@
                                                     <a href="{{ url('detail-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Detail Toko" class="btn btn-link btn-success" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="detail">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ url('ubah-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Ubah Toko" class="btn btn-link btn-primary" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="Ubah">
+                                                    <a href="{{ url('edit-toko',$item->id) }}" type="button" data-toggle="tooltip" title="Ubah Toko" class="btn btn-link btn-primary" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="Ubah">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    {{-- <button type="button" data-toggle="tooltip" title="Ubah Toko" class="btn btn-link btn-primary action" data-original-title="Edit Task" data-id="{{ $item->id }}" data-jenis="ubah">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button> --}}
                                                     <button type="button" data-toggle="tooltip" title="Hapus Toko" class="btn btn-link btn-danger action" data-original-title="Remove" data-id="{{ $item->id }}" data-jenis="hapus">
                                                         <i class="fa fa-times"></i>
                                                     </button>
