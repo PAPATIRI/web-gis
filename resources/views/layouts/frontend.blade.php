@@ -63,9 +63,9 @@
     <div id="app top">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand fw-bold" href="{{ url('/') }}">
                     {{-- {{ config('app.name') }} --}}
-                    GIS-MERAUKE
+                    web-GIS
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -128,7 +128,8 @@
         </main>
         {{-- footer --}}
         <div class="footer">
-            <span>copyright @ 2023</span>
+            2023 made with <i class="fa fa-heart heart text-danger mx-2"></i> by <a href="https://www.webgis.com">web
+                GIS</a>
         </div>
         {{-- button to top --}}
         <div class="custom-back-to-top-wrapper">

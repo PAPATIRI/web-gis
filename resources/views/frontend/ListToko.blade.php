@@ -10,12 +10,12 @@
 
 @section('content')
     <div class="container">
-        <div class="custom-map-wrapper">
+        <div class="custom-map-wrapper" data-aos="zoom-in">
             <div id="map"></div>
         </div>
         <div class="row justify-content-center mt-5 gap-3">
             @forelse ($tokoKerajinan as $item)
-                <div class="col-sm-12 col-md-6 col-lg-3 card pb-2">
+                <div class="col-sm-12 col-md-6 col-lg-3 card pb-2" data-aos="fade-up" data-anchor-delay="400">
                     <div class="custom-img-map-wrapper">
                         <img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt="toko-img"
                             class='card-img-top custom-img-map'>
@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <p class="card-text">{{ $item->deskripsi_toko }}</p>
                     </div>
-                    <a href="{{ route('detail.show', $item->slug) }}" class="btn btn-primary mx-3">Selengkapnya</a>
+                    <a href="{{ route('detailtoko', $item->id) }}" class="btn btn-primary mx-3">Selengkapnya</a>
                 </div>
             @empty
                 <div class="alert alert-danger">
@@ -121,17 +121,6 @@
         // spot dan option bindPopoup.Jadi ketika salah satu amrker yang ada di klik akan memunculkan popup berupa informasi spot,
         // tombol cek rute dan tombol detail spot.
 
-        // @foreach ($tokoKerajinan as $item)
-        //     L.marker([{{ $item->lokasi_toko }}])
-        //         .bindPopup(
-        //             "<img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map'>" +
-        //             "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
-
-        //             "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
-        //             "<div class='my-2'></div>"
-
-        //         ).addTo(map);
-        // @endforeach
 
         // pada variable datas kita akan mendefinisikannya sebagai data array yang mana isian arraynya kita ambil dari
         // looping dari $spots dan variable datas ini akan kita loop lagi dalam perulangan for di bawah
@@ -171,7 +160,7 @@
                         "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
 
 
-                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
+                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
                         "<div class='my-2'></div>"
 
                     ).addTo(map);
