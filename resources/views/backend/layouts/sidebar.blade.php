@@ -4,7 +4,7 @@
             <div class="sidebar-content">
                 <div class="user">
                     <div class="avatar-sm float-left mr-2">
-                        <img src="{{ url('assetBackend/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
+                        <img src="{{ url('uploads/Foto Profile User')}}/{{Auth::user()->foto_profile }}" alt="..." class="avatar-img rounded-circle">
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -15,7 +15,6 @@
                             <span class="caret"></span>
                         </a>
                         <div class="clearfix"></div>
-
                         <div class="collapse in" id="collapseExample">
                             <ul class="nav">
                                 <li>
@@ -88,8 +87,6 @@
         <div class="modal-dialog">
             {{-- Ambil dari blade action --}}
             <div class="modal-content">
-                <form class="" id="formActiontttt" method="POST">
-                    @csrf
                     <div class="modal-header">
                         <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
                             <strong>
@@ -113,7 +110,7 @@
                         </div>
                         <div class="col-4">
                             <div class="avatar-xxl mt-2">
-                                <img src="../assetBackend/img/profile.jpg" alt="image profile" class="avatar-img rounded">
+                                <img src="{{ url('uploads/Foto Profile User')}}/{{Auth::user()->foto_profile }}" alt="image profile" class="avatar-img rounded">
                             </div>
                         </div>
                     </div>
@@ -121,7 +118,6 @@
                     <div class="modal-footer mt-2">
                         <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal" arial-label="Close"><i class="fas fa-fw fa-times"></i> Tutup</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -163,7 +159,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="avatar-xxl">
-                                            <img src="../assetBackend/img/profile.jpg" alt="image profile" class="avatar-img rounded">
+                                            <img src="{{ url('uploads/Foto Profile User')}}/{{Auth::user()->foto_profile }}" alt="image profile" class="avatar-img rounded">
                                         </div>
                                     </div>
                                 </div>
