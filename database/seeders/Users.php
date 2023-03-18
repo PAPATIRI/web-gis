@@ -19,11 +19,13 @@ class Users extends Seeder
                 'name'      => 'Admin Toko 1',
                 'email'     => 'admin1@gmail.com',
                 'password'  => bcrypt('12345678'),
+                'foto_profile'  => 'Avatar.png',
             ],
             [
                 'name'      => 'Admin Toko 2',
                 'email'     => 'admin2@gmail.com',
                 'password'  => bcrypt('12345678'),
+                'foto_profile'  => 'Avatar.png',
             ],
         ];
 
