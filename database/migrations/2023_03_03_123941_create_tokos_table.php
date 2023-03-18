@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('fkid_user')->index();
             $table->string('nama_toko');
+            $table->string('slug');            
             $table->string('lokasi_toko');
             $table->string('alamat_detail_toko');
             $table->string('website_toko');

@@ -32,10 +32,6 @@
 }
 .active-link {
     color: #0d6efd;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 8px;
 }
 
 /* ================= */
@@ -81,7 +77,7 @@
 .custom-search-section-wrapper {
     padding-right: 15%;
 }
-button {
+.custom-search-section-wrapper a {
     width: fit-content;
     font-weight: 500;
     font-size: 18px;
@@ -104,6 +100,7 @@ button {
 .custom-map-wrapper {
     border-radius: 12px;
     overflow: hidden;
+    /* box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2); */
 }
 .custom-map-section-title {
     font-size: 32px;
@@ -111,6 +108,12 @@ button {
     text-align: center;
     padding: 0 25%;
     text-transform: capitalize;
+}
+.custom-img-map {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    object-fit: cover;
 }
 
 /* ================= */

@@ -23,6 +23,7 @@ class Toko extends Model
         'jam_tutup',
         'status_toko',
         'sampul_toko',
+        'slug'
     ];
 
     public function pemilik()

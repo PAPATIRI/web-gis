@@ -1,38 +1,66 @@
 @extends('layouts.frontend')
 
 @section('styles')
-    {{-- cdn css leaflet  --}}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
-
-    {{-- cdn js leaflet --}}
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
-
-    {{-- cdn leaflet fullscreen js dan css --}}
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-
     <style>
         #map {
-            height: 500px
+            height: 450px
         }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div id="map"></div>
+        <div class="custom-map-wrapper">
+            <div id="map"></div>
+        </div>
+        <div class="row justify-content-center mt-5 gap-3">
+            @forelse ($tokoKerajinan as $item)
+                <div class="col-sm-12 col-md-6 col-lg-3 card pb-2">
+                    <div class="custom-img-map-wrapper">
+                        <img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt="toko-img"
+                            class='card-img-top custom-img-map'>
+                        <div class="custom-card-title-wrapper">
+                            <h5 class="card-title">{{ $item->nama_toko }}</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ $item->deskripsi_toko }}</p>
+                    </div>
+                    <a href="{{ route('detail.show', $item->slug) }}" class="btn btn-primary mx-3">Selengkapnya</a>
+                </div>
+            @empty
+                <div class="alert alert-danger">
+                    upss, data masih kosong nih
+                </div>
+            @endforelse
+            <div class="d-flex justify-content-center">
+                {!! $tokoKerajinan->links() !!}
             </div>
         </div>
     </div>
 @endsection
 
 @push('javascript')
+    <script>
+        var description = document.getElementsByClassName('card-text');
+        var title = document.getElementsByClassName('card-title')
+
+        function truncate(words, maxlength, typeText) {
+            if (typeText === 'title') {
+                return `<p>${words.slice(0, maxlength)}</p>`;
+            }
+            return `<p>${words.slice(0, maxlength)}...</p>`;
+        }
+        // memperpendek title toko di card
+        for (var i = 0; i < title.length; i++) {
+            title[i].innerHTML = truncate(title[i].textContent, 30, 'title');
+        }
+
+        // memperpendek text dari deskripsi di card toko
+        for (var i = 0; i < description.length; i++) {
+            description[i].innerHTML = truncate(description[i].textContent, 100, 'description')
+        }
+    </script>
     <script>
         var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -63,7 +91,7 @@
                 pseudoFullscreen: false
             },
 
-            // Titik koordinat peta indonesia
+            // Titik koordinat peta merauke
             // untuk source code menampilkan peta pada halaman welcome ini masih sama seperti pada
             // halaman backend di file view spot, create.blade. Tapi pada halaman ini kita akan memunculkan 
             // marker dari masing-masing spot yang sudah ditambahkan dan ketika marker itu di klik akan memunculkan 
@@ -88,33 +116,29 @@
             "Satellite": satellite,
         };
 
-        // disini kita melakukan looping dari controller HomeController tepatnya dari method index
+        // disini kita melakukan looping dari controller ListTokoController tepatnya dari method index
         // kemudian hasil dari looping tersebut kita masukkan kedalam function marker untuk memunculkan marker dari tiap-tiap
         // spot dan option bindPopoup.Jadi ketika salah satu amrker yang ada di klik akan memunculkan popup berupa informasi spot,
         // tombol cek rute dan tombol detail spot.
 
-        @foreach ($spots as $item)
-            L.marker([{{ $item->location }}])
-                .bindPopup(
-                    "<div class='my-2'><img src='{{ $item->getImage() }}' class='img-fluid' width='700px'></div>" +
-                    "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $item->name }}</div>" +
+        // @foreach ($tokoKerajinan as $item)
+        //     L.marker([{{ $item->lokasi_toko }}])
+        //         .bindPopup(
+        //             "<img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map'>" +
+        //             "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
 
-                    @foreach ($item->getCategory as $itemCategory)
-                        "<div class='my-2'><strong>Kategori Spot:</strong> <br>{{ $itemCategory->name }}</div>" +
-                    @endforeach
+        //             "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
+        //             "<div class='my-2'></div>"
 
-                    "<div class='my-2'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-primary btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>" +
-                    "<div class='my-2'></div>"
-
-                ).addTo(map);
-        @endforeach
+        //         ).addTo(map);
+        // @endforeach
 
         // pada variable datas kita akan mendefinisikannya sebagai data array yang mana isian arraynya kita ambil dari
         // looping dari $spots dan variable datas ini akan kita loop lagi dalam perulangan for di bawah
         var datas = [
-            @foreach ($spots as $key => $value)
+            @foreach ($tokoKerajinan as $key => $value)
                 {
-                    "loc": [{{ $value->location }}],
+                    "loc": [{{ $value->lokasi_toko }}],
                     "title": '{!! $value->name !!}'
                 },
             @endforeach
@@ -140,17 +164,14 @@
             // markersLayer.addLayer(marker);
 
             // melakukan looping data untuk memunculkan popup dari spot yang dipilih
-            @foreach ($spots as $item)
-                L.marker([{{ $item->location }}])
+            @foreach ($tokoKerajinan as $item)
+                L.marker([{{ $item->lokasi_toko }}])
                     .bindPopup(
-                        "<div class='my-2'><img src='{{ $item->getImage() }}' class='img-fluid' width='700px'></div>" +
-                        "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $item->name }}</div>" +
+                        "<img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map'>" +
+                        "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
 
-                        @foreach ($item->getCategory as $itemCategory)
-                            "<div class='my-2'><strong>Kategori Spot:</strong> <br>{{ $itemCategory->name }}</div>" +
-                        @endforeach
 
-                        "<div class='my-2'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-primary btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>" +
+                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detail.show', $item->slug) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
                         "<div class='my-2'></div>"
 
                     ).addTo(map);

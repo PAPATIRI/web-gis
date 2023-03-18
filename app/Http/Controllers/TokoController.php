@@ -8,6 +8,7 @@ use App\Models\RatingToko;
 use Illuminate\Database\Eloquent\Model;
 use \App\Models\Toko;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class TokoController extends Controller
             'jam_tutup'     =>$request->jamTutup,
             'status_toko'   =>$request->status_toko,
             'sampul_toko'   =>$namaFile,
+            'slug' => Str::slug($request->nama_toko)
         ];
         Toko::create($data);
         return response()->json([
@@ -142,6 +144,7 @@ class TokoController extends Controller
             'jam_buka'      =>$request->jamBuka,
             'jam_tutup'     =>$request->jamTutup,
             'status_toko'   =>$request->status_toko,
+            'slug' => Str::slug($request->nama_toko)
             // 'sampul_toko'   =>$namaFile,
 
         ]);
