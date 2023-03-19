@@ -33,25 +33,21 @@
             </ol>
         </nav>
         <div class="custom-detail-header mb-5">
-            <div class="custom-map-wrapper">
+            <div class="custom-map-wrapper" data-aos="zoom-in">
                 <div id="map"></div>
             </div>
-            <div class="custom-detail-image-wrapper">
+            <div class="custom-detail-image-wrapper" data-aos="fade-right">
                 <img src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $tokoKerajinan->sampul_toko }}" alt='toko-img'
                     class='custom-detail-image'>
                 <div>
-                    <p class="custom-label-detail mb-4">{{ $tokoKerajinan->nama_toko }}</p>
+                    <p class="fs-5 fw-bold text-capitalize m-0 mb-2">{{ $tokoKerajinan->nama_toko }}</p>
                     <div class="d-flex mb-3 gap-1">
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-warning"></i>
-                        <i class="fa fa fa-star fa-lg text-dark"></i>
-                        <i class="fa fa fa-star fa-lg text-dark"></i>
+                        @for ($i = 0; $i < $overalRating; $i++)
+                            <i class="fa fa fa-star fa-lg text-warning"></i>
+                        @endfor
+                        @for ($i = 0; $i < 10 - $overalRating; $i++)
+                            <i class="far fa-star fa-lg text-secondary"></i>
+                        @endfor
                     </div>
                     <button class="btn btn-{{ $tokoKerajinan->status_toko == 0 ? 'danger' : 'success' }} btn-xs mt-1">
                         @if ($tokoKerajinan->status_toko == 0)
@@ -65,7 +61,7 @@
         </div>
         <div class="py-5"></div>
         <div class="container">
-            <div class="row">
+            <div class="row" data-aos="fade-up">
                 <div class="col-sm-12 col-md-4 rounded border bg-white p-3">
                     <p class="fs-3 fw-bold text-capitalize">detail toko</p>
                     <hr class="mb-4">
@@ -93,133 +89,15 @@
                 <div class="col-sm-12 col-md-8 p-3">
                     <p class="fs-3 fw-bold text-capitalize"><strong>Galeri Toko</strong></p>
                     <hr class="mb-5">
-                    <div class="d-flex justify-content-center flex-wrap gap-2">
-                        {{-- @dump($galeriProduk) --}}
-                        @forelse ($galeriProduk as $item)
-                            <div class="custom-galeri-img-wrapper">
-                                <img class="custom-galeri-img"
-                                    src="{{ url('uploads/Galeri Produk/') }}/{{ $item->gambar_produk }}" alt='toko-img'>
-                            </div>
-                        @empty
-                            <div class="alert alert-warning w-100">
-                                <p class="fs-5 fw-medium text-center">toko ini belum menambah foto-foto produknya</p>
-                            </div>
-                        @endforelse
+                    <div class="">
+                        @include('frontend.components.galeriToko')
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <p class="fs-3 fw-bold text-capitalize">review</p>
-                <hr class="mb-4">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i
-                        class="fa fa-regular fa-plus"></i> tambah
-                    review</button>
-                <div class="collapse" id="collapseExample">
-                    <div class="w-100 rounded border bg-white p-3 shadow-sm">
-                        <form>
-                            <div class="mb-3">
-                                <label for="rating" class="form-label fs-5 fw-medium">rating toko</label>
-                                <div>
-                                    <p id="rangeValue" class="fs-5 fw-bold text-primary">0</p>
-                                    <Input class="range" type="range" name="rating" value="5" min="0"
-                                        max="10" onChange="rangeSlide(this.value)"
-                                        onmousemove="rangeSlide(this.value)"></Input>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="review" class="form-label fs-5 fw-medium">komentar anda</label>
-                                <textarea placeholder="tambahkan review anda" class="form-control" id="review" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary fs-5 fw-md"
-                                    style="width:250px">Kirim</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-4 gap-3 overflow-x-scroll p-2">
-                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
-                        <p class="fs-5 fw-bold">supri</p>
-                        <div class="d-flex mb-3 gap-1">
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                        </div>
-                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini,
-                            penjualnya juga ramah ramah dan bisa tawar menamwar kalo beli grosir</p>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
-                        <p class="fs-5 fw-bold">supri</p>
-                        <div class="d-flex mb-3 gap-1">
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                        </div>
-                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
-                        <p class="fs-5 fw-bold">supri</p>
-                        <div class="d-flex mb-3 gap-1">
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                        </div>
-                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
-                        <p class="fs-5 fw-bold">supri</p>
-                        <div class="d-flex mb-3 gap-1">
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                        </div>
-                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 card rounded p-4">
-                        <p class="fs-5 fw-bold">supri</p>
-                        <div class="d-flex mb-3 gap-1">
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-warning"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                            <i class="fa fa fa-star fa-sm text-dark"></i>
-                        </div>
-                        <p class="fs-6">toko nya lengkap sekali, harga dan kualitasnya sangat worth to buy sih disini</p>
-                    </div>
+            <div class="mt-5" data-aos="fade-up">
+                @include('frontend.components.formTambahRating')
+                <div class="row justify-content-center rating-pagination mt-4 gap-3 overflow-x-scroll p-2" id="rating-data">
+                    @include('frontend.components.ratingToko')
                 </div>
             </div>
         </div>
@@ -228,6 +106,47 @@
 @endsection
 
 @push('javascript')
+    {{-- ajax pagination rating komentar toko --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    // getData(page);
+                    getRatingData(page)
+                }
+            }
+        });
+
+        $(document).ready(function() {
+            $(document).on('click', '.rating-pagination .pagination a', function(event) {
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+                event.preventDefault();
+                var myurl = $(this).attr('href');
+                var page = $(this).attr('href').split('page=')[1];
+                getRatingData(page);
+            });
+        });
+
+        function getRatingData(page) {
+            $.ajax({
+                    url: '?page=' + page,
+                    type: "get",
+                    datatype: "html",
+                })
+                .done(function(data) {
+                    $("#rating-data").empty().html(data);
+                    location.hash = page;
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('No response from server');
+                });
+        }
+    </script>
     <script>
         // slider script
         function rangeSlide(value) {

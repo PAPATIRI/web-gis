@@ -125,10 +125,10 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #0d6efd;
+    background: lightsalmon;
     cursor: pointer;
-    border: 4px solid lightskyblue;
-    box-shadow: -407px 0 0 400px #0d6efd;
+    border: 4px solid orange;
+    box-shadow: -407px 0 0 400px salmon;
 }
 
 /* ================ */
