@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('fkid_toko')->index();
             $table->double('rating_toko');
             $table->string('komentar');
+            $table->string('nama');
             $table->timestamps();
             $table->foreign('fkid_toko')->references('id')->on('tbl_toko')->onDelete('cascade')->onUpdate('cascade');
         });

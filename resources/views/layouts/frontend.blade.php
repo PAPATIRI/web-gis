@@ -49,7 +49,8 @@
             }
         });
     </script>
-    {{-- AOS --}}
+    {{-- SWEET ALERT & AOS --}}
+    <link href="{{ url('assetBackend/js/plugin/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Styles -->
@@ -139,6 +140,8 @@
         </div>
     </div>
     @stack('javascript')
+    {{-- SWEET ALERT & AOS --}}
+    <script src="{{ url('assetBackend/js/plugin/sweetalert/sweetalert2.all.min.js') }}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();

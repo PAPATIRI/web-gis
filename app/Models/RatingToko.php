@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon ;
 
 class RatingToko extends Model
 {
@@ -12,6 +13,7 @@ class RatingToko extends Model
 
     protected $fillable = [
         'fkid_toko',
+        'nama',
         'rating_toko',
         'komentar',
     ];
@@ -19,5 +21,10 @@ class RatingToko extends Model
     public function toko()
     {
         return $this->belongsTo(Toko::class, 'fkid_toko');
+    }
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y');
+        
     }
 }

@@ -24,13 +24,13 @@ Auth::routes();
 
 // Route FRONTEND
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::resource('detail',(HomeController::class));
 Route::get('rute/{id}',[HomeController::class,'getRoute'])->name('cek-rute');
-Route::get('kategori-spot/{slug}',[HomeController::class,'getCategory'])->name('kategori-spot');
 Route::post('posts',[HomeController::class,'storeRatings'])->name('store-ratings');
 Route::get('/toko', [App\Http\Controllers\ListTokoController::class, 'index'])->name('toko');
 Route::get('/detailtoko/{id}', [App\Http\Controllers\DetailTokoController::class, 'show'])->name('detailtoko');
+// Route Rating Toko
+Route::post('detailtoko',[\App\Http\Controllers\DetailTokoController::class,'tambahRating'])->name('toko.tambahRating');
 
 // Route BACKEND
 Route::resource('spot',(SpotController::class));

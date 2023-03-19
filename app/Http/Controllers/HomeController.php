@@ -49,12 +49,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show($id)
     {
         /**
          * Menampilkan detail dari spot yang dipilih beradasrkan slugnya
          */
-        $tokoKerajinan = Toko::where('slug', $slug)->first();
+        $tokoKerajinan = Toko::where('id', $id)->first();
         return view('frontend.DetailToko', [
             'tokoKerajinan' => $tokoKerajinan,
         ]);
