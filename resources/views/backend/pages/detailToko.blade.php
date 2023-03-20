@@ -47,6 +47,10 @@
                                         <label for="email2" style="font-size: 20px"><h3 style="font-weight:bold">{{ $item->jam_buka }} - {{ $item->jam_tutup }}</h3></label>
                                     </div>
                                     <div class="form-group">
+                                        <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Alamat Toko</small>
+                                        <label for="email2" style="font-size: 20px"></label>{{ $item->alamat_detail_toko }}</label>
+                                    </div>
+                                    <div class="form-group">
                                         <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Deskripsi Toko</small>
                                         <label for="email2" style="font-size: 20px"></label>{{ $item->deskripsi_toko }}</label>
                                     </div>
@@ -69,13 +73,13 @@
                                         <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Foto Profile Toko</small>
                                         <img class="card-img-top mt-2" src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}" alt="Card image cap">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Alamat Toko</small>
                                         <img class="card-img-top mt-2" src="/assetBackend/img/backgroundLogin.jpg" alt="Card image cap">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-4">
-                                    <div class="form-group">
+                                    <div class="form-group ml-4">
                                         <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Rating Toko</small>
                                         <span class="btn-label" style="font-size: 40px;font-weight:bold"><i class="fas fa-star mt-4" style="color:rgb(255, 153, 0); font-size:3rem"></i> {{ $overalRating }}</span>
                                     </div>

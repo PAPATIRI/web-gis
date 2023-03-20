@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pemilik()
+    {
+        return $this->belongsTo(Toko::class, 'fkid_user');
+    }
 }
