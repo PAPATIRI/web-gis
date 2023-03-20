@@ -41,7 +41,7 @@
                     class='custom-detail-image'>
                 <div>
                     <p class="fs-5 fw-bold text-capitalize m-0 mb-2">{{ $tokoKerajinan->nama_toko }}</p>
-                    <div class="d-flex mb-3 gap-1">
+                    <div class="d-flex mb-3 flex-wrap gap-2">
                         @for ($i = 0; $i < $overalRating; $i++)
                             <i class="fa fa fa-star fa-lg text-warning"></i>
                         @endfor
@@ -61,7 +61,7 @@
         </div>
         <div class="py-5"></div>
         <div class="container">
-            <div class="row" data-aos="fade-up">
+            <div class="row" data-aos="fade-right">
                 <div class="col-sm-12 col-md-4 rounded border bg-white p-3">
                     <p class="fs-3 fw-bold text-capitalize">detail toko</p>
                     <hr class="mb-4">
@@ -108,6 +108,34 @@
 @push('javascript')
     {{-- ajax pagination rating komentar toko --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $('.btn-close').on('click', function() {
+            $('#modalAction').modal('hide');
+        })
+
+        // Proses CRUD
+        // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $('.galeri-toko').on('click', '#action', function() {
+            let data = $(this).data()
+            let id = data.id
+            let jenis = data.jenis
+
+            if (jenis == 'detail') {
+                // alert('Detail'+id)
+                $('#modalActionDetail').modal('show');
+                $.ajax({
+                    method: 'get',
+                    url: `{{ url('detail-foto') }}/${id}`,
+                    success: function(res) {
+                        console.log(res)
+                        $('#modalActionDetail').find('.modal-dialog').html(res)
+                        $('#modalActionDetail').modal('show');
+
+                    }
+                })
+            }
+        })
+    </script>
     <script>
         $(window).on('hashchange', function() {
             if (window.location.hash) {

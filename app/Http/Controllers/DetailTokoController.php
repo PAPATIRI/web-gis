@@ -36,11 +36,12 @@ class DetailTokoController extends Controller
         if ($request->ajax()) {
             return view('frontend.components.ratingToko', compact('ratingToko'));
         }
+
         return view('frontend.DetailToko', [
             'tokoKerajinan' => $tokoKerajinan,
             'galeriProduk' => $galeriProduk,
             'ratingToko'=>$ratingToko,
-            'overalRating'=>round($overalRating)
+            'overalRating'=>round($overalRating),
         ]);
     }
 
@@ -53,5 +54,10 @@ class DetailTokoController extends Controller
         ];
         RatingToko::create($data);
         return back()->withInput();
+     }
+
+     public function detailProduk(Request $request){
+        $data = GaleriProduk::where('id',$request->id)->first();
+        return view('frontend.modal.modal-detailFoto', compact('data'));
      }
 }

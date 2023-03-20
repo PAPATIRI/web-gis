@@ -231,7 +231,6 @@
                 $('#modalAction').modal('show');
                     store();
             })
-
              $('.btn-ubah').on('click' ,function(){
                 $('#modalAction').modal('show');
             })
@@ -242,7 +241,6 @@
                 let data    = $(this).data()
                 let id      = data.id
                 let jenis   = data.jenis
-
                 if(jenis == 'detail'){
                     // alert('Detail'+id)
                     $('#modalActionDetail').modal('show');
@@ -252,7 +250,6 @@
                         success : function(res){
                             $('#modalActionDetail').find('.modal-dialog').html(res)
                             $('#modalActionDetail').modal('show');
-
                         }
                     })
                 }
@@ -300,9 +297,7 @@
                 });
                 return
                 }
-
             })
-
             // Proses simpan galeri baru
             function store(){
                 $('#formAction').on('submit', function(e){

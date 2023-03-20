@@ -108,6 +108,15 @@
     width: 300px;
     height: 200px;
 }
+.custom-img-modal-wrapper {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.custom-img-modal {
+    object-fit: cover;
+}
 
 /* input custom range style */
 .range {
@@ -141,4 +150,11 @@
     }
 }
 @media only screen and (max-width: 768px) {
+    .custom-img-modal-wrapper {
+        height: 264px;
+    }
+    .custom-img-modal {
+        height: 264px;
+        width: auto;
+    }
 }
