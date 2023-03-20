@@ -1,0 +1,226 @@
+/* custom style */
+/* ================= */
+/* reusable style */
+/* ================= */
+.custom-section-wrapper {
+    height: 550px;
+}
+.custom-section-title {
+    font-size: 32px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+.custom-section-desc {
+    font-size: 18px;
+    margin-bottom: 32px;
+}
+.custom-section-img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 400px;
+    padding: 100px;
+}
+
+/* ================= */
+/* navbar style */
+/* ================= */
+.nav-link {
+    font-size: 16px;
+    color: black;
+}
+.active-link {
+    color: #0d6efd;
+}
+
+/* ================= */
+/* jumbotron section */
+/* ================= */
+.custom-jumbotron {
+    position: relative;
+    margin-bottom: 40px;
+}
+.custom-jumbotron-text-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 200px;
+}
+.custom-jumbotron h2 {
+    color: #fefefe;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    line-height: calc(32px * 1.6);
+    text-transform: capitalize;
+}
+.custom-overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.custom-jumbotron .img-fluid {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* ================= */
+/* search section */
+/* ================= */
+.custom-search-section-wrapper {
+    padding-right: 15%;
+}
+.custom-search-section-wrapper a {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/* ================= */
+/* rating section */
+/* ================= */
+.custom-rating-section-wrapper {
+    padding-left: 10%;
+    padding-right: 15%;
+}
+
+/* ================= */
+/* map section */
+/* ================= */
+.custom-section-wrapper:last-child {
+    height: fit-content;
+}
+.custom-map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    /* box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2); */
+}
+.custom-map-section-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 25%;
+    text-transform: capitalize;
+}
+.custom-img-map {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+/* ================= */
+/* footer section */
+/* ================= */
+.footer {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(13, 110, 253, 0.6);
+}
+footer span {
+    font-size: 16px;
+    line-height: normal;
+}
+/* ================= */
+/* responsive style */
+/* ================= */
+@media only screen and (max-width: 1000px) {
+    /* reusable style */
+    .custom-section-wrapper {
+        height: fit-content;
+        margin-bottom: 20px;
+    }
+    .custom-section-desc {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    /* search section */
+    .custom-search-section-wrapper {
+        padding-right: 0;
+    }
+    .custom-section-img-wrapper {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    /* map section */
+    .custom-map-section-title {
+        font-size: 24px;
+        padding: 0 5%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    /* reusable style */
+    button {
+        align-self: center;
+    }
+    .custom-section-wrapper {
+        height: fit-content;
+        padding: 50px 0;
+    }
+    .custom-section-desc {
+        font-size: 16px;
+        text-align: center;
+    }
+    .custom-section-title {
+        font-size: 24px;
+        text-align: center;
+    }
+    .custom-section-img-wrapper {
+        height: 250px;
+        width: 100%;
+    }
+    /* navbar section */
+    .nav-item a {
+        margin-bottom: 5px;
+    }
+    /* jumbotron section */
+    .custom-jumbotron-text-wrapper {
+        padding: 0 40px;
+    }
+    .img-fluid {
+        height: 300px;
+    }
+    /* rating section */
+    .custom-rating-section-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .custom-order-xs-2 {
+        order: 2;
+    }
+    .custom-order-xs-1 {
+        order: 1;
+    }
+}
+
+/* smooth scrolling button to top */
+.custom-back-to-top-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: all;
+    z-index: 80;
+    height: 48px;
+    width: 48px;
+    background-color: #0d6efd;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
