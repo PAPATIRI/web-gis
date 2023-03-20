@@ -1,7 +1,7 @@
 <p class="fs-3 fw-bold text-capitalize">review</p>
 <hr class="mb-4">
 <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-    aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-regular fa-plus"></i> tambah
+    aria-expanded="false" aria-controls="collapseExample">tambah
     komentar</button>
 <div class="collapse mt-2" id="collapseExample">
     <div class="w-100 rounded border bg-white p-3 shadow-sm">

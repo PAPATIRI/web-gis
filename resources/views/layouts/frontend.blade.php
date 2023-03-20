@@ -129,8 +129,7 @@
         </main>
         {{-- footer --}}
         <div class="footer">
-            2023 made with <i class="fa fa-heart heart text-danger mx-2"></i> by <a href="https://www.webgis.com">web
-                GIS</a>
+            2023 dibuat dengan penuh <i class="fa fa-heart heart text-danger mx-2"></i></a>
         </div>
         {{-- button to top --}}
         <div class="custom-back-to-top-wrapper">
