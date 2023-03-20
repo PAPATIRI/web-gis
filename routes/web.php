@@ -31,6 +31,7 @@ Route::get('/toko', [App\Http\Controllers\ListTokoController::class, 'index'])->
 Route::get('/detailtoko/{id}', [App\Http\Controllers\DetailTokoController::class, 'show'])->name('detailtoko');
 // Route Rating Toko
 Route::post('detailtoko',[\App\Http\Controllers\DetailTokoController::class,'tambahRating'])->name('toko.tambahRating');
+Route::get('detail-foto/{id}',[\App\Http\Controllers\DetailTokoController::class,'detailProduk'])->name('toko.detailFoto');
 
 // Route BACKEND
 Route::resource('spot',(SpotController::class));
