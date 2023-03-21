@@ -63,12 +63,12 @@ class ListTokoController extends Controller
     //     ]);
     // }
 
-    public function getRoute($slug)
+    public function getRoute($id)
     {
         /**
          * Menampilkan rute spot berdasarkan lokasi spot yang dipilih
          */
-        $tokoKerajinan = Toko::where('slug', $slug)->first();
+        $tokoKerajinan = Toko::where('id', $id)->first();
         return view('frontend.RouteSpot', [
             'tokoKerajinan' => $tokoKerajinan,
         ]);

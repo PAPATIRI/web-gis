@@ -160,7 +160,7 @@
                         "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
 
 
-                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->slug) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
+                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->id) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
                         "<div class='my-2'></div>"
 
                     ).addTo(map);
