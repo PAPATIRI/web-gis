@@ -1,0 +1,78 @@
+/* map section dan identitas toko */
+#map {
+    z-index: 80;
+}
+.custom-map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.custom-detail-image-wrapper {
+    position: absolute;
+    display: flex;
+    padding: 25px;
+    height: fit-content;
+    align-items: center;
+    gap: 20px;
+    inset: 80% 10px -50px 10px;
+    z-index: 99;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 12px;
+    width: 40%;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.custom-detail-image {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+.custom-name-toko,
+.custom-rating-toko {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3rem;
+    text-transform: capitalize;
+}
+.custom-detail-image {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+/* ================ */
+/* detail data toko styling */
+/* ================ */
+.custom-label-data-toko {
+    font-size: 15px;
+    font-weight: bold;
+}
+.custom-value-data-toko {
+    font-size: 18px;
+}
+
+/* ================ */
+/* modal detail produk styling */
+/* ================ */
+.custom-img-modal-wrapper {
+    overflow: hidden;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.custom-img-modal {
+    object-fit: cover;
+}
+
+/* ================ */
+/* responsive style */
+/* ================ */
+@media only screen and (max-width: 1000px) {
+    .custom-detail-image-wrapper {
+        inset: 80% 0px -50px 0px;
+        width: 100%;
+    }
+}

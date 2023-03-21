@@ -33,16 +33,6 @@ Route::get('/detailtoko/{id}', [App\Http\Controllers\DetailTokoController::class
 Route::post('detailtoko',[\App\Http\Controllers\DetailTokoController::class,'tambahRating'])->name('toko.tambahRating');
 Route::get('detail-foto/{id}',[\App\Http\Controllers\DetailTokoController::class,'detailProduk'])->name('toko.detailFoto');
 
-// Route BACKEND
-Route::resource('spot',(SpotController::class));
-Route::resource('category',(CategoryController::class));
-Route::delete('/deleteimage/{id}',[SpotController::class,'deleteImage'])->name('delete-image');
-
-// ROUTE DataTable
-Route::get('data-category',[\App\Http\Controllers\DataController::class,'categories'])->name('data-category');
-Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
-
-
 Route::get('dashboard',[\App\Http\Controllers\Backend\Dashboard::class,'index'])->name('dashboard');
 
 // Route Toko

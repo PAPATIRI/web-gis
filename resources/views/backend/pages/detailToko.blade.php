@@ -1,4 +1,17 @@
 @extends('backend.layouts.master')
+@section('styles')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+@endsection
 @section('container')
     <div class="main-panel">
         <div class="content">
@@ -7,7 +20,7 @@
                     {{-- <h4 class="page-title">{{ $title }}</h4> --}}
                     <ul class="breadcrumbs">
                         <li class="nav-home">
-                            <a href="#">
+                            <a href="{{ route('toko.listToko') }}">
                                 <i class="flaticon-home"></i>
                             </a>
                         </li>
@@ -19,95 +32,48 @@
                         </li>
                     </ul>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Detail Toko, <strong>{{ $item->nama_toko }}</strong></h4>
+                <div class="position-relative">
+                    <div class="custom-map-wrapper">
+                        <div id="map"></div>
+                    </div>
+                    <div class="custom-detail-image-wrapper">
+                        <img class="custom-detail-image"
+                            src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}" alt="Card image cap">
+                        <div>
+                            <p class="custom-name-toko">{{ $item->nama_toko }}</p>
+                            <div class="mb-3">
+                                <h3 class="custom-rating-toko">
+                                    <span>
+                                        <i class="fa fa fa-star fa-lg text-warning"></i>
+                                    </span>{{ $overalRating }}/10
+                                </h3>
                             </div>
-                            {{-- <form action="#" method="post"> --}}
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px;">Nama Toko</small>
-                                            <label for="email2" style="font-size: 20px">
-                                                <h3 style="font-weight:bold">{{ $item->nama_toko }}</h3>
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Website</small>
-                                            <label for="email2" style="font-size: 20px">
-                                                <h3 style="font-weight:bold">{{ $item->website_toko }}</h3>
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Kontak Person</small>
-                                            <label for="email2" style="font-size: 20px">
-                                                <h3 style="font-weight:bold">{{ $item->kontak_toko }}</h3>
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger" style="font-size: 14px">Jam
-                                                Pelayanan</small>
-                                            <label for="email2" style="font-size: 20px">
-                                                <h3 style="font-weight:bold">{{ $item->jam_buka }} - {{ $item->jam_tutup }}
-                                                </h3>
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Deskripsi Toko</small>
-                                            <label for="email2"
-                                                style="font-size: 20px"></label>{{ $item->deskripsi_toko }}</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Status Toko</small>
-                                            <label for="email2">
-                                                <button
-                                                    class="btn btn-{{ $item->status_toko == 0 ? 'danger' : 'success' }} btn-xs mt-1">
-
-                                                    @if ($item->status_toko == 0)
-                                                        <i class="fas fa-fw fa-door-closed"></i> Tutup
-                                                    @else
-                                                        <i class="fas fa-fw fa-door-open"></i> Buka
-                                                    @endif
-                                                </button>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Foto Profile Toko</small>
-                                            <img class="card-img-top mt-2"
-                                                src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}"
-                                                alt="Card image cap">
-                                        </div>
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Alamat Toko</small>
-                                            <img class="card-img-top mt-2" src="/assetBackend/img/backgroundLogin.jpg"
-                                                alt="Card image cap">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <small id="emailHelp2" class="form-text text-danger"
-                                                style="font-size: 14px">Rating Toko</small>
-                                            <span class="btn-label" style="font-size: 40px;font-weight:bold"><i
-                                                    class="fas fa-star mt-4"
-                                                    style="color:rgb(255, 153, 0); font-size:3rem"></i>
-                                                {{ $overalRating }}</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div
+                                class="{{ $item->status_toko == 0 ? 'bg-danger' : 'bg-success' }} w-50 rounded py-3 text-center text-white">
+                                @if ($item->status_toko == 0)
+                                    <i class="fas fa-fw fa-door-closed mr-2"></i> Tutup
+                                @else
+                                    <i class="fas fa-fw fa-door-open mr-2"></i> Buka
+                                @endif
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="my-2 py-5"></div>
+                <div class="row px-4">
+                    <div class="col-sm-12 col-lg-4 mb-3 rounded-lg bg-white p-4 shadow">
+                        <small class="custom-label-data-toko">Nama Toko</small>
+                        <p class="custom-value-data-toko">{{ $item->nama_toko }}</p>
+                        <small class="custom-label-data-toko">Website</small>
+                        <p class="custom-value-data-toko">{{ $item->website_toko }}</p>
+                        <small class="custom-label-data-toko">Kontak</small>
+                        <p class="custom-value-data-toko">{{ $item->kontak_toko }}</p>
+                        <small class="custom-label-data-toko">Jam Pelayanan</small>
+                        <p class="custom-value-data-toko">{{ $item->jam_buka }}-{{ $item->jam_tutup }}</p>
+                        <small class="custom-label-data-toko">deskripsi</small>
+                        <p class="custom-value-data-toko">{{ $item->deskripsi_toko }}</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-8">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Galeri Produk</h4>
@@ -116,24 +82,6 @@
                                 <button type="button" class="btn btn-info" id="tambahProduk"><i
                                         class="fa fa-fw fa-plus"></i> Tambah Produk</button>
                                 <div class="row m-1">
-                                    {{-- @foreach ($galeriProduk as $produk)
-                                <div class ="col-md-3 mt-4">
-                                    <div class="card card-post card-round">
-                                        <input type="hidden" value="{{ $produk->id }}" id="id" class="id">
-                                        <img class="card-img-top" src="{{ url('uploads/Galeri Produk/')}}/{{$produk->gambar_produk }}" alt="Card image cap">
-                                        <div class="card-body">
-                                            <div class="separator-solid"></div>
-                                            <h5 class="card-title" style="font-size: 18px; font-weight:bold; color:#17a2b8">
-                                                {{ $produk->nama_produk }}
-                                            </h5>
-                                            <p class="card-text">{{ $produk->deskripsi_produk }}</p>
-                                            <button type="button"class="btn btn-primary btn-sm btn-ubah"><i class="fas fa-fw fa-pen-square"></i> Ubah</button>
-                                            <button type="button"class="btn btn-danger btn-sm btn-hapus" id="btn-hapus" data-id="{{ $item->id }}"><i class="fas fa-fw fa-trash"></i> Hapus</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach --}}
-
                                     <div class="table-responsive mt-2">
                                         {{-- @csrf --}}
                                         <table id="basic-datatables tabelProduk" class="table-hover tabelProduk table">
@@ -141,7 +89,6 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Produk</th>
-                                                    <th>Deskripsi Produk</th>
                                                     <th>Gambar Produk</th>
                                                     <th width="10px">Aksi</th>
                                                 </tr>
@@ -150,11 +97,10 @@
                                                 @php
                                                     $no = 1;
                                                 @endphp
-                                                @foreach ($galeriProduk as $produk)
+                                                @forelse ($galeriProduk as $produk)
                                                     <tr>
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $produk->nama_produk }}</td>
-                                                        <td>{{ $produk->deskripsi_produk }}</td>
                                                         <td>
                                                             <div class="avatar">
                                                                 <img src="{{ url('uploads/Galeri Produk/') }}/{{ $produk->gambar_produk }}"
@@ -162,33 +108,37 @@
                                                                     style="">
                                                             </div>
                                                         </td>
-                                                        <td width="30px">
+                                                        <td>
                                                             <div class="form-button-action">
                                                                 <button type="button" data-toggle="tooltip"
                                                                     title="Detail Produk"
                                                                     class="btn btn-link btn-success action"
                                                                     data-original-title="Edit Task"
                                                                     data-id="{{ $produk->id }}" data-jenis="detail">
-                                                                    <i class="fa fa-eye"></i>
+                                                                    <i class="fa fa-lg fa-eye"></i>
                                                                 </button>
                                                                 <button type="button" data-toggle="tooltip"
                                                                     title="Ubah Produk"
                                                                     class="btn btn-link btn-primary action"
                                                                     data-original-title="Edit Task"
                                                                     data-id="{{ $produk->id }}" data-jenis="Ubah">
-                                                                    <i class="fa fa-edit"></i>
+                                                                    <i class="fa fa-lg fa-edit"></i>
                                                                 </button>
                                                                 <button type="button" data-toggle="tooltip"
                                                                     title="Hapus Produk"
                                                                     class="btn btn-link btn-danger action"
                                                                     data-original-title="Remove" id="btn-hapus"
                                                                     data-id="{{ $produk->id }}">
-                                                                    <i class="fa fa-times"></i>
+                                                                    <i class="fa fa-lg fa-times"></i>
                                                                 </button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <div class="bg-warning text-dark rounded py-4 text-center">
+                                                        <h3>data produk kosong</h3>
+                                                    </div>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -199,179 +149,240 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        {{-- Modal tambah produk --}}
-        <div id="modalAction" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                {{-- Ambil dari blade action --}}
-                <div class="modal-content">
-                    <form class="" id="formAction" action="{{ route('toko.simpanProduk') }}" method="POST">
-                        @csrf
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
-                                <strong>
-                                    Tambah Produk
-                                </strong>
-                            </h3>
+    {{-- Modal tambah produk --}}
+    <div id="modalAction" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {{-- Ambil dari blade action --}}
+            <div class="modal-content">
+                <form class="" id="formAction" action="{{ route('toko.simpanProduk') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myLargeModalLabel" style="color: black">
+                            <strong>
+                                Tambah Produk
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" value="{{ $item->id }}" name="fkid_toko">
+                        {{-- {{ $item->id }} --}}
+                        <div class="form-group">
+                            <label for="email2">Nama Produk</label>
+                            <input type="text" class="form-control" id="namaProduk" placeholder="Masukan Nama produk"
+                                name="nama_produk" required>
+                            {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                         </div>
-                        <div class="modal-body">
-                            <input type="hidden" value="{{ $item->id }}" name="fkid_toko">
-                            {{-- {{ $item->id }} --}}
-                            <div class="form-group">
-                                <label for="email2">Nama Produk</label>
-                                <input type="text" class="form-control" id="namaProduk"
-                                    placeholder="Masukan Nama produk" name="nama_produk" required>
-                                {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
-                            </div>
-                            <div class="form-group">
-                                <label for="comment">Deskripsi</label>
-                                <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk" required>
+                        <div class="form-group">
+                            <label for="comment">Deskripsi</label>
+                            <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk" required>
                             </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlFile1">Foto Produk</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                    name="gambar_produk" required>
-                            </div>
                         </div>
-                        <div class="modal-footer mt-2">
-                            <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal"
-                                arial-label="Close"><i class="fas fa-fw fa-times"></i> Batal</button>
-                            <button type="submit" class="btn btn-success btn-sm"><i class="far fa-fw fa-save"></i>
-                                Simpan</button>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Foto Produk</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                name="gambar_produk" required>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-danger btn-close btn-sm" data-bs-dismiss="modal"
+                            arial-label="Close"><i class="fas fa-fw fa-times"></i> Batal</button>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="far fa-fw fa-save"></i>
+                            Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
+    {{-- Modal Detail Produk --}}
+    <div id="modalActionDetail" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            {{-- Ambil dari blade action --}}
 
-        {{-- Modal Detail Produk --}}
-        <div id="modalActionDetail" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                {{-- Ambil dari blade action --}}
-
-            </div>
         </div>
+    </div>
+    {{-- Modal Edit Produk --}}
+    <div id="modalActionEdit" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            {{-- Ambil dari blade action --}}
 
-        {{-- Modal Edit Produk --}}
-        <div id="modalActionEdit" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                {{-- Ambil dari blade action --}}
-
-            </div>
         </div>
-
-        @include('backend.layouts.footer')
-        <script>
-            $('.btn-close').on('click', function() {
-                $('#modalAction').modal('hide');
-            })
-            $('#tambahProduk').on('click', function() {
-                $('#modalAction').modal('show');
-                store();
-            })
-
-            $('.btn-ubah').on('click', function() {
-                $('#modalAction').modal('show');
-            })
-
-            // Proses CRUD
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $('.tabelProduk').on('click', '.action', function() {
-                let data = $(this).data()
-                let id = data.id
-                let jenis = data.jenis
-
-                if (jenis == 'detail') {
-                    // alert('Detail'+id)
-                    $('#modalActionDetail').modal('show');
-                    $.ajax({
-                        method: 'get',
-                        url: `{{ url('detail-produk') }}/${id}`,
-                        success: function(res) {
-                            console.log('res: ', res)
-                            $('#modalActionDetail').find('.modal-dialog').html(res)
-                            $('#modalActionDetail').modal('show');
-
-                        }
-                    })
-                } else if (jenis == 'Ubah') {
-                    $.ajax({
-                        method: 'get',
-                        url: `{{ url('edit-produk') }}/${id}`,
-                        success: function(res) {
-                            $('#modalActionEdit').find('.modal-dialog').html(res)
-                            $('#modalActionEdit').modal('show');
-                            // store();
-
-                        }
-                    })
-                } else {
-                    Swal.fire({
-                        title: "Anda Yakin ?",
-                        text: "Produk akan dihapus",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        cancelButtonText: "Batal",
-                        confirmButtonText: "Hapus"
-                    }).then(result => {
-                        if (result.value) {
-                            $.ajax({
-                                method: 'DELETE',
-                                url: `{{ url('hapus-foto-produk') }}/${id}`,
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                success: function(res) {
-                                    Swal.fire({
-                                        icon: res.state,
-                                        title: res.title,
-                                        text: res.message,
-                                    }).then(function() {
-                                        location.reload();
-                                    })
-                                }
-                            })
-                        }
-                    });
-                    return
-                }
-
-            })
-
-            // Proses simpan galeri baru
-            function store() {
-                $('#formAction').on('submit', function(e) {
-                    e.preventDefault()
-                    const _form = this
-                    const formData = new FormData(_form)
-                    const url = this.getAttribute('action')
-                    $.ajax({
-                        method: 'post',
-                        url: url,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(res) {
-                            $('#modalAction').modal('hide');
-                            Swal.fire({
-                                icon: res.state,
-                                title: res.title,
-                                text: res.message,
-                            }).then(function() {
-                                location.reload();
-                            })
-                        }
-                    })
-                });
-            }
-        </script>
+    </div>
+    @include('backend.layouts.footer')
     </div>
 @endsection
+@push('javascript')
+    <script>
+        $('.btn-close').on('click', function() {
+            $('#modalAction').modal('hide');
+        })
+        $('#tambahProduk').on('click', function() {
+            $('#modalAction').modal('show');
+            store();
+        })
+
+        $('.btn-ubah').on('click', function() {
+            $('#modalAction').modal('show');
+        })
+
+        // Proses CRUD
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $('.tabelProduk').on('click', '.action', function() {
+            let data = $(this).data()
+            let id = data.id
+            let jenis = data.jenis
+
+            if (jenis == 'detail') {
+                // alert('Detail'+id)
+                $('#modalActionDetail').modal('show');
+                $.ajax({
+                    method: 'get',
+                    url: `{{ url('detail-produk') }}/${id}`,
+                    success: function(res) {
+                        $('#modalActionDetail').find('.modal-dialog').html(res)
+                        $('#modalActionDetail').modal('show');
+
+                    }
+                })
+            } else if (jenis == 'Ubah') {
+                $.ajax({
+                    method: 'get',
+                    url: `{{ url('edit-produk') }}/${id}`,
+                    success: function(res) {
+                        $('#modalActionEdit').find('.modal-dialog').html(res)
+                        $('#modalActionEdit').modal('show');
+                        // store();
+
+                    }
+                })
+            } else {
+                Swal.fire({
+                    title: "Anda Yakin ?",
+                    text: "Produk akan dihapus",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Batal",
+                    confirmButtonText: "Hapus"
+                }).then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: `{{ url('hapus-foto-produk') }}/${id}`,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    icon: res.state,
+                                    title: res.title,
+                                    text: res.message,
+                                }).then(function() {
+                                    location.reload();
+                                })
+                            }
+                        })
+                    }
+                });
+                return
+            }
+
+        })
+
+        // Proses simpan galeri baru
+        function store() {
+            $('#formAction').on('submit', function(e) {
+                e.preventDefault()
+                const _form = this
+                const formData = new FormData(_form)
+                const url = this.getAttribute('action')
+                $.ajax({
+                    method: 'post',
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        $('#modalAction').modal('hide');
+                        Swal.fire({
+                            icon: res.state,
+                            title: res.title,
+                            text: res.message,
+                        }).then(function() {
+                            location.reload();
+                        })
+                    }
+                })
+            });
+        }
+    </script>
+    </div>
+    <script>
+        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            mbUrl =
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+        var satellite = L.tileLayer(mbUrl, {
+                id: 'mapbox/satellite-v9',
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: mbAttr
+            }),
+            dark = L.tileLayer(mbUrl, {
+                id: 'mapbox/dark-v10',
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: mbAttr
+            }),
+            streets = L.tileLayer(mbUrl, {
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: mbAttr
+            });
+
+        var data{{ $item->id }} = L.layerGroup()
+        var map = L.map('map', {
+            // Menampilkan nilai lokasi dari tabel spot
+            center: [{{ $item->lokasi_toko }}],
+            zoom: 17,
+            fullscreenControl: {
+                pseudoFullscreen: false
+            },
+            layers: [streets, data{{ $item->id }}]
+        });
+
+        var baseLayers = {
+            "Streets": streets,
+            "Satellite": satellite,
+            "Dark": dark,
+        };
+
+        var overlays = {
+            //"Streets": streets
+            "{{ $item->name }}": data{{ $item->id }},
+        };
+
+        L.control.layers(baseLayers, overlays).addTo(map);
+
+        // Begitu Juga pada curLocation kita Menampilkan nilai lokasi dari tabel spot
+        var curLocation = [{{ $item->lokasi_toko }}];
+        map.attributionControl.setPrefix(false);
+
+
+        var marker = new L.marker(curLocation);
+        marker.bindPopup("<p style='font-size:18px'><b>hay pak bos!!</b><br>lokasi toko kamu di sini 😊. </p>").openPopup();
+        var popup = L.popup()
+            .setLatLng([{{ $item->lokasi_toko }}])
+            .setContent("<p style='font-size:18px'><b>halo pak bos!!</b><br>lokasi toko kamu di sini 😊. </p>")
+            .openOn(map);
+        map.addLayer(marker);
+    </script>
+@endpush
