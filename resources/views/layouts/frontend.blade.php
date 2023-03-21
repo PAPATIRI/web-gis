@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'web-gis') }}</title>
 
     {{-- cdn css leaflet  --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -66,7 +66,7 @@
             <div class="container">
                 <a class="navbar-brand fw-bold" href="{{ url('/') }}">
                     {{-- {{ config('app.name') }} --}}
-                    web-GIS
+                    web-gis
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

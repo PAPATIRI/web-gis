@@ -17,66 +17,74 @@
     </style>
 @endsection
 @section('container')
-
-<div class="main-panel">
-    <div class="content">
-        <div class="page-inner">
-            <div class="page-header">
-                {{-- <h4 class="page-title">{{ $title }}</h4> --}}
-                <ul class="breadcrumbs">
-                    <li class="nav-home">
-                        <a href="#">
-                            <i class="flaticon-home"></i>
-                        </a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">{{ $title  }}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Ubah Toko Saya</h4>
-                        </div>
-                        <form method="post" id="formAction">
-                            @csrf
-                            <div class="card-body">
-                                <input type="hidden" value="{{Auth::user()->id }}" name="fkid_user">
-                                <input type="hidden" value="{{$data->id }}" name="id_toko">
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    {{-- <h4 class="page-title">{{ $title }}</h4> --}}
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">{{ $title }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Ubah Toko Saya</h4>
+                            </div>
+                            <form method="post" id="formAction">
+                                @csrf
+                                <div class="card-body">
+                                    <input type="hidden" value="{{ Auth::user()->id }}" name="fkid_user">
+                                    <input type="hidden" value="{{ $data->id }}" name="id_toko">
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Nama Toko</label>
-                                                <input type="text" value="{{ $data->nama_toko }}" class="form-control" id="namaToko" placeholder="Masukan Nama Toko" name="nama_toko" required>
+                                                <input type="text" value="{{ $data->nama_toko }}" class="form-control"
+                                                    id="namaToko" placeholder="Masukan Nama Toko" name="nama_toko"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Lokasi Toko</label>
-                                                <input type="text" value="{{ $data->lokasi_toko }}" class="form-control" id="lokasiToko" placeholder="Longitude, Latitude" name="lokasi_toko">
-                                                <small id="emailHelp2" class="form-text text-danger">*Pilih melalui google maps, kemudian copy dan paste longituted dan latitude</small>
+                                                <input type="text" value="{{ $data->lokasi_toko }}" class="form-control"
+                                                    id="lokasiToko" placeholder="Longitude, Latitude" name="lokasi_toko">
+                                                <small id="emailHelp2" class="form-text text-danger">*Pilih melalui google
+                                                    maps, kemudian copy dan paste longituted dan latitude</small>
                                                 {{-- <small id="emailHelp2" class="form-text text-danger">*Pilih melalui map (klik Lokasi Toko)</small> --}}
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Alamat Detail Toko</label>
-                                                <input type="text" value="{{ $data->alamat_detail_toko }}" class="form-control" id="alamatDetailToko" placeholder="Masukan detail alamat" name="alamat_detail_toko" required>
+                                                <input type="text" value="{{ $data->alamat_detail_toko }}"
+                                                    class="form-control" id="alamatDetailToko"
+                                                    placeholder="Masukan detail alamat" name="alamat_detail_toko" required>
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="row mt-3">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Website</label>
                                                 <div class="input-group">
-                                                    <input type="text" value="{{ $data->website_toko }}" id="websiteToko" class="form-control" placeholder="Masukan website" aria-label="Recipient's username" aria-describedby="basic-addon2" name="website_toko">
+                                                    <input type="text" value="{{ $data->website_toko }}" id="websiteToko"
+                                                        class="form-control" placeholder="Masukan website"
+                                                        aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                                        name="website_toko">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text" id="basic-addon2">@example.com</span>
                                                     </div>
@@ -86,7 +94,9 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Kontak Person</label>
-                                                <input type="number" value="{{ $data->kontak_toko }}" class="form-control" id="kontakToko" placeholder="Masukan Kontak person" name="kontak_toko" required>
+                                                <input type="number" value="{{ $data->kontak_toko }}" class="form-control"
+                                                    id="kontakToko" placeholder="Masukan Kontak person" name="kontak_toko"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -96,55 +106,68 @@
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <select class="form-control" id="jamBuka" name="jamBuka" required>
-                                                            <option selected value="{{ $data->jam_buka }}">{{ $data->jam_buka }}</option>
+                                                            <option selected value="{{ $data->jam_buka }}">
+                                                                {{ $data->jam_buka }}</option>
                                                             @foreach ($jamPelayanan as $jamBuka)
-                                                                <option value="{{$jamBuka->jam_buka}}">{{ $jamBuka->jam_buka }}</option>  
+                                                                <option value="{{ $jamBuka->jam_buka }}">
+                                                                    {{ $jamBuka->jam_buka }}</option>
                                                             @endforeach
                                                         </select>
-        
+
                                                     </div>
                                                     <div class="col-2">
-                                                            <h5 class="mt-2 text-center"> <hr> </h5>
+                                                        <h5 class="mt-2 text-center">
+                                                            <hr>
+                                                        </h5>
                                                     </div>
                                                     <div class="col-5">
-                                                        <select class="form-control" id="jamTutup" name="jamTutup" required>
-                                                            <option selected value="{{ $data->jam_tutup }}">{{ $data->jam_tutup }}</option>
+                                                        <select class="form-control" id="jamTutup" name="jamTutup"
+                                                            required>
+                                                            <option selected value="{{ $data->jam_tutup }}">
+                                                                {{ $data->jam_tutup }}</option>
                                                             @foreach ($jamPelayanan as $jamTutup)
-                                                                <option value="{{$jamTutup->jam_tutup}}">{{ $jamTutup->jam_tutup }}</option>  
+                                                                <option value="{{ $jamTutup->jam_tutup }}">
+                                                                    {{ $jamTutup->jam_tutup }}</option>
                                                             @endforeach
                                                         </select>
-        
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="row mt-3">
                                         <div class="col-4">
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="exampleFormControlFile1">Foto Profile Toko</label>
-                                                        <input type="file" class="form-control-file" id="fotoProfileToko" name="sampul_toko">
+                                                        <input type="file" class="form-control-file"
+                                                            id="fotoProfileToko" name="sampul_toko">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="avatar-xl mt-2">
-                                                        <img src="{{ url('uploads/Foto Sampul Toko/')}}/{{$data->sampul_toko }}" alt="..." class="avatar-img rounded">
+                                                        <img src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $data->sampul_toko }}"
+                                                            alt="..." class="avatar-img rounded">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-check">
-                                                <label>Status Toko</label><br/>
+                                                <label>Status Toko</label><br />
                                                 <label class="form-radio-label">
-                                                    <input class="form-radio-input" type="radio" name="status_toko" value="1" id="statusToko" required {{ $data->status_toko==1 ? 'checked' : '' }}>
+                                                    <input class="form-radio-input" type="radio" name="status_toko"
+                                                        value="1" id="statusToko" required
+                                                        {{ $data->status_toko == 1 ? 'checked' : '' }}>
                                                     <span class="form-radio-sign">Buka</span>
                                                 </label>
                                                 <label class="form-radio-label ml-3">
-                                                    <input class="form-radio-input" type="radio" name="status_toko" value="0" id="statusToko" required {{ $data->status_toko==1 ? '' : 'checked' }}>
+                                                    <input class="form-radio-input" type="radio" name="status_toko"
+                                                        value="0" id="statusToko" required
+                                                        {{ $data->status_toko == 1 ? '' : 'checked' }}>
                                                     <span class="form-radio-sign">Tutup</span>
                                                 </label>
                                             </div>
@@ -156,69 +179,69 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     {{-- <div class="col-8">
                                         <h1>Maps</h1>
                                         <div class="" id="map"></div>
                                     </div> --}}
-                            </div>
-                        <div class="card-action">
-                            <button class="btn btn-primary" type="submit">
-                                <span class="btn-label"><i class="fas fa-save"></i></span>
-                                Simpan
-                            </button>
-                            <button class="btn btn-danger ml-1" type="reset">
-                                <span class="btn-label"><i class="fas fa-recycle"></i></span>
-                                Reset
-                            </button>
+                                </div>
+                                <div class="card-action">
+                                    <button class="btn btn-primary" type="submit">
+                                        <span class="btn-label"><i class="fas fa-save"></i></span>
+                                        Simpan
+                                    </button>
+                                    <button class="btn btn-danger ml-1" type="reset">
+                                        <span class="btn-label"><i class="fas fa-recycle"></i></span>
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    @include('backend.layouts.footer')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-             // menjalankan fungsi select2 untuk properti category_id
-        $(document).ready(function() {
-            $('#jamBuka').select2({
-                placeholder: 'Pilih Jam Buka'
+        @include('backend.layouts.footer')
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            // menjalankan fungsi select2 untuk properti category_id
+            $(document).ready(function() {
+                $('#jamBuka').select2({
+                    placeholder: 'Pilih Jam Buka'
+                })
+                $('#jamTutup').select2({
+                    placeholder: 'Pilih Jam Tutup'
+                })
             })
-            $('#jamTutup').select2({
-                placeholder: 'Pilih Jam Tutup'
-            })
-        })
 
-         $('#formAction').on('submit', function(e){
+            $('#formAction').on('submit', function(e) {
                 e.preventDefault()
                 const _form = this
                 const formData = new FormData(_form)
                 const url = this.getAttribute('action')
-                    $.ajax({
-                        method  : 'post',
-                        url     : `{{ url('ubah-toko') }}`,
-                        headers : {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data    : formData,
-                        processData : false,
-                        contentType : false,
-                        success : function(res){
+                $.ajax({
+                    method: 'post',
+                    url: `{{ url('ubah-toko') }}`,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
 
-                            Swal.fire({
-                                    icon: res.state,
-                                    title: res.title,
-                                    text: res.message,
-                                    }) 
-                            resetForm();
-                        }
-                    })
+                        Swal.fire({
+                            icon: res.state,
+                            title: res.title,
+                            text: res.message,
+                        })
+                        resetForm();
+                    }
+                })
             });
 
             // fungsi untuk reset form setelah submit toko baru
-            function resetForm(){
+            function resetForm() {
                 $('#jamBuka').val("");
                 $('#jamTutup').val("");
                 $('#namaToko').val("");
@@ -231,13 +254,13 @@
                 $('#fotoProfileToko').val("");
                 $('#statusToko').val("");
             }
-    </script>
-</div>
+        </script>
+    </div>
 @endsection
 
 
 @push('javascript')
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         // membuat variabel untuk load attribute dan url pada map
         var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
