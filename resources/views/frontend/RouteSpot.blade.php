@@ -26,15 +26,24 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">{{ __('Cek Rute') }}</div>
-
-                    <div class="card-body">
-                        <div id="map" style="height: 500px;"></div>
-                    </div>
+    <div class="container" style="height:100vh">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item nav-home">
+                    <a href="{{ route('toko') }}" style="text-decoration:none" class="d-flex align-items-center gap-2">
+                        <i class="flaticon-home"></i>
+                        list toko
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">rute ke {{ $tokoKerajinan->nama_toko }}</li>
+            </ol>
+        </nav>
+        <div class="justify-content-center">
+            <div class="rounded-3 border bg-white p-3 shadow">
+                <p class="fs-5 text-capitalize">lokasi anda saat ini menuju toko <span
+                        class="fw-bold">{{ $tokoKerajinan->nama_toko }}</span></p>
+                <div class="custom-map-wrapper">
+                    <div id="map" style="height: 720px;"></div>
                 </div>
             </div>
         </div>
@@ -76,16 +85,16 @@
             console.log(navigator.geolocation.getCurrentPosition(getPosition));
         }
 
-        var data{{ $spots->id }} = L.layerGroup();
+        var data{{ $tokoKerajinan->id }} = L.layerGroup();
 
         // fungsi ini untuk menampilkan map secara penuh pada browser
         var map = L.map('map', {
-            center: [{{ $spots->location }}],
+            center: [{{ $tokoKerajinan->lokasi_toko }}],
             fullscreenControl: {
                 pseudoFullscreen: false
             },
             zoom: 10,
-            layers: [streets, data{{ $spots->id }}]
+            layers: [streets, data{{ $tokoKerajinan->id }}]
         });
 
         // mengatur baselayer
@@ -97,13 +106,13 @@
 
         // mengatur overlayers
         var overlays = {
-            "{{ $spots->name }}": data{{ $spots->id }},
+            "{{ $tokoKerajinan->name }}": data{{ $tokoKerajinan->id }},
         };
 
         L.control.layers(baseLayers, overlays).addTo(map);
-        L.marker([{{ $spots->location }}]).bindPopup(
-            "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $spots->name }}</div>" +
-            "<div class='my-2'><a href='{{ route('detail.show', $spots->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>"
+        L.marker([{{ $tokoKerajinan->lokasi_toko }}]).bindPopup(
+            "<div class='my-2'><strong>Nama Spot:</strong> <br>{{ $tokoKerajinan->name }}</div>" +
+            "<div class='my-2'><a href='{{ route('detail.show', $tokoKerajinan->slug) }}' class='btn btn-outline-info btn-sm'>Detail Spot</a></div>"
         ).addTo(map);
 
 
@@ -142,12 +151,12 @@
 
             // Setelah itu buat routing control untuk memuat waypoint (latitude dan longitude) 
             // yang pertama waypoint dari lokasi kita dan yang kedua waypoint lokasi tujuan
-            // yang mana nilainya kita dapatkan dari $spots->location
+            // yang mana nilainya kita dapatkan dari $tokoKerajinan->lokasi_toko
 
             L.Routing.control({
                 waypoints: [
                     L.latLng(latPos, longPos),
-                    L.latLng({{ $spots->location }}),
+                    L.latLng({{ $tokoKerajinan->lokasi_toko }}),
                 ],
                 // mengatur warna dan ukuran garis penghubung antara lokasi user dan tujuan
                 lineOptions: {

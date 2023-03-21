@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SpotController;
+use App\Http\Controllers\ListTokoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +24,7 @@ Auth::routes();
 // Route FRONTEND
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::resource('detail',(HomeController::class));
-Route::get('rute/{id}',[HomeController::class,'getRoute'])->name('cek-rute');
+Route::get('rute/{id}',[ListTokoController::class,'getRoute'])->name('cek-rute');
 Route::post('posts',[HomeController::class,'storeRatings'])->name('store-ratings');
 Route::get('/toko', [App\Http\Controllers\ListTokoController::class, 'index'])->name('toko');
 Route::get('/detailtoko/{id}', [App\Http\Controllers\DetailTokoController::class, 'show'])->name('detailtoko');
