@@ -10,9 +10,11 @@
                 arial-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="custom-img-modal-wrapper d-flex flex-column justify-content-center align-items-center">
-                <img class="card-img-top custom-img-modal"
-                    src="{{ url('uploads/Galeri Produk/') }}/{{ $data->gambar_produk }}" alt="Card image cap">
+            <div class="d-flex justify-content-center items-center">
+                <div class="custom-img-modal-wrapper">
+                    <img class="card-img-top custom-img-modal"
+                        src="{{ url('uploads/Galeri Produk/') }}/{{ $data->gambar_produk }}" alt="Card image cap">
+                </div>
             </div>
         </div>
         <div class="mt-3 px-2">

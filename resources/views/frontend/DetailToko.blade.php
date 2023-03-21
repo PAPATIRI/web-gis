@@ -127,7 +127,6 @@
                     method: 'get',
                     url: `{{ url('detail-foto') }}/${id}`,
                     success: function(res) {
-                        console.log(res)
                         $('#modalActionDetail').find('.modal-dialog').html(res)
                         $('#modalActionDetail').modal('show');
 
@@ -240,6 +239,9 @@
 
 
         var marker = new L.marker(curLocation);
+        marker.bindPopup(
+            "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $tokoKerajinan->id) }}' class='btn btn-primary text-white btn'>Lihat Rute</a>"
+        ).openPopup();
         map.addLayer(marker);
     </script>
 @endpush

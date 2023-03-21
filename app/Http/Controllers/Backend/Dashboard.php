@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\GaleriProduk;
+use App\Models\RatingToko;
 use Illuminate\Http\Request;
 use App\Models\Toko;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +23,27 @@ class Dashboard extends Controller
     public function index()
     {
         $user = Auth::user()->id;
-        $jumlahToko = Toko::where('fkid_user',$user)->count();
-        return view('backend.pages.dashboard', compact('jumlahToko'));
+        $totalToko = Toko::where('fkid_user',$user)->count();
+        $getProduk = Toko::where('fkid_user',$user)->get();
+
+        $getProdukArray = [];
+        foreach($getProduk as $produk){
+            $getProdukArray[] = $produk->id;
+        }
+
+        
+        $countRating = RatingToko::whereIn('fkid_toko',$getProdukArray)->count();
+        $sumRating = RatingToko::whereIn('fkid_toko',$getProdukArray)->select(RatingToko::raw('sum(rating_toko) as totalRating'))->first();
+        if($countRating == 0){
+            $overalRating = 0;
+        }else{
+            $overalRating = $sumRating['totalRating']/$countRating;
+        }
+
+
+        $overalProduk = GaleriProduk::whereIn('fkid_toko',$getProdukArray)->count();
+
+        return view('backend.pages.dashboard', compact('totalToko','overalRating','overalProduk'));
         // return view('backend.pages.dashboardtest');
     }
 

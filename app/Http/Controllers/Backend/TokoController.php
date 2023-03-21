@@ -183,7 +183,7 @@ class TokoController extends Controller
         if($countRating == 0){
             $overalRating = 0;
         }else{
-            $overalRating = $sumRating['totalRating']/$countRating;
+            $overalRating = round($sumRating['totalRating']/$countRating);
         }
         return view('backend.pages.detailToko', compact('title','item','overalRating','galeriProduk'));
     }

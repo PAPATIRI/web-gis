@@ -18,7 +18,7 @@ class RatingToko extends Model
         'komentar',
     ];
 
-    public function toko()
+    public function ratingToko()
     {
         return $this->belongsTo(Toko::class, 'fkid_toko');
     }

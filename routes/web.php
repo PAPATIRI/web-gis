@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SpotController;
+use App\Http\Controllers\ListTokoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,23 +24,13 @@ Auth::routes();
 // Route FRONTEND
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::resource('detail',(HomeController::class));
-Route::get('rute/{id}',[HomeController::class,'getRoute'])->name('cek-rute');
+Route::get('rute/{id}',[ListTokoController::class,'getRoute'])->name('cek-rute');
 Route::post('posts',[HomeController::class,'storeRatings'])->name('store-ratings');
 Route::get('/toko', [App\Http\Controllers\ListTokoController::class, 'index'])->name('toko');
 Route::get('/detailtoko/{id}', [App\Http\Controllers\DetailTokoController::class, 'show'])->name('detailtoko');
 // Route Rating Toko
 Route::post('detailtoko',[\App\Http\Controllers\DetailTokoController::class,'tambahRating'])->name('toko.tambahRating');
 Route::get('detail-foto/{id}',[\App\Http\Controllers\DetailTokoController::class,'detailProduk'])->name('toko.detailFoto');
-
-// Route BACKEND
-Route::resource('spot',(SpotController::class));
-Route::resource('category',(CategoryController::class));
-Route::delete('/deleteimage/{id}',[SpotController::class,'deleteImage'])->name('delete-image');
-
-// ROUTE DataTable
-Route::get('data-category',[\App\Http\Controllers\DataController::class,'categories'])->name('data-category');
-Route::get('data-spot',[\App\Http\Controllers\DataController::class,'spots'])->name('data-spot');
-
 
 Route::get('dashboard',[\App\Http\Controllers\Backend\Dashboard::class,'index'])->name('dashboard');
 
