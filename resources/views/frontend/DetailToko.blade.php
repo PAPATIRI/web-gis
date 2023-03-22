@@ -13,6 +13,11 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 @endsection
+<style>
+    #map {
+        height: 400px;
+    }
+</style>
 
 @section('content')
     <div class="container">
