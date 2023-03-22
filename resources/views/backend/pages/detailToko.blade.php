@@ -36,7 +36,7 @@
                     <div class="custom-map-wrapper">
                         <div id="map"></div>
                     </div>
-                    <div class="custom-detail-image-wrapper">
+                    <div class="custom-detail-toko-wrapper">
                         <img class="custom-detail-image"
                             src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}" alt="Card image cap">
                         <div>
@@ -49,7 +49,7 @@
                                 </h3>
                             </div>
                             <div
-                                class="{{ $item->status_toko == 0 ? 'bg-danger' : 'bg-success' }} w-50 rounded py-3 text-center text-white">
+                                class="{{ $item->status_toko == 0 ? 'bg-danger' : 'bg-success' }} d-flex align-items-center rounded py-2 px-4 text-center text-white">
                                 @if ($item->status_toko == 0)
                                     <i class="fas fa-fw fa-door-closed mr-2"></i> Tutup
                                 @else

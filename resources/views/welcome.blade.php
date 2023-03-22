@@ -194,11 +194,11 @@
             @foreach ($tokoKerajinan as $item)
                 L.marker([{{ $item->lokasi_toko }}])
                     .bindPopup(
-                        "<img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map'>" +
-                        "<div class='mt-2 mb-3'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
+                        "<div style='min-width:200px'><img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map rounded'>" +
+                        "<div class='my-1'><p class='fs-5 text-capitalize fw-bold'>{{ $item->nama_toko }}</p></div>" +
 
-                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->id) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-sm text-light'>Detail Spot</a></div>" +
-                        "<div class='my-2'></div>"
+                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->id) }}' class='visually-hidden btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-md text-light'>Detail Toko</a></div>" +
+                        "<div class='my-2'></div></div>"
 
                     ).addTo(map);
             @endforeach

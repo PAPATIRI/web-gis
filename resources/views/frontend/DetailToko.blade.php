@@ -244,7 +244,7 @@
 
         var marker = new L.marker(curLocation);
         marker.bindPopup(
-            "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $tokoKerajinan->id) }}' class='btn btn-primary text-white btn'>Lihat Rute</a>"
+            "<div class='my-2 d-flex justify-content-between'><p class='fs-5 fw-medium text-center'>ini lokasi toko kami silahkan datang berkunjung 😊</p><a href='{{ route('cek-rute', $tokoKerajinan->id) }}' class='visually-hidden btn btn-primary text-white btn'>Lihat Rute</a>"
         ).openPopup();
         map.addLayer(marker);
     </script>
