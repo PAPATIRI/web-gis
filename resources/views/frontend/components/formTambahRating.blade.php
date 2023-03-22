@@ -20,13 +20,15 @@
             <div class="mb-3">
                 <label for="rating" class="form-label fs-5 fw-medium">rating toko</label>
                 <div>
-                    <p id="rangeValue" class="fs-5 fw-bold text-primary">0</p>
-                    <Input class="range bg-white" type="range" name="rating" value="5" min="0"
+                    <p id="rangeValue" class="fs-5 fw-bold text-primary">0 <i
+                            class="fa fa fa-star fa-lg text-warning"></i></p>
+
+                    <Input class="range bg-white" type="range" name="rating" value="0" min="0"
                         max="10" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
                 </div>
             </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary fs-5 fw-md" style="width:250px">Kirim</button>
+            <div class="mb-3 pt-3">
+                <button type="submit" class="btn btn-primary fs-5 fw-semibold" style="width:250px">Kirim</button>
             </div>
         </form>
     </div>

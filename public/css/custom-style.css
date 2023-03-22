@@ -96,7 +96,7 @@
 /* ================= */
 .custom-section-wrapper:last-child {
     height: fit-content;
-    margin-bottom: 150px;
+    margin-bottom: 120px;
 }
 .custom-map-wrapper {
     border-radius: 12px;
@@ -160,7 +160,7 @@ footer span {
 }
 @media only screen and (max-width: 768px) {
     /* reusable style */
-    button {
+    .btn {
         align-self: center;
     }
     .custom-section-wrapper {
@@ -200,6 +200,10 @@ footer span {
     }
     .custom-order-xs-1 {
         order: 1;
+    }
+    .custom-section-wrapper:last-child {
+        height: fit-content;
+        margin-bottom: 10px;
     }
 }
 
