@@ -1,20 +1,16 @@
 @extends('backend.layouts.master')
 @section('styles')
-    {{-- pada section styles kita menambahkan style css untuk menampilkan plugin leaflet dan select2 untuk select option kategori spot --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
-
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
-    <style>
-        #map {
-            height: 100%;
-        }
-    </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<style>
+#map {
+    height: 400px;
+    width: 100%;
+}
+</style>
 @endsection
 @section('container')
     <div class="main-panel">
@@ -46,126 +42,101 @@
                                 @csrf
                                 <div class="card-body">
                                     <input type="hidden" value="{{ Auth::user()->id }}" name="fkid_user">
-                                    <div class="row">
-                                        <div class="col-4">
+                                <div class="row">
+                                    <div class="col">        
                                             <div class="form-group">
                                                 <label for="toko">Nama Toko</label>
                                                 <input type="text" class="form-control" id="namaToko"
                                                     placeholder="Masukan Nama Toko" name="nama_toko" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="toko">Lokasi Toko</label>
-                                                <input type="text" class="form-control" id="lokasiToko"
-                                                    placeholder="Longitude, Latitude" name="lokasi_toko">
-                                                <small id="emailHelp2" class="form-text text-danger">*Pilih melalui google
-                                                    maps, kemudian copy dan paste longituted dan latitude</small>
-                                                {{-- <small id="emailHelp2" class="form-text text-danger">*Pilih melalui map (klik Lokasi Toko)</small> --}}
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
+                                            </div>                                   
                                             <div class="form-group">
                                                 <label for="toko">Alamat Detail Toko</label>
                                                 <input type="text" class="form-control" id="alamatDetailToko"
                                                     placeholder="Masukan detail alamat" name="alamat_detail_toko" required>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Website</label>
                                                 <div class="input-group">
-                                                    <input type="text" id="websiteToko" class="form-control"
-                                                        placeholder="Masukan website" aria-label="Recipient's username"
-                                                        aria-describedby="basic-addon2" name="website_toko">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text" id="basic-addon2">@example.com</span>
+                                                        <input type="text" id="websiteToko" class="form-control"
+                                                            placeholder="Masukan website" aria-label="Recipient's username"
+                                                            aria-describedby="basic-addon2" name="website_toko">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="basic-addon2">@example.com</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
+                                                </div>                                  
                                             <div class="form-group">
                                                 <label for="toko">Kontak Person</label>
                                                 <input type="number" class="form-control" id="kontakToko"
-                                                    placeholder="Masukan Kontak person" name="kontak_toko" required>
+                                                        placeholder="Masukan Kontak person" name="kontak_toko" required>
                                             </div>
-                                        </div>
-                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="toko">Jam Pelayanan</label>
-                                                {{-- <input type="text" class="form-control" id="jamPelayananToko" placeholder="Masukan Jam pelayanan" name="jam_pelayanan" required> --}}
+                                                    {{-- <input type="text" class="form-control" id="jamPelayananToko" placeholder="Masukan Jam pelayanan" name="jam_pelayanan" required> --}}
                                                 <div class="row">
-                                                    <div class="col-5">
-                                                        <select class="form-control" id="jamBuka" name="jamBuka" required>
-                                                            <option selected>Jam Buka</option>
-                                                            @foreach ($jamPelayanan as $jamBuka)
-                                                                <option value="{{ $jamBuka->jam_buka }}">
-                                                                    {{ $jamBuka->jam_buka }}</option>
-                                                            @endforeach
-                                                        </select>
-
+                                                        <div class="col-5">
+                                                            <select class="form-control" id="jamBuka" name="jamBuka" required>
+                                                                <option selected>Jam Buka</option>
+                                                                @foreach ($jamPelayanan as $jamBuka)
+                                                                    <option value="{{ $jamBuka->jam_buka }}">
+                                                                        {{ $jamBuka->jam_buka }}</option>
+                                                                @endforeach
+                                                            </select>
+    
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <h5 class="mt-2 text-center">
+                                                                <hr>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <select class="form-control" id="jamTutup" name="jamTutup"
+                                                                required>
+                                                                <option selected>Jam Tutup</option>
+                                                                @foreach ($jamPelayanan as $jamTutup)
+                                                                    <option value="{{ $jamTutup->jam_tutup }}">
+                                                                        {{ $jamTutup->jam_tutup }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-2">
-                                                        <h5 class="mt-2 text-center">
-                                                            <hr>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-5">
-                                                        <select class="form-control" id="jamTutup" name="jamTutup"
-                                                            required>
-                                                            <option selected>Jam Tutup</option>
-                                                            @foreach ($jamPelayanan as $jamTutup)
-                                                                <option value="{{ $jamTutup->jam_tutup }}">
-                                                                    {{ $jamTutup->jam_tutup }}</option>
-                                                            @endforeach
-                                                        </select>
-
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlFile1">Foto Profile Toko</label>
-                                                <input type="file" class="form-control-file" id="fotoProfileToko"
-                                                    name="sampul_toko">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-check">
-                                                <label>Status Toko</label><br />
-                                                <label class="form-radio-label">
-                                                    <input class="form-radio-input" type="radio" name="status_toko"
-                                                        value="1" id="statusToko" required>
-                                                    <span class="form-radio-sign">Buka</span>
-                                                </label>
-                                                <label class="form-radio-label ml-3">
-                                                    <input class="form-radio-input" type="radio" name="status_toko"
-                                                        value="0" id="statusToko" required>
-                                                    <span class="form-radio-sign">Tutup</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="comment">Deskripsi Toko</label>
                                                 <textarea class="form-control" id="deskripsiToko" rows="5" name="deskripsi_toko" required></textarea>
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlFile1">Foto Profile Toko</label>
+                                                <input type="file" class="form-control-file" id="fotoProfileToko" name="sampul_toko">
+                                            </div>
+                                             <div class="form-check">
+                                                        <label>Status Toko</label><br />
+                                                        <label class="form-radio-label">
+                                                            <input class="form-radio-input" type="radio" name="status_toko"
+                                                                value="1" id="statusToko" required>
+                                                            <span class="form-radio-sign">Buka</span>
+                                                        </label>
+                                                        <label class="form-radio-label ml-3">
+                                                            <input class="form-radio-input" type="radio" name="status_toko"
+                                                                value="0" id="statusToko" required>
+                                                            <span class="form-radio-sign">Tutup</span>
+                                                        </label>
+                                            </div>
                                     </div>
-
-                                    {{-- <div class="col-8">
-                                    <h1>Maps</h1>
-                                    <div class="" id="map"></div>
-                                </div> --}}
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="toko">Lokasi Toko</label>
+                                            <input type="text" class="form-control" id="location"
+                                                placeholder="Longitude, Latitude" name="location" readonly>
+                                            <small id="emailHelp2" class="form-text text-danger">*Pilih melalui
+                                                maps, klik lokasi untuk mendapatkan longituted dan latitude</small>
+                                            {{-- <small id="emailHelp2" class="form-text text-danger">*Pilih melalui map (klik Lokasi Toko)</small> --}}
+                                        </div>
+                                        <div class="m-2" id="map"></div>
+                                    </div>
                                 </div>
+                                
+                            </div>
                                 <div class="card-action">
                                     <button class="btn btn-primary" type="submit">
                                         <span class="btn-label"><i class="fas fa-save"></i></span>
@@ -240,7 +211,7 @@
 
 
 @push('javascript')
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> --}}
     <script>
         // membuat variabel untuk load attribute dan url pada map
         var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -250,13 +221,13 @@
 
         // membuat var satellite, dark, dan streets agar layer map kita punya beberapa opsi tampilan yang bisa kita ubah 
         var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v11',
+                id: 'mapbox/satellite-v9',
                 tileSize: 512,
                 zoomOffset: -1,
                 attribution: mbAttr
             }),
             dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v11',
+                id: 'mapbox/dark-v10',
                 tileSize: 512,
                 zoomOffset: -1,
                 attribution: mbAttr
@@ -274,20 +245,22 @@
         // nilai latitude dan longitude bisa di ambil dari google map
         var map = L.map('map', {
             // center: [-0.4922612112757657, 117.14561375238749],
-            center: [-3.196071254860089, 135.50952252328696],
-            zoom: 7,
+            center: [-8.499137749030071, 140.4046483416395],
+            zoom: 13,
             layers: [streets]
         });
 
         // set baselayer yang ingin digunakan
         var baseLayers = {
-            //"Grayscale": grayscale,
+            "Grayscale": dark,
+            "Satellite": satellite,
             "Streets": streets
         };
 
-        // set overlayer yang ingin digunakan
         var overlays = {
-            "Streets": streets
+            "Streets": streets,
+            "Grayscale": dark,
+            "Satellite": satellite,
         };
 
         // menambahkan baselayer dan overlays tadi ke dalam control dan di tampilkan ke tag map
