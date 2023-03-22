@@ -13,7 +13,7 @@
         <div class="custom-map-wrapper" data-aos="zoom-in">
             <div id="map"></div>
         </div>
-        <div class="row justify-content-center mt-5 gap-3">
+        <div class="row justify-content-center my-5 gap-3">
             @forelse ($tokoKerajinan as $item)
                 <div class="col-sm-12 col-md-6 col-lg-3 card pb-2" data-aos="fade-up" data-anchor-delay="400">
                     <div class="custom-img-map-wrapper">
@@ -30,7 +30,9 @@
                 </div>
             @empty
                 <div class="alert alert-danger">
-                    upss, data masih kosong nih
+                    <p class="fs-4 fw-bold text-capitalize w-100 text-center">
+                        maaf<br /> data toko kerajinan masih kosong
+                    </p>
                 </div>
             @endforelse
             <div class="d-flex justify-content-center">
@@ -156,12 +158,12 @@
             @foreach ($tokoKerajinan as $item)
                 L.marker([{{ $item->lokasi_toko }}])
                     .bindPopup(
-                        "<img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map'>" +
-                        "<div class='my-2'><strong>Nama Toko:</strong> <br>{{ $item->nama_toko }}</div>" +
+                        "<div style='min-width:200px'><img src='{{ url('uploads/Foto Sampul Toko/') }}/{{ $item->sampul_toko }}' alt='toko-img' class='custom-img-map rounded'>" +
+                        "<div class='my-1'><p class='fs-5 text-capitalize fw-bold'>{{ $item->nama_toko }}</p></div>" +
 
 
-                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->id) }}' class='btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-sm text-light'>Detail Toko</a></div>" +
-                        "<div class='my-2'></div>"
+                        "<div class='my-2 d-flex justify-content-between'><a href='{{ route('cek-rute', $item->id) }}' class='visually-hidden btn btn-outline-light btn-sm'>Lihat Rute</a> <a href='{{ route('detailtoko', $item->id) }}' class='btn btn-primary btn-md text-light'>Detail Toko</a></div>" +
+                        "<div class='my-2'></div></div>"
 
                     ).addTo(map);
             @endforeach
