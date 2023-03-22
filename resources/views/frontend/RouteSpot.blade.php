@@ -26,7 +26,7 @@
 @endsection
 
 @section('content')
-    <div class="container" style="height:100vh">
+    <div class="container" style="margin-bottom:64px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item nav-home">
