@@ -1,8 +1,10 @@
 @extends('layouts.frontend')
 
-@section('styles')
-@endsection
-
+<style>
+    #map {
+        height: 400px;
+    }
+</style>
 @section('content')
     <div class="container">
         <div class="custom-map-wrapper" data-aos="zoom-in">
