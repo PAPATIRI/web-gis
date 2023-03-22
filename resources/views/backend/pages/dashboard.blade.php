@@ -29,13 +29,13 @@
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <div class="icon-big text-center">
-                                                            <i class="flaticon-store"></i>
+                                                            <i class="flaticon-store" style="font-size: 1.5em"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-7 col-stats">
                                                         <div class="numbers">
-                                                            <p class="card-category">Toko Saya</p>
-                                                            <h4 class="card-title">{{ $totalToko }}</h4>
+                                                            <p class="card-category" style="font-size: 18px">Toko Saya</p>
+                                                            <h3 class="card-title" style="font-size: 20px; font-weight:bold">{{ $totalToko }}</h3>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -48,13 +48,13 @@
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <div class="icon-big text-center">
-                                                            <i class="flaticon-star-1"></i>
+                                                            <i class="flaticon-star-1"  style="font-size: 1.5em"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-7 col-stats">
                                                         <div class="numbers">
-                                                            <p class="card-category">Rating Toko</p>
-                                                            <h4 class="card-title"> {{ $overalRating }}</h4>
+                                                            <p class="card-category" style="font-size: 18px">Rating Toko</p>
+                                                            <h4 class="card-title" style="font-size: 20px; font-weight:bold"> {{ $overalRating }}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -67,13 +67,13 @@
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <div class="icon-big text-center">
-                                                            <i class="flaticon-box-2"></i>
+                                                            <i class="flaticon-box-2"  style="font-size: 1.5em"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-7 col-stats">
                                                         <div class="numbers">
-                                                            <p class="card-category">Produk</p>
-                                                            <h4 class="card-title">{{ $overalProduk }}</h4>
+                                                            <p class="card-category" style="font-size: 18px">Produk</p>
+                                                            <h4 class="card-title" style="font-size: 20px; font-weight:bold">{{ $overalProduk }}</h4>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -68,7 +68,7 @@ class TokoController extends Controller
         $data = [
             'fkid_user'     =>$request->fkid_user,
             'nama_toko'     =>$request->nama_toko,
-            'lokasi_toko'   =>$request->lokasi_toko,
+            'lokasi_toko'   =>$request->location,
             'alamat_detail_toko'   =>$request->alamat_detail_toko,
             'website_toko'  =>$request->website_toko,
             'kontak_toko'   =>$request->kontak_toko,
@@ -129,7 +129,7 @@ class TokoController extends Controller
         $toko = Toko::findOrFail($request->id_toko);
         $toko->fkid_user        =$request->fkid_user;
         $toko->nama_toko        =$request->nama_toko;
-        $toko->lokasi_toko   =$request->lokasi_toko;
+        $toko->lokasi_toko   =$request->location;
         $toko->alamat_detail_toko   =$request->alamat_detail_toko;
         $toko->website_toko  =$request->website_toko;
         $toko->kontak_toko   =$request->kontak_toko;

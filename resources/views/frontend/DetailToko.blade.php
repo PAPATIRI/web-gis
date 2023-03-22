@@ -85,6 +85,10 @@
                         <p class="fs-5 fw-bold text-capitalize m-0">website toko</p>
                         <p class="fs-5"> {{ $tokoKerajinan->website_toko }}</p>
                     </div>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold text-capitalize m-0">Pemilikk toko</p>
+                        <p class="fs-5"> {{ $tokoKerajinan->pemilik->name }}</p>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-8 p-3">
                     <p class="fs-3 fw-bold text-capitalize"><strong>Galeri Toko</strong></p>
