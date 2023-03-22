@@ -13,7 +13,7 @@
         <div class="custom-map-wrapper" data-aos="zoom-in">
             <div id="map"></div>
         </div>
-        <div class="row justify-content-center mt-5 gap-3">
+        <div class="row justify-content-center my-5 gap-3">
             @forelse ($tokoKerajinan as $item)
                 <div class="col-sm-12 col-md-6 col-lg-3 card pb-2" data-aos="fade-up" data-anchor-delay="400">
                     <div class="custom-img-map-wrapper">
@@ -30,7 +30,9 @@
                 </div>
             @empty
                 <div class="alert alert-danger">
-                    upss, data masih kosong nih
+                    <p class="fs-4 fw-bold text-capitalize w-100 text-center">
+                        maaf<br /> data toko kerajinan masih kosong
+                    </p>
                 </div>
             @endforelse
             <div class="d-flex justify-content-center">
