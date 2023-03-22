@@ -12,11 +12,6 @@
     {{-- cdn leaflet fullscreen js dan css --}}
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-    <style>
-        #map {
-            height: 400px
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -39,15 +34,17 @@
             <div class="custom-detail-image-wrapper" data-aos="fade-right">
                 <img src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $tokoKerajinan->sampul_toko }}" alt='toko-img'
                     class='custom-detail-image'>
-                <div>
-                    <p class="fs-5 fw-bold text-capitalize m-0 mb-2">{{ $tokoKerajinan->nama_toko }}</p>
-                    <div class="d-flex mb-3 flex-wrap gap-2">
-                        @for ($i = 0; $i < $overalRating; $i++)
-                            <i class="fa fa fa-star fa-lg text-warning"></i>
-                        @endfor
-                        @for ($i = 0; $i < 10 - $overalRating; $i++)
-                            <i class="far fa-star fa-lg text-secondary"></i>
-                        @endfor
+                <div class="w-100">
+                    <p class="fs-4 fw-bold text-capitalize m-0">{{ $tokoKerajinan->nama_toko }}</p>
+                    <div>
+                        @if ($overalRating == 0)
+                            <p class="fs-5">{{ $overalRating }}/10 <i class="far fa-star fa-lg text-secondary"></i>
+                            </p>
+                        @else
+                            <p class="fs-5">
+                                {{ $overalRating }}/10 <i class="fa fa fa-star fa-lg text-warning"></i>
+                            </p>
+                        @endif
                     </div>
                     <button class="btn btn-{{ $tokoKerajinan->status_toko == 0 ? 'danger' : 'success' }} btn-xs mt-1">
                         @if ($tokoKerajinan->status_toko == 0)
@@ -59,34 +56,35 @@
                 </div>
             </div>
         </div>
-        <div class="py-5"></div>
+        <div class="gap"></div>
         <div class="container">
             <div class="row" data-aos="fade-right">
                 <div class="col-sm-12 col-md-4 rounded border bg-white p-3">
                     <p class="fs-3 fw-bold text-capitalize">detail toko</p>
                     <hr class="mb-4">
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">Alamat Toko</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-map-marker-alt"></i> Alamat Toko
+                        </p>
                         <p class="fs-5"> {{ $tokoKerajinan->alamat_detail_toko }}</p>
                     </div>
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">Deskripsi</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-question-circle"></i> Deskripsi</p>
                         <p class="fs-5"> {{ $tokoKerajinan->deskripsi_toko }}</p>
                     </div>
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">jam kerja</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-clock"></i> jam kerja</p>
                         <p class="fs-5"> {{ $tokoKerajinan->jam_buka }} - {{ $tokoKerajinan->jam_tutup }}</p>
                     </div>
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">kontak</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-phone"></i> kontak</p>
                         <p class="fs-5"> {{ $tokoKerajinan->kontak_toko }}</p>
                     </div>
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">website toko</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-globe-asia"></i> website toko</p>
                         <p class="fs-5"> {{ $tokoKerajinan->website_toko }}</p>
                     </div>
                     <div class="mb-3">
-                        <p class="fs-5 fw-bold text-capitalize m-0">Pemilikk toko</p>
+                        <p class="fs-6 fw-bold text-capitalize m-0"><i class="fas fa-user"></i> Pemilikk toko</p>
                         <p class="fs-5"> {{ $tokoKerajinan->pemilik->name }}</p>
                     </div>
                 </div>
@@ -181,7 +179,8 @@
     <script>
         // slider script
         function rangeSlide(value) {
-            document.getElementById('rangeValue').innerHTML = value;
+            document.getElementById('rangeValue').innerHTML = value + ' ' +
+                '<i class="fa fa fa-star fa-lg text-warning"></i>';
         }
 
         // map script
@@ -244,7 +243,7 @@
 
         var marker = new L.marker(curLocation);
         marker.bindPopup(
-            "<div class='my-2 d-flex justify-content-between'><p class='fs-5 fw-medium text-center'>ini lokasi toko kami silahkan datang berkunjung 😊</p><a href='{{ route('cek-rute', $tokoKerajinan->id) }}' class='visually-hidden btn btn-primary text-white btn'>Lihat Rute</a>"
+            "<div class='my-2 d-flex justify-content-between'><p class='fs-6 fw-medium text-center'>ini lokasi toko kami silahkan datang berkunjung 😊</p><a href='{{ route('cek-rute', $tokoKerajinan->id) }}' class='visually-hidden btn btn-primary text-white btn'>Lihat Rute</a>"
         ).openPopup();
         map.addLayer(marker);
     </script>

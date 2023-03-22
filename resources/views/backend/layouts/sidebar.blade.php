@@ -115,8 +115,13 @@
                      </div>
                      <div class="col-4">
                          <div class="avatar-xxl mt-2">
-                             {{-- <img src="{{ url('uploads/Foto Profile User') }}/{{ Auth::user()->foto_profile }}"
- alt="image profile" class="avatar-img rounded"> --}}
+                             @if (Auth::user()->foto_profile === null)
+                                 <img src="{{ url('img/Avatar.png') }}" alt="..."
+                                     class="avatar-img rounded-circle">
+                             @else
+                                 <img src="{{ url('uploads/Foto Profile User') }}/{{ Auth::user()->foto_profile }}"
+                                     alt="..." class="avatar-img rounded-circle">
+                             @endif
                          </div>
                      </div>
                  </div>
@@ -168,8 +173,13 @@
                                      </div>
                                      <div class="col">
                                          <div class="avatar-xxl">
-                                             <img src="{{ url('uploads/Foto Profile User') }}/{{ Auth::user()->foto_profile }}"
-                                                 alt="image profile" class="avatar-img rounded">
+                                             @if (Auth::user()->foto_profile === null)
+                                                 <img src="{{ url('img/Avatar.png') }}" alt="..."
+                                                     class="avatar-img rounded-circle">
+                                             @else
+                                                 <img src="{{ url('uploads/Foto Profile User') }}/{{ Auth::user()->foto_profile }}"
+                                                     alt="..." class="avatar-img rounded-circle">
+                                             @endif
                                          </div>
                                      </div>
                                  </div>

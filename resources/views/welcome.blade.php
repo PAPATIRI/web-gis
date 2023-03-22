@@ -1,11 +1,6 @@
 @extends('layouts.frontend')
 
 @section('styles')
-    <style>
-        #map {
-            height: 500px
-        }
-    </style>
 @endsection
 
 @section('content')
