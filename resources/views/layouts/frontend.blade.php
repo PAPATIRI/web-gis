@@ -54,10 +54,10 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Styles -->
+    @yield('styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom-style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom-style-list-toko.css') }}" rel="stylesheet">
-    @yield('styles')
 </head>
 
 <body>

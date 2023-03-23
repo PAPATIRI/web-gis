@@ -77,11 +77,6 @@
 .custom-search-section-wrapper {
     padding-right: 15%;
 }
-.custom-search-section-wrapper a {
-    width: fit-content;
-    font-weight: 500;
-    font-size: 18px;
-}
 
 /* ================= */
 /* rating section */
@@ -160,9 +155,6 @@ footer span {
 }
 @media only screen and (max-width: 768px) {
     /* reusable style */
-    .btn {
-        align-self: center;
-    }
     .custom-section-wrapper {
         height: fit-content;
         padding: 50px 0;
