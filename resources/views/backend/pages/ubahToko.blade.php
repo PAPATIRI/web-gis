@@ -51,7 +51,7 @@
                                     <input type="hidden" value="{{ Auth::user()->id }}" name="fkid_user">
                                     <input type="hidden" value="{{ $data->id }}" name="id_toko">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                 <label for="toko">Nama Toko</label>
                                                 <input type="text" class="form-control" id="namaToko"
@@ -72,7 +72,8 @@
                                                         aria-describedby="basic-addon2" name="website_toko"
                                                         value="{{ $data->website_toko }}">
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" id="basic-addon2">@example.com</span>
+                                                        <span class="input-group-text"
+                                                            id="basic-addon2">contoh-url.com</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,8 +86,8 @@
                                             <div class="form-group">
                                                 <label for="toko">Jam Pelayanan</label>
                                                 {{-- <input type="text" class="form-control" id="jamPelayananToko" placeholder="Masukan Jam pelayanan" name="jam_pelayanan" required> --}}
-                                                <div class="row">
-                                                    <div class="col-5">
+                                                <div class="row w-100">
+                                                    <div class="col-12 col-md-6 mb-2">
                                                         <select class="form-control" id="jamBuka" name="jamBuka" required>
                                                             <option selected value="{{ $data->jam_buka }}">
                                                                 {{ $data->jam_buka }}</option>
@@ -97,12 +98,7 @@
                                                         </select>
 
                                                     </div>
-                                                    <div class="col-2">
-                                                        <h5 class="mt-2 text-center">
-                                                            <hr>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-5">
+                                                    <div class="col-12 col-md-6 mb-2">
                                                         <select class="form-control" id="jamTutup" name="jamTutup"
                                                             required>
                                                             <option selected value="{{ $data->jam_tutup }}">
@@ -124,8 +120,8 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="exampleFormControlFile1">Foto Profile Toko</label>
-                                                        <input type="file" class="form-control-file"
-                                                            id="fotoProfileToko" name="sampul_toko">
+                                                        <input type="file" class="form-control-file" id="fotoProfileToko"
+                                                            name="sampul_toko">
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -152,7 +148,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="col">
+                                        <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                 <label for="toko">Lokasi Toko Admin</label>
                                                 <input type="text" class="form-control" id="location"

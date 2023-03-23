@@ -160,7 +160,6 @@
 
                     ).addTo(map);
             @endforeach
-
         }
     </script>
 @endpush

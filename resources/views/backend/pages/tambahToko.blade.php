@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                     <input type="hidden" value="{{ Auth::user()->id }}" name="fkid_user">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="toko">Nama Toko</label>
                                                 <input type="text" class="form-control" id="namaToko"
@@ -62,10 +62,12 @@
                                                 <label for="toko">Website</label>
                                                 <div class="input-group">
                                                     <input type="text" id="websiteToko" class="form-control"
-                                                        placeholder="Masukan website" aria-label="Recipient's username"
-                                                        aria-describedby="basic-addon2" name="website_toko">
+                                                        placeholder="Masukan url website toko"
+                                                        aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                                        name="website_toko">
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text" id="basic-addon2">@example.com</span>
+                                                        <span class="input-group-text"
+                                                            id="basic-addon2">contoh-url.com</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,8 +79,8 @@
                                             <div class="form-group">
                                                 <label for="toko">Jam Pelayanan</label>
                                                 {{-- <input type="text" class="form-control" id="jamPelayananToko" placeholder="Masukan Jam pelayanan" name="jam_pelayanan" required> --}}
-                                                <div class="row">
-                                                    <div class="col-5">
+                                                <div class="row w-100">
+                                                    <div class="col-12 col-md-6 mb-2">
                                                         <select class="form-control" id="jamBuka" name="jamBuka" required>
                                                             <option selected>Jam Buka</option>
                                                             @foreach ($jamPelayanan as $jamBuka)
@@ -88,12 +90,7 @@
                                                         </select>
 
                                                     </div>
-                                                    <div class="col-2">
-                                                        <h5 class="mt-2 text-center">
-                                                            <hr>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="col-5">
+                                                    <div class="col-0 col-md-6 mb-2">
                                                         <select class="form-control" id="jamTutup" name="jamTutup"
                                                             required>
                                                             <option selected>Jam Tutup</option>
@@ -128,7 +125,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="toko">Lokasi Toko</label>
                                                 <input type="text" class="form-control" id="location"
