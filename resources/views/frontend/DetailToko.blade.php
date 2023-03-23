@@ -189,57 +189,20 @@
         }
 
         // map script
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl =
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-        var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v9',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v10',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            streets = L.tileLayer(mbUrl, {
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            });
-
         var data{{ $tokoKerajinan->id }} = L.layerGroup()
-
         var map = L.map('map', {
-            fullscreenControl: {
-                pseudoFullscreen: false
-            },
+            fullscreenControl: true,
             // Menampilkan nilai lokasi dari tabel toko
             center: [{{ $tokoKerajinan->lokasi_toko }}],
             zoom: 15,
             fullscreenControl: {
                 pseudoFullscreen: false
             },
-            layers: [streets, data{{ $tokoKerajinan->id }}]
+            layers: data{{ $tokoKerajinan->id }}
         });
-
-        var baseLayers = {
-            "Streets": streets,
-            "Satellite": satellite,
-            "Dark": dark,
-        };
-
-        var overlays = {
-            //"Streets": streets
-            "{{ $tokoKerajinan->name }}": data{{ $tokoKerajinan->id }},
-        };
-
-        L.control.layers(baseLayers, overlays).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
         // Begitu Juga pada curLocation kita Menampilkan nilai lokasi dari tabel toko
         var curLocation = [{{ $tokoKerajinan->lokasi_toko }}];
