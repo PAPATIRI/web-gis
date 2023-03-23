@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="gap"></div>
+        <div class="my-5 py-3"></div>
         <div class="container">
             <div class="row" data-aos="fade-right">
                 <div class="col-sm-12 col-md-4 rounded border bg-white p-3">
