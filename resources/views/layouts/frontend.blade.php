@@ -49,8 +49,6 @@
             }
         });
     </script>
-    {{-- SWEET ALERT & AOS --}}
-    <link href="{{ url('assetBackend/js/plugin/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Styles -->
@@ -149,13 +147,6 @@
             btnScrollToTop.style.display = window.scrollY > 40 ? 'block' : 'none'
 
         })
-    </script>
-    <script>
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                $(this).remove();
-            })
-        }, 3000)
     </script>
 </body>
 
