@@ -29,12 +29,14 @@
                     <div class="col-sm-12 col-md-6 d-flex items-center" data-aos="fade-left" data-aos-delay="300">
                         <div class="d-flex flex-column justify-content-center custom-search-section-wrapper">
                             <h2 class="custom-section-title">cari oleh-oleh dengan mudah</h2>
-                            <p class="custom-section-desc">toko kerajinan tangan khas di merauke tersebar di
+                            <p class="custom-section-desc mb-4">toko kerajinan tangan khas di merauke tersebar di
                                 seluruh
                                 merauke. kamu dapat menemukan
                                 dengan
                                 mudah dengan memanfaatkan fitur GIS (Geographic Information System) di sini</p>
-                            <a href="{{ route('toko') }}" class="btn btn-success">Cari Sekarang</a>
+                            <a href="{{ route('toko') }}"
+                                class="btn btn-success w-50 align-self-sm-center align-self-md-start fw-semibold">Cari
+                                Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -67,11 +69,14 @@
                     <div class="col-sm-12 col-md-6 d-flex items-center" data-aos="fade-left" data-aos-delay="300">
                         <div class="d-flex flex-column justify-content-center custom-search-section-wrapper">
                             <h2 class="custom-section-title">Tingkatkan Penjualan Toko kamu sekarang!</h2>
-                            <p class="custom-section-desc">kamu mempunyai toko yang menjual kerajinan tangan? jangan ragu
+                            <p class="custom-section-desc mb-4">kamu mempunyai toko yang menjual kerajinan tangan? jangan
+                                ragu
                                 untun daftarkan tokomu agar lebih dikenal oleh konsumen secara luas dan tingkatkan hasil
                                 penjualanmu
                             </p>
-                            <a href="{{ route('login') }}" class="btn btn-success">Daftar Sekarang</a>
+                            <a href="{{ route('login') }}"
+                                class="btn btn-success w-50 align-self-sm-center align-self-md-start fw-semibold">Daftar
+                                Sekarang</a>
                         </div>
                     </div>
                 </div>
