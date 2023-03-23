@@ -35,7 +35,7 @@
                                 dengan
                                 mudah dengan memanfaatkan fitur GIS (Geographic Information System) di sini</p>
                             <a href="{{ route('toko') }}"
-                                class="btn btn-success w-50 align-self-sm-center align-self-md-start fw-semibold">Cari
+                                class="btn btn-success w-50 align-self-center align-self-md-start fw-semibold">Cari
                                 Sekarang</a>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                 penjualanmu
                             </p>
                             <a href="{{ route('login') }}"
-                                class="btn btn-success w-50 align-self-sm-center align-self-md-start fw-semibold">Daftar
+                                class="btn btn-success w-50 align-self-center align-self-md-start fw-semibold">Daftar
                                 Sekarang</a>
                         </div>
                     </div>
