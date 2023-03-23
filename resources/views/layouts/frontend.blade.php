@@ -107,7 +107,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('dashboard') }}" class="dropdown-item mb-2">Dashboard</a>
+                                    <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
                                     <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

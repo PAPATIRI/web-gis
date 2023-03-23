@@ -104,59 +104,14 @@
 
 @push('javascript')
     <script>
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl =
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-        var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v9',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v10',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            streets = L.tileLayer(mbUrl, {
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            });
-
         var map = L.map('map', {
-            fullscreenControl: {
-                pseudoFullscreen: false
-            },
-
-            // Titik koordinat peta merauke
-            // untuk source code menampilkan peta pada halaman welcome ini masih sama seperti pada
-            // halaman backend di file view spot, create.blade. Tapi pada halaman ini kita akan memunculkan 
-            // marker dari masing-masing spot yang sudah ditambahkan dan ketika marker itu di klik akan memunculkan 
-            // popup yang berisikan informasi dari spot tersebut dan juga tombol untuk melihat
-            // rute dari lokasi kita ke lokasi spot yang kita pilih serta tombol detail untuk detail lengkap 
-            // dari spot yang dipilih
-
             center: [-8.499137749030071, 140.4046483416395],
             zoom: 13,
-            layers: [streets]
-        });
-
-        var baseLayers = {
-            "Grayscale": dark,
-            "Satellite": satellite,
-            "Streets": streets
-        };
-
-        var overlays = {
-            "Streets": streets,
-            "Grayscale": dark,
-            "Satellite": satellite,
-        };
+            fullscreenControl: true
+        })
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
         // disini kita melakukan looping dari controller HomeController tepatnya dari method index
         // kemudian hasil dari looping tersebut kita masukkan kedalam function marker untuk memunculkan marker dari tiap-tiap
@@ -207,6 +162,5 @@
             @endforeach
 
         }
-        L.control.layers(baseLayers, overlays).addTo(map);
     </script>
 @endpush

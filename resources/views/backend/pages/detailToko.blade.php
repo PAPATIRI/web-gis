@@ -5,6 +5,10 @@
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    {{-- cdn leaflet fullscreen js dan css --}}
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
     <style>
         #map {
             height: 400px;
@@ -324,57 +328,22 @@
     </script>
     </div>
     <script>
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl =
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-        var satellite = L.tileLayer(mbUrl, {
-                id: 'mapbox/satellite-v9',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            dark = L.tileLayer(mbUrl, {
-                id: 'mapbox/dark-v10',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            }),
-            streets = L.tileLayer(mbUrl, {
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-                attribution: mbAttr
-            });
-
         var data{{ $item->id }} = L.layerGroup()
         var map = L.map('map', {
             // Menampilkan nilai lokasi dari tabel spot
             center: [{{ $item->lokasi_toko }}],
             zoom: 17,
-            fullscreenControl: {
-                pseudoFullscreen: false
-            },
-            layers: [streets, data{{ $item->id }}]
+            fullscreenControl: true,
+            layers: data{{ $item->id }}
         });
 
-        var baseLayers = {
-            "Streets": streets,
-            "Satellite": satellite,
-            "Dark": dark,
-        };
-
-        var overlays = {
-            //"Streets": streets
-            "{{ $item->name }}": data{{ $item->id }},
-        };
-
-        L.control.layers(baseLayers, overlays).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
         // Begitu Juga pada curLocation kita Menampilkan nilai lokasi dari tabel spot
         var curLocation = [{{ $item->lokasi_toko }}];
-        map.attributionControl.setPrefix(false);
+        // map.attributionControl.setPrefix(false);
 
 
         var marker = new L.marker(curLocation);
