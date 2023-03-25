@@ -43,11 +43,11 @@
                     <p class="fs-4 fw-bold text-capitalize m-0">{{ $tokoKerajinan->nama_toko }}</p>
                     <div>
                         @if ($overalRating == 0)
-                            <p class="fs-5">{{ $overalRating }}/10 <i class="far fa-star fa-lg text-secondary"></i>
+                            <p class="fs-5">{{ $overalRating }}/5 <i class="far fa-star fa-lg text-secondary"></i>
                             </p>
                         @else
                             <p class="fs-5">
-                                {{ $overalRating }}/10 <i class="fa fa fa-star fa-lg text-warning"></i>
+                                {{ $overalRating }}/5 <i class="fa fa fa-star fa-lg text-warning"></i>
                             </p>
                         @endif
                     </div>

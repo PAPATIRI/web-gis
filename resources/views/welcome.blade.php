@@ -20,7 +20,7 @@
                 </div>
                 {{-- end of jumbotron section --}}
                 {{-- search CTA section --}}
-                <div class="row custom-section-wrapper mb-5">
+                <div class="row custom-section-wrapper mb-3">
                     <div class="col-sm-12 col-md-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
                         <div class="custom-section-img-wrapper">
                             <img src="{{ asset('img/searching.png') }}" class="img-fluid rounded" alt="...">
@@ -42,7 +42,7 @@
                 </div>
                 {{-- end of search CTA section --}}
                 {{-- rating section --}}
-                <div class="row custom-section-wrapper mb-5 mb-5">
+                <div class="row custom-section-wrapper mb-3">
                     <div class="col-sm-12 order-sm-2 order-md-1 col-md-6 d-flex custom-order-xs-2 items-center"
                         data-aos="fade-right" data-aos-delay="300">
                         <div class="d-flex flex-column justify-content-center custom-rating-section-wrapper">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 {{-- seller CTA section --}}
-                <div class="row custom-section-wrapper mb-5">
+                <div class="row custom-section-wrapper mb-3">
                     <div class="col-sm-12 col-md-6 d-flex align-items-center" data-aos="fade-right">
                         <div class="custom-section-img-wrapper">
                             <img src="{{ asset('img/get-money.png') }}" class="img-fluid rounded" alt="...">

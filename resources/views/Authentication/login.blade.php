@@ -85,11 +85,6 @@
                                         class="fas fas-fw fa-recycle"></i></button>
                             </div>
                         </div>
-
-                        <!-- Register buttons -->
-                        <div class="text-center">
-                            <p>Not a member? <a href="#!">Register</a></p>
-                        </div>
                     </form>
                 </div>
 

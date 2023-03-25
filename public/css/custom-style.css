@@ -2,8 +2,12 @@
 /* ================= */
 /* reusable style */
 /* ================= */
+body {
+    overflow-x: hidden;
+}
 .custom-section-wrapper {
-    height: 550px;
+    height: 400px;
+    padding: 20px 0;
 }
 .custom-section-title {
     font-size: 32px;
@@ -92,11 +96,11 @@
 .custom-section-wrapper:last-child {
     height: fit-content;
     margin-bottom: 120px;
+    margin-top: 50px;
 }
 .custom-map-wrapper {
     border-radius: 12px;
     overflow: hidden;
-    /* box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2); */
 }
 .custom-map-section-title {
     font-size: 32px;
@@ -131,13 +135,15 @@ footer span {
 /* ================= */
 @media only screen and (max-width: 1000px) {
     /* reusable style */
-    .custom-section-wrapper {
-        height: fit-content;
-        margin-bottom: 20px;
+    .custom-section-title {
+        font-size: 24px;
     }
     .custom-section-desc {
         font-size: 16px;
         margin-bottom: 10px;
+    }
+    .custom-section-img-wrapper img {
+        width: 80%;
     }
     /* search section */
     .custom-search-section-wrapper {
@@ -157,19 +163,23 @@ footer span {
     /* reusable style */
     .custom-section-wrapper {
         height: fit-content;
-        padding: 50px 0;
+        padding: 20px 0;
+        margin-bottom: 80px;
     }
     .custom-section-desc {
         font-size: 16px;
         text-align: center;
     }
     .custom-section-title {
-        font-size: 24px;
+        font-size: 20px;
         text-align: center;
     }
     .custom-section-img-wrapper {
-        height: 250px;
+        height: 200px;
         width: 100%;
+    }
+    .custom-section-img-wrapper img {
+        width: 50%;
     }
     /* navbar section */
     .nav-item a {
@@ -179,8 +189,12 @@ footer span {
     .custom-jumbotron-text-wrapper {
         padding: 0 40px;
     }
-    .img-fluid {
-        height: 300px;
+    .custom-jumbotron .img-fluid {
+        height: 250px;
+    }
+    .custom-jumbotron h2 {
+        font-size: 24px;
+        line-height: calc(24px * 1.6);
     }
     /* rating section */
     .custom-rating-section-wrapper {

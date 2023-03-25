@@ -49,7 +49,7 @@
                                 <h3 class="custom-rating-toko">
                                     <span>
                                         <i class="fa fa fa-star fa-lg text-warning"></i>
-                                    </span>{{ $overalRating }}/10
+                                    </span>{{ $overalRating }}/5
                                 </h3>
                             </div>
                             <div
