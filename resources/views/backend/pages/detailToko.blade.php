@@ -40,9 +40,11 @@
                     <div class="custom-map-wrapper">
                         <div id="map"></div>
                     </div>
-                    <div class="custom-detail-toko-wrapper">
-                        <img class="custom-detail-image"
-                            src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}" alt="Card image cap">
+                    <div class="custom-data-toko-wrapper">
+                        <div class="custom-detail-image-wrapper">
+                            <img class="custom-detail-image"
+                                src="{{ url('uploads/Foto Sampul Toko') }}/{{ $item->sampul_toko }}" alt="Card image cap">
+                        </div>
                         <div>
                             <p class="custom-name-toko">{{ $item->nama_toko }}</p>
                             <div class="mb-3">

@@ -7,7 +7,7 @@
     overflow: hidden;
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
 }
-.custom-detail-toko-wrapper {
+.custom-data-toko-wrapper {
     position: absolute;
     display: flex;
     padding: 16px;
@@ -23,8 +23,14 @@
     width: 40%;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
 }
-.custom-detail-image {
+
+.custom-detail-image-wrapper {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
     border-radius: 50%;
+}
+.custom-detail-image {
     object-fit: cover;
     width: 100px;
     height: 100px;
@@ -35,12 +41,6 @@
     font-weight: 700;
     line-height: 1.3rem;
     text-transform: capitalize;
-}
-.custom-detail-image {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 100px;
-    height: 100px;
 }
 
 /* ================ */
@@ -71,7 +71,7 @@
 /* responsive style */
 /* ================ */
 @media only screen and (max-width: 1000px) {
-    .custom-detail-toko-wrapper {
+    .custom-data-toko-wrapper {
         inset: 80% 0px -50px 0px;
         width: 100%;
     }
