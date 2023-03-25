@@ -8,7 +8,7 @@
             @for ($i = 0; $i < $item->rating_toko; $i++)
                 <i class="fas fa-star fa-md text-warning"></i>
             @endfor
-            @for ($i = 0; $i < 10 - $item->rating_toko; $i++)
+            @for ($i = 0; $i < 5 - $item->rating_toko; $i++)
                 <i class="far fa-star fa-md text-secondary"></i>
             @endfor
         </div>

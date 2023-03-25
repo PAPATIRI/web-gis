@@ -24,7 +24,7 @@
                             class="fa fa fa-star fa-lg text-warning"></i></p>
 
                     <Input class="range bg-white" type="range" name="rating" value="0" min="0"
-                        max="10" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
+                        max="5" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
                 </div>
             </div>
             <div class="mb-3 pt-3">
