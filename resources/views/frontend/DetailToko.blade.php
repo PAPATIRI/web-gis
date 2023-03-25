@@ -32,13 +32,13 @@
                 <li class="breadcrumb-item active" aria-current="page">{{ $tokoKerajinan->nama_toko }}</li>
             </ol>
         </nav>
-        <div class="custom-detail-header mb-5">
+        <div class="position-relative">
             <div class="custom-map-wrapper" data-aos="zoom-in">
                 <div id="map"></div>
             </div>
-            <div class="custom-detail-image-wrapper" data-aos="fade-right">
-                <img src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $tokoKerajinan->sampul_toko }}" alt='toko-img'
-                    class='custom-detail-image'>
+            <div class="custom-data-toko-wrapper" data-aos="fade-right">
+                <img class='custom-detail-image'
+                    src="{{ url('uploads/Foto Sampul Toko/') }}/{{ $tokoKerajinan->sampul_toko }}" alt='toko-img'>
                 <div class="w-100">
                     <p class="fs-4 fw-bold text-capitalize m-0">{{ $tokoKerajinan->nama_toko }}</p>
                     <div>
