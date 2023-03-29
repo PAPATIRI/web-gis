@@ -22,6 +22,30 @@
         width: 100%;
         object-fit: cover;
     }
+
+    .input-box img{
+        width: 30px;
+        cursor: pointer;
+        margin-top: 39px;
+        margin-right: 10px;
+
+    }
+
+    .input-box2 img{
+        width: 30px;
+        cursor: pointer;
+        margin-top: 15px;
+        margin-right: 10px;
+
+    }
+
+    .input-box3 img{
+        width: 30px;
+        cursor: pointer;
+        margin-top: 15px;
+        margin-right: 10px;
+
+    }
 </style>
 
 <div class="container mt-4 text-center">
@@ -53,26 +77,35 @@
                     <form action="{{ route('login') }}" method="POST">
                         <!-- Email input -->
                         @csrf
-                        <div class="form-outline mb-4">
-                            <input type="email" id="loginName"
-                                class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
-                                value="{{ old('email') }}" name="email" autocomplete="off" style="font-size:15pt;"
-                                required />
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                            <label class="form-label" for="loginName">Email atau Username</label>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="loginName"
+                                    class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
+                                    name="email" autocomplete="off" style="font-size:15pt;"
+                                    required />
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
+                                    <label class="form-label" for="loginName">Email atau Username</label>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Password input -->
-                        <div class="form-outline mb-4 mt-4">
-                            <input type="password" id="loginPassword" class="form-control form-control-lg mt-4"
-                                name="password" style="font-size:15pt;" required />
-                            <label class="form-label" for="loginPassword">Password</label>
+                        <div class="row mb-4">
+                            <div class="col-11">
+                                <div class="form-outline mb-4 mt-4 ">
+                                    <input type="password" id="loginPassword" class="form-control form-control-lg mt-4" name="password" style="font-size:15pt;" required>
+                                    <label class="form-label" for="loginPassword">Password</label>
+                                </div>
+                            </div>
+                            <div class="col-1 input-box">
+                                <img src="{{ url('/assetBackend/icon/eye-slash-solid.svg') }}" id="eyeicon">
+                            </div>
                         </div>
-
 
                         <!-- Submit button -->
                         <div class="row">
@@ -85,14 +118,17 @@
                                         class="fas fas-fw fa-recycle"></i></button>
                             </div>
                         </div>
+                         <!-- Reset Passowrd -->
+                        {{-- <div class="text-center">
+                            <p> <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a></p>
+                        </div> --}}
                     </form>
                 </div>
 
                 {{-- //Registrasi form --}}
                 <div class="tab-pane fade m-4" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                    {{-- <div class="text-center mb-4">
-          <p><strong>FORM REGISTRASI</strong></p>
-          </div> --}}
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <!-- Name input -->
@@ -104,23 +140,34 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="registerEmail" class="form-control form-control-lg" name="email"
-                                style="font-size:15pt;" required />
+                            <input type="email" id="registerEmail" class="form-control form-control-lg" name="email" style="font-size:15pt;" required />
                             <label class="form-label" for="registerEmail">Email</label>
                         </div>
-
+                        
                         <!-- Password input -->
-                        <div class="form-outline mb-4">
-                            <input type="password" id="registerPassword" class="form-control form-control-lg"
-                                name="password" style="font-size:15pt;" required />
-                            <label class="form-label" for="registerPassword">Password</label>
+                        <div class="row">
+                            <div class="col-11">
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="registerPassword" class="form-control form-control-lg" name="password" style="font-size:15pt;" required />
+                                    <label class="form-label" for="registerEmail">Password</label>
+                                </div>
+                            </div>
+                            <div class="col-1 input-box2">
+                                <img src="{{ url('/assetBackend/icon/eye-slash-solid.svg') }}" id="eyeicon1">
+                            </div>
                         </div>
-
+                        
                         <!-- Repeat Password input -->
-                        <div class="form-outline mb-4">
-                            <input type="password" id="registerRepeatPassword" class="form-control form-control-lg"
-                                name="password_confirmation" style="font-size:15pt;" required />
-                            <label class="form-label" for="registerRepeatPassword">Ulangi Password</label>
+                        <div class="row">
+                            <div class="col-11">
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="registerRepeatPassword" class="form-control form-control-lg" name="password_confirmation" style="font-size:15pt;" required />
+                                    <label class="form-label" for="registerRepeatPassword">Ulangi Password</label>
+                                </div>
+                            </div>
+                            <div class="col-1 input-box3">
+                                <img src="{{ url('/assetBackend/icon/eye-slash-solid.svg') }}" id="eyeicon2">
+                            </div>
                         </div>
                         <!-- Submit button -->
                         <!-- Submit button -->
@@ -146,4 +193,45 @@
 </section> --}}
     <!-- Section: Design Block -->
     <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+<script src="{{ url('assetBackend/js/core/jquery.min.js') }}"></script>
+
+<script>
+    let eyeicon = document.getElementById("eyeicon");
+    let password = document.getElementById("loginPassword");
+    let eyeicon1 = document.getElementById("eyeicon1");
+    let eyeicon2 = document.getElementById("eyeicon2");
+    let passwordRegister        = document.getElementById("registerPassword");
+    let passwordRepeatRegister  = document.getElementById("registerRepeatPassword");
+
+    eyeicon.onclick = function(){
+        if(password.type == "password"){
+            password.type = "text";
+            eyeicon.src = "{{ url('/assetBackend/icon/eye-solid.svg') }}"
+        }else{
+            password.type = "password";
+            eyeicon.src = "{{ url('/assetBackend/icon/eye-slash-solid.svg') }}"
+        }
+    }
+
+    eyeicon1.onclick = function(){
+        if(passwordRegister.type == "password"){
+            passwordRegister.type = "text";
+            eyeicon1.src = "{{ url('/assetBackend/icon/eye-solid.svg') }}"
+        }else{
+            passwordRegister.type = "password";
+            eyeicon1.src = "{{ url('/assetBackend/icon/eye-slash-solid.svg') }}"
+        }
+    }
+
+    eyeicon2.onclick = function(){
+        if(passwordRepeatRegister.type == "password"){
+            passwordRepeatRegister.type = "text";
+            eyeicon2.src = "{{ url('/assetBackend/icon/eye-solid.svg') }}"
+        }else{
+            passwordRepeatRegister.type = "password";
+            eyeicon2.src = "{{ url('/assetBackend/icon/eye-slash-solid.svg') }}"
+        }
+    }
+
+</script>

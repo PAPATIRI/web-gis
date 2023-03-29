@@ -42,7 +42,7 @@ class ListTokoController extends Controller
          * 
          * $categories akan digunakan pada header di file views/layouts/frontend
          */
-        $tokoKerajinan = Toko::paginate(8);
+        $tokoKerajinan = Toko::where('status_toko',1)->paginate(8);
 
         return view('frontend.ListToko', [
             'tokoKerajinan' => $tokoKerajinan,
