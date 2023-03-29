@@ -19,7 +19,7 @@
             </div> 
             <div class="form-group">
                 <label for="comment">Deskripsi</label>
-                <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk" required>{{ $data->deskripsi_produk }}</textarea>
+                <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk">{{ $data->deskripsi_produk }}</textarea>
             </div>
             <div class="form-group">
                 <div class="row">

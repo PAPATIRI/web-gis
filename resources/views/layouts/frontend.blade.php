@@ -63,8 +63,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="{{ url('/') }}">
-                    {{-- {{ config('app.name') }} --}}
-                    web-gis
+                    {{ config('app.name') }}
+                    {{-- web-gis --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -77,11 +77,11 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('/') ? 'active-link' : '' }}"
-                                href="{{ url('/') }}">Home</a>
+                                href="{{ url('/') }}"><strong>HOME</strong></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('toko') ? 'active-link' : '' }}"
-                                href="{{ route('toko') }}">{{ __('Toko Kerajinan') }}</a>
+                                href="{{ route('toko') }}"><strong>TOKO KERAJINAN</strong></a>
                         </li>
                     </ul>
 
