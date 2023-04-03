@@ -16,9 +16,13 @@
         <div class="py-2"></div>
         <div class="mt-2">
             <div class="separator-solid"></div>
-            <h3 class="card-title" style="font-size: 20px; font-weight:bold; color:#17a2b8">
+            <h3 class="card-title" style="font-size: 23px; font-weight:bold; color:#17a2b8">
                 {{ $data->nama_produk }}
             </h3>
+            <h3 class="card-title" style="font-size: 18px; font-weight:bold; color:#878787">
+                Rp {{ number_format($data->harga_produk)  }}
+            </h3>
+            <hr>
             <p class="card-text">{{ $data->deskripsi_produk }}</p>
         </div>
     </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('fkid_toko')->index();
             $table->string('nama_produk');
+            $table->double('harga_produk',10,0);
             $table->string('deskripsi_produk')->nullable();
             $table->string('gambar_produk');
             $table->timestamps();

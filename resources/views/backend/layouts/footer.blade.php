@@ -10,6 +10,7 @@
 <script src="{{ url('assetBackend/js/core/jquery.min.js') }}"></script>
 <script src="{{ url('assetBackend/js/core/popper.min.js') }}"></script>
 <script src="{{ url('assetBackend/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ url('assetBackend/js/autoNumeric.js') }}"></script>
 
 <!-- jQuery UI -->
 <script src="{{ url('assetBackend/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>

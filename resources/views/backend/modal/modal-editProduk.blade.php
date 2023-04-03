@@ -18,6 +18,12 @@
                 {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
             </div> 
             <div class="form-group">
+                <label for="email2">Harga Produk</label>
+                <input type="text" class="form-control" id="hargaProdukOld" placeholder="Masukan Harga produk"
+                    name="harga_produk" required style="text-align:right;" value="{{ $data->harga_produk }}">
+                {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+            </div>
+            <div class="form-group">
                 <label for="comment">Deskripsi</label>
                 <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk">{{ $data->deskripsi_produk }}</textarea>
             </div>
@@ -41,12 +47,19 @@
         </div>
     </form>
 </div>
+    {{-- <script src="{{ url('assetBackend/js/autoNumeric.js') }}"></script> --}}
     <script>
-        
-        $('.btn-close').on('click' ,function(){
-                $('#modalActionEdit').modal('hide');
-        })
+          $(document).ready(function() {
+            $('#hargaProdukOld').autoNumeric('init',{
+                    aSep    : ',',
+                    aDec    : '.',
+                    mDec    : '0'
+            });
+        });
 
+        $('.btn-close').on('click' ,function(){
+            $('#modalActionEdit').modal('hide');
+        })
         $('#formActionEdit').on('submit', function(e){
                     e.preventDefault()
                     const _form = this
