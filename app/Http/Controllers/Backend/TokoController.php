@@ -195,10 +195,14 @@ class TokoController extends Controller
     }
 
     public function simpanProduk(Request $request){
+
+        // dd($request->all());
         $this->validate($request,[
             'gambar_produk' => 'image|required'
         ]);
 
+        $hargaProduk = str_replace(",","",$request->harga_produk);
+        // dd($hargaProduk);
         // Proses Input dan upload file gambar foto sampul toko
         $file = $request->file('gambar_produk');
         $namaFile = $file->getClientOriginalName();
@@ -208,6 +212,7 @@ class TokoController extends Controller
         $data = [
             'fkid_toko'         =>$request->fkid_toko,
             'nama_produk'       =>$request->nama_produk,
+            'harga_produk'       =>$hargaProduk,
             'deskripsi_produk'  =>$request->deskripsi_produk,
             'gambar_produk'     =>$namaFile,
         ];
@@ -247,8 +252,11 @@ class TokoController extends Controller
             'gambar_produk' => 'image'
         ]);
 
+        $hargaProduk = str_replace(",","",$request->harga_produk);
+
         $galeriProduk = GaleriProduk::findOrFail($request->id_produk);
         $galeriProduk->nama_produk       = $request->nama_produk;
+        $galeriProduk->harga_produk      = $hargaProduk;
         $galeriProduk->deskripsi_produk  = $request->deskripsi_produk;
        
 

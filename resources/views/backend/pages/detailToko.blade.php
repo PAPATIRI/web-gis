@@ -181,6 +181,12 @@
                             {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                         </div>
                         <div class="form-group">
+                            <label for="email2">Harga Produk</label>
+                            <input type="text" class="form-control" id="hargaProduk" placeholder="Masukan Harga produk"
+                                name="harga_produk" required style="text-align:right;" >
+                            {{-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+                        </div>
+                        <div class="form-group">
                             <label for="comment">Deskripsi</label>
                             <textarea class="form-control" id="comment" rows="5" name="deskripsi_produk">
                             </textarea>
@@ -221,18 +227,26 @@
 @endsection
 @push('javascript')
     <script>
-        $('.btn-close').on('click', function() {
-            $('#modalAction').modal('hide');
-        })
-        $('#tambahProduk').on('click', function() {
-            $('#modalAction').modal('show');
-            store();
-        })
+        $(document).ready(function() {
+            $('#hargaProduk').autoNumeric('init',{
+                    aSep    : ',',
+                    aDec    : '.',
+                    mDec    : '0'
+            });
 
-        $('.btn-ubah').on('click', function() {
-            $('#modalAction').modal('show');
-        })
-
+            $('.btn-close').on('click', function() {
+                $('#modalAction').modal('hide');
+            })
+            $('#tambahProduk').on('click', function() {
+                $('#modalAction').modal('show');
+                store();
+            })
+            
+            $('.btn-ubah').on('click', function() {
+                $('#modalAction').modal('show');
+            })
+        });
+        
         // Proses CRUD
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('.tabelProduk').on('click', '.action', function() {

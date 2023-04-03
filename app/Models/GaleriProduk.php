@@ -14,6 +14,7 @@ class GaleriProduk extends Model
         'id',
         'fkid_toko',
         'nama_produk',
+        'harga_produk',
         'deskripsi_produk',
         'gambar_produk',
     ];

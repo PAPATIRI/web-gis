@@ -17,9 +17,12 @@
                 </div>
             </div>
         </div>
-        <div class="mt-3 px-2">
+        <div class="mt-3 px-2 m-2">
             <hr />
-            <p class="fs-5 text-center">{{ $data->deskripsi_produk }}</p>
+            <h3 class="" style="font-size: 20px; font-weight:bold; color:#878787">
+                Rp {{ number_format($data->harga_produk)  }}
+            </h3>
+            <p class="fs-6">{{ $data->deskripsi_produk }}</p>
         </div>
     </div>
 </div>
